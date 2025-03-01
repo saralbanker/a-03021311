@@ -1,0 +1,212 @@
+
+import React, { useState } from 'react';
+import { BookingForm } from '@/components/BookingForm';
+import { useToast } from '@/components/ui/use-toast';
+import { Separator } from '@/components/ui/separator';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { Check, Info } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+const BookingPage = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleBookingSubmit = async (values: any) => {
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    try {
+      // In a real app, this would be an API call to your backend
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      toast({
+        title: "Booking Request Received",
+        description: "We'll contact you shortly to confirm your booking.",
+        variant: "default",
+      });
+      
+      console.log('Booking submitted:', values);
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+      console.error('Booking error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      <main className="flex-grow">
+        {/* Hero Section */}
+        <div className="relative h-[40vh] md:h-[50vh] w-full">
+          <div 
+            className="absolute inset-0 bg-cover bg-center" 
+            style={{ 
+              backgroundImage: "url('https://images.unsplash.com/photo-1567636788276-80a11be35011?q=80&w=1974&auto=format&fit=crop')", 
+              backgroundPosition: "center 30%" 
+            }}
+          >
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+          
+          <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">
+              Book Your Getaway
+            </h1>
+            <p className="text-lg md:text-xl max-w-2xl animate-slide-up animation-delay-200">
+              Reserve your perfect stay in the heart of nature's paradise
+            </p>
+          </div>
+        </div>
+        
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Booking Form Column */}
+            <div className="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 animate-fade-in">
+              <h2 className="text-2xl font-display font-semibold mb-6">Reservation Details</h2>
+              <BookingForm onSubmit={handleBookingSubmit} />
+            </div>
+            
+            {/* Sidebar Information */}
+            <div className="space-y-6">
+              {/* Booking Information */}
+              <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in animation-delay-200">
+                <h3 className="text-xl font-display font-semibold mb-4 flex items-center gap-2">
+                  <Info size={20} className="text-accent" />
+                  Booking Information
+                </h3>
+                <Separator className="mb-4" />
+                <ul className="space-y-3 text-sm">
+                  <li className="flex items-start gap-2">
+                    <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
+                    <span>Check-in time: 2:00 PM</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
+                    <span>Check-out time: 11:00 AM</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
+                    <span>Free cancellation up to 48 hours before check-in</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
+                    <span>Pet-friendly accommodations available (additional charges may apply)</span>
+                  </li>
+                </ul>
+              </div>
+              
+              {/* Contact Information */}
+              <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in animation-delay-400">
+                <h3 className="text-xl font-display font-semibold mb-4">Need Assistance?</h3>
+                <Separator className="mb-4" />
+                <p className="mb-4 text-sm">Our reservation team is available to help you plan your perfect stay.</p>
+                <div className="space-y-2 text-sm">
+                  <p className="font-medium">Call us:</p>
+                  <p className="text-accent">+91 9876543210</p>
+                  <p className="font-medium mt-3">Email:</p>
+                  <p className="text-accent">bookings@dandeliadventures.com</p>
+                </div>
+              </div>
+              
+              {/* Testimonial */}
+              <div className="bg-accent/10 rounded-lg p-6 animate-fade-in animation-delay-600">
+                <p className="italic text-sm mb-4">
+                  "Our stay at Dandeli Adventures was absolutely magical. The staff went above and beyond to make our vacation unforgettable!"
+                </p>
+                <p className="font-medium text-sm">- Priya & Rahul, Bangalore</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Policies Section */}
+        <section className="bg-muted/50 py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-display font-semibold mb-8 text-center">Booking Policies</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-xl font-display font-semibold mb-4">Reservation Policy</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>• A 50% advance payment is required to confirm your booking</li>
+                  <li>• Full payment is due upon check-in</li>
+                  <li>• We accept all major credit cards, UPI, and bank transfers</li>
+                </ul>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-xl font-display font-semibold mb-4">Cancellation Policy</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>• Free cancellation up to 48 hours before check-in</li>
+                  <li>• 50% refund for cancellations made 24-48 hours before check-in</li>
+                  <li>• No refund for cancellations made less than 24 hours before check-in</li>
+                </ul>
+              </div>
+              
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-xl font-display font-semibold mb-4">Additional Information</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>• Extra person charges may apply beyond double occupancy</li>
+                  <li>• Special requests are subject to availability</li>
+                  <li>• Government-issued ID is required at check-in</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* FAQ Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-display font-semibold mb-8 text-center">Frequently Asked Questions</h2>
+            
+            <div className="max-w-3xl mx-auto space-y-6">
+              {faqs.map((faq, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-medium mb-2">{faq.question}</h3>
+                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+// FAQ data
+const faqs = [
+  {
+    question: "How do I make a reservation?",
+    answer: "You can make a reservation by filling out the booking form on our website, calling our reservation team, or sending an email to bookings@dandeliadventures.com."
+  },
+  {
+    question: "Is there a minimum stay requirement?",
+    answer: "During weekends and peak seasons, there is typically a 2-night minimum stay requirement. During weekdays and off-peak seasons, single-night stays may be available."
+  },
+  {
+    question: "Do you offer airport transfers?",
+    answer: "Yes, we offer airport transfers from Hubballi Airport and Goa Airport for an additional fee. Please mention your requirement in the special requests section of the booking form."
+  },
+  {
+    question: "Are meals included in the room rate?",
+    answer: "Our standard packages include breakfast. You can upgrade to half-board (breakfast and dinner) or full-board (all meals) options during the booking process."
+  },
+  {
+    question: "Can I book activities in advance?",
+    answer: "Yes, we recommend booking activities in advance, especially during peak season. You can add activities to your reservation through our booking form or contact our team for assistance."
+  }
+];
+
+export default BookingPage;
