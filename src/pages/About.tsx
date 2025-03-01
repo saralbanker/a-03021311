@@ -1,234 +1,244 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { MapPin, Mail, Phone, Heart, Leaf, Shield, Award } from 'lucide-react';
+import { ArrowRight, Leaf, Shield, Award, Users, Heart, BookOpen, Map, Calendar, Mountain } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const About: React.FC = () => {
+  const teamMembers = [
+    {
+      name: "Aishwarya Sharma",
+      role: "Founder & CEO",
+      bio: "With over 15 years of experience in adventure tourism, Aishwarya founded Dandeli Adventures with a vision to create sustainable tourism experiences.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      name: "Rahul Patil",
+      role: "Operations Director",
+      bio: "Rahul ensures all our adventures run smoothly and safely, with a background in wilderness management and outdoor leadership.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      name: "Priya Desai",
+      role: "Wildlife Expert",
+      bio: "A certified naturalist with a passion for conservation, Priya leads our wildlife experiences and educational programs.",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80"
+    },
+    {
+      name: "Vikram Mehra",
+      role: "Head Chef",
+      bio: "Specializing in local Malnad cuisine, Chef Vikram creates authentic farm-to-table experiences using ingredients from our organic garden.",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80"
+    }
+  ];
+
+  const timeline = [
+    {
+      year: "2005",
+      title: "Our Beginning",
+      description: "Dandeli Adventures was founded with just two riverside cottages and a dream to share the magic of Western Ghats."
+    },
+    {
+      year: "2010",
+      title: "Expansion",
+      description: "Added our signature treehouse villas and expanded our adventure activities to include white water rafting and kayaking."
+    },
+    {
+      year: "2015",
+      title: "Conservation Partnership",
+      description: "Partnered with the Karnataka Forest Department for wildlife conservation initiatives in Dandeli-Anshi Tiger Reserve."
+    },
+    {
+      year: "2019",
+      title: "Sustainability Award",
+      description: "Recognized with the National Tourism Award for sustainable ecotourism practices and community development."
+    },
+    {
+      year: "2023",
+      title: "Today",
+      description: "Now offering over 20 unique experiences and accommodations while remaining committed to sustainable tourism."
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow pt-24">
         {/* Hero Section */}
-        <section className="relative h-[60vh] bg-accent text-accent-foreground overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-30"></div>
-          <div className="absolute inset-0 flex items-center justify-center flex-col text-center p-4">
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-4 animate-fade-in">About Us</h1>
-            <p className="text-xl max-w-2xl animate-fade-in animation-delay-200">
-              Discover the story behind Dandeli Adventures and our commitment to sustainable tourism
+        <section className="relative py-20 mb-8">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="relative z-10 container mx-auto text-center px-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in">
+              Our Story
+            </h1>
+            <p className="text-lg md:text-xl max-w-3xl mx-auto text-foreground/80 animate-fade-in animation-delay-200">
+              Discover the journey of Dandeli Adventures, from a small riverside camp to becoming Karnataka's premier eco-adventure destination.
             </p>
           </div>
         </section>
         
-        {/* Our Story */}
+        {/* Mission & Vision */}
         <section className="section-padding container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Our Story</h2>
-              <p className="text-foreground/80 mb-4">
-                Dandeli Adventures was born from a passion for nature and a desire to share the pristine beauty of the Western Ghats with the world. Founded in 2005 by nature enthusiasts Anand and Meera Sharma, our resort began as a small collection of eco-friendly cottages by the Kali River.
-              </p>
-              <p className="text-foreground/80 mb-4">
-                Over the years, we've grown into a premier adventure destination while staying true to our core values of environmental conservation and community development. We work closely with local tribal communities, employing their knowledge of the land to create authentic and respectful experiences for our guests.
-              </p>
-              <p className="text-foreground/80">
-                Today, Dandeli Adventures stands as a testament to sustainable tourism, offering world-class adventure activities and accommodations that exist in harmony with nature. Our team of passionate naturalists, adventure experts, and hospitality professionals are dedicated to creating unforgettable experiences that connect people with the natural world.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-4 animate-slide-up animation-delay-200">
-              <div className="overflow-hidden rounded-tl-3xl rounded-xl">
+              <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" 
-                  alt="Dandeli Landscape" 
-                  className="w-full h-full object-cover"
+                  src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" 
+                  alt="Dandeli Wildlife" 
+                  className="w-full h-[500px] object-cover rounded-xl shadow-lg"
                 />
-              </div>
-              <div className="overflow-hidden rounded-tr-3xl rounded-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=600&q=80" 
-                  alt="Wildlife" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="overflow-hidden rounded-bl-3xl rounded-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1438565434616-3ef039228b15?auto=format&fit=crop&w=600&q=80" 
-                  alt="Adventure Activities" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="overflow-hidden rounded-br-3xl rounded-xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=600&q=80" 
-                  alt="Local Culture" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Our Mission */}
-        <section className="py-20 bg-secondary">
-          <div className="container px-4">
-            <div className="max-w-3xl mx-auto text-center animate-slide-up">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">Our Mission</h2>
-              <p className="text-foreground/80 mb-8 text-lg">
-                To create immersive nature experiences that inspire conservation, support local communities, and promote sustainable tourism practices in the Western Ghats ecosystem.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                {[
-                  {
-                    icon: <Heart className="h-8 w-8 text-red-500" />,
-                    title: "Passion for Nature",
-                    description: "We are driven by our love for the outdoors and commitment to preserving it for future generations."
-                  },
-                  {
-                    icon: <Leaf className="h-8 w-8 text-green-500" />,
-                    title: "Eco-Conscious",
-                    description: "All our operations are designed to minimize environmental impact and promote conservation."
-                  },
-                  {
-                    icon: <Shield className="h-8 w-8 text-blue-500" />,
-                    title: "Community Support",
-                    description: "We empower local communities through employment, education, and cultural preservation."
-                  }
-                ].map((value, index) => (
-                  <div 
-                    key={index}
-                    className="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center animate-fade-in"
-                    style={{ animationDelay: `${index * 200}ms` }}
-                  >
-                    <div className="mb-4">
-                      {value.icon}
-                    </div>
-                    <h3 className="text-xl font-display font-semibold mb-2">{value.title}</h3>
-                    <p className="text-foreground/70">{value.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Our Team */}
-        <section className="section-padding container">
-          <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Meet Our Team</h2>
-            <p className="text-foreground/70 max-w-2xl mx-auto">
-              The passionate individuals behind your unforgettable experiences at Dandeli Adventures
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                name: "Anand Sharma",
-                role: "Founder & CEO",
-                bio: "Wildlife enthusiast with 20+ years of experience in eco-tourism",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80"
-              },
-              {
-                name: "Meera Sharma",
-                role: "Co-Founder & Conservation Director",
-                bio: "Former wildlife biologist dedicated to preserving the Western Ghats ecosystem",
-                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80"
-              },
-              {
-                name: "Rahul Nair",
-                role: "Adventure Activities Manager",
-                bio: "Certified adventure specialist with expertise in water sports and trekking",
-                image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
-              },
-              {
-                name: "Priya Desai",
-                role: "Hospitality Manager",
-                bio: "Creating memorable guest experiences with attention to every detail",
-                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80"
-              }
-            ].map((member, index) => (
-              <div 
-                key={index}
-                className="bg-white rounded-xl overflow-hidden shadow-md animate-slide-up card-hover"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="aspect-square overflow-hidden">
+                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block">
                   <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1678483789107-0029c61fdcca?auto=format&fit=crop&w=400&q=80" 
+                    alt="Wildlife" 
+                    className="w-40 h-32 object-cover rounded-md"
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-semibold">{member.name}</h3>
-                  <p className="text-foreground/70 font-medium text-sm mb-2">{member.role}</p>
-                  <p className="text-foreground/80">{member.bio}</p>
+              </div>
+            </div>
+            
+            <div className="animate-slide-up animation-delay-200">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+                Our Mission & Vision
+              </h2>
+              <p className="text-foreground/70 mb-6">
+                At Dandeli Adventures, we're on a mission to create transformative experiences that connect people with nature while preserving the pristine wilderness of the Western Ghats for generations to come.
+              </p>
+              
+              <div className="space-y-6 mb-8">
+                <div className="bg-secondary p-6 rounded-xl transition-all duration-300 hover:shadow-md">
+                  <div className="flex items-center mb-2">
+                    <Heart size={22} className="text-accent mr-2" />
+                    <h3 className="font-display text-xl font-semibold">Our Mission</h3>
+                  </div>
+                  <p className="text-foreground/70">
+                    To provide unforgettable, sustainable adventure experiences that educate and inspire a deep appreciation for nature's wonders.
+                  </p>
+                </div>
+                
+                <div className="bg-secondary p-6 rounded-xl transition-all duration-300 hover:shadow-md">
+                  <div className="flex items-center mb-2">
+                    <BookOpen size={22} className="text-accent mr-2" />
+                    <h3 className="font-display text-xl font-semibold">Our Vision</h3>
+                  </div>
+                  <p className="text-foreground/70">
+                    To be recognized globally as a model for responsible ecotourism that benefits local communities and natural ecosystems.
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </section>
         
-        {/* Awards and Recognition */}
+        {/* Core Values */}
         <section className="py-20 bg-secondary">
           <div className="container px-4">
             <div className="text-center mb-16 animate-slide-up">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                Awards & Recognition
+                Our Core Values
               </h2>
               <p className="text-foreground/70 max-w-2xl mx-auto">
-                Our commitment to excellence has been recognized by leading industry organizations
+                The guiding principles that define everything we do at Dandeli Adventures.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
-                  award: "Best Eco-Tourism Destination",
-                  year: "2022",
-                  organization: "Sustainable Tourism India"
+                  icon: <Leaf size={30} />,
+                  title: "Sustainability",
+                  description: "Minimize our ecological footprint while maximizing positive impact on local ecosystems.",
+                  delay: 0
                 },
                 {
-                  award: "Excellence in Adventure Tourism",
-                  year: "2021",
-                  organization: "Adventure Travel Awards"
+                  icon: <Shield size={30} />,
+                  title: "Safety",
+                  description: "Rigorous safety standards and certified guides for all adventure activities.",
+                  delay: 100
                 },
                 {
-                  award: "Top Wildlife Experience",
-                  year: "2020",
-                  organization: "Travel & Leisure India"
+                  icon: <Users size={30} />,
+                  title: "Community",
+                  description: "Supporting local communities through employment and cultural preservation.",
+                  delay: 200
                 },
                 {
-                  award: "Best Responsible Tourism Initiative",
-                  year: "2019",
-                  organization: "World Travel Awards"
-                },
-                {
-                  award: "Outstanding Hospitality",
-                  year: "2018",
-                  organization: "Hospitality Excellence Awards"
-                },
-                {
-                  award: "Environmental Conservation Award",
-                  year: "2017",
-                  organization: "Green Business Awards"
+                  icon: <Award size={30} />,
+                  title: "Excellence",
+                  description: "Commitment to exceptional experiences and continuous improvement.",
+                  delay: 300
                 }
-              ].map((award, index) => (
+              ].map((value, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white p-8 rounded-xl text-center shadow-sm animate-slide-up card-hover"
+                  style={{ animationDelay: `${value.delay}ms` }}
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary text-accent mb-6">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-xl font-display font-semibold mb-3">
+                    {value.title}
+                  </h3>
+                  <p className="text-foreground/70">
+                    {value.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Our History Timeline */}
+        <section className="section-padding container">
+          <div className="text-center mb-16 animate-slide-up">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Our Journey
+            </h2>
+            <p className="text-foreground/70 max-w-2xl mx-auto">
+              From humble beginnings to a recognized name in ecotourism.
+            </p>
+          </div>
+          
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-accent/30 transform md:translate-x-[-50%] hidden sm:block"></div>
+            
+            <div className="space-y-12">
+              {timeline.map((item, index) => (
                 <div 
                   key={index}
-                  className="bg-white p-6 rounded-xl shadow-md flex items-start animate-slide-up"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className={cn(
+                    "relative flex flex-col sm:flex-row items-start gap-8 animate-fade-in",
+                    index % 2 === 0 ? "md:flex-row-reverse text-left md:text-right" : "text-left"
+                  )}
+                  style={{ animationDelay: `${index * 200}ms` }}
                 >
-                  <div className="mr-4 mt-1">
-                    <Award className="h-6 w-6 text-yellow-500" />
+                  <div className="sm:w-1/2"></div>
+                  
+                  {/* Year marker */}
+                  <div className="absolute left-[-20px] md:left-1/2 transform md:translate-x-[-50%] w-10 h-10 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold z-10 hidden sm:flex">
+                    <Calendar size={16} />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-lg">{award.award}</h3>
-                    <p className="text-foreground/70">{award.organization}</p>
-                    <p className="text-sm text-foreground/60">{award.year}</p>
+                  
+                  <div className={cn(
+                    "sm:w-1/2 bg-white p-6 rounded-xl shadow-sm card-hover",
+                    index % 2 === 0 ? "sm:pr-10" : "sm:pl-10"
+                  )}>
+                    <div className="flex sm:hidden items-center mb-3">
+                      <div className="w-8 h-8 rounded-full bg-accent text-accent-foreground flex items-center justify-center mr-3">
+                        <Calendar size={14} />
+                      </div>
+                      <span className="font-display font-bold text-lg">{item.year}</span>
+                    </div>
+                    <div className="sm:block">
+                      <span className="font-display font-bold text-xl hidden sm:block mb-2">{item.year}</span>
+                      <h3 className="text-lg font-medium mb-2">{item.title}</h3>
+                      <p className="text-foreground/70">{item.description}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -236,70 +246,129 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        {/* Location */}
-        <section className="section-padding container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-slide-up">
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                Our Location
+        {/* Team Members */}
+        <section className="py-20 bg-secondary">
+          <div className="container px-4">
+            <div className="text-center mb-16 animate-slide-up">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+                Meet Our Team
               </h2>
-              <p className="text-foreground/80 mb-6">
-                Dandeli Adventures is located in the heart of the Western Ghats, one of India's richest biodiversity hotspots and a UNESCO World Heritage site. Our resort is situated along the banks of the Kali River, surrounded by lush forests teeming with wildlife.
+              <p className="text-foreground/70 max-w-2xl mx-auto">
+                The passionate individuals who make your adventures unforgettable.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {teamMembers.map((member, index) => (
+                <div 
+                  key={index}
+                  className="bg-white rounded-xl overflow-hidden shadow-sm animate-slide-up card-hover"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-display font-semibold">{member.name}</h3>
+                    <p className="text-accent font-medium mb-3">{member.role}</p>
+                    <p className="text-foreground/70 text-sm">{member.bio}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Location Map */}
+        <section className="section-padding container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="animate-slide-up">
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+                Visit Us in Paradise
+              </h2>
+              <p className="text-foreground/70 mb-6">
+                Nestled between the lush forests of the Western Ghats and the crystal-clear Kali River, Dandeli Adventures offers the perfect backdrop for your nature retreat.
               </p>
               
-              <div className="space-y-4">
+              <div className="space-y-4 mb-8">
                 <div className="flex items-start">
-                  <MapPin className="h-5 w-5 text-accent mr-3 mt-1" />
-                  <p className="text-foreground/80">
-                    Dandeli Wildlife Sanctuary, Karnataka, India - 581325
-                  </p>
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
+                    <Map size={20} />
+                  </div>
+                  <div>
+                    <h3 className="font-medium">Our Location</h3>
+                    <p className="text-sm text-foreground/70">
+                      Dandeli Wildlife Sanctuary, Karnataka, India - 581325
+                    </p>
+                  </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <Phone className="h-5 w-5 text-accent mr-3 mt-1" />
-                  <p className="text-foreground/80">
-                    +91 (123) 456-7890
-                  </p>
-                </div>
-                
-                <div className="flex items-start">
-                  <Mail className="h-5 w-5 text-accent mr-3 mt-1" />
-                  <p className="text-foreground/80">
-                    info@dandeliadventures.com
-                  </p>
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
+                    <Mountain size={20} />
+                  </div>
+                  <div>
+                    <h3 className="font-medium">Getting Here</h3>
+                    <p className="text-sm text-foreground/70">
+                      5 hours drive from Goa, 3 hours from Hubli, and 8 hours from Bangalore.
+                    </p>
+                  </div>
                 </div>
               </div>
               
-              <div className="mt-8">
-                <h3 className="text-xl font-semibold mb-3">How to Reach</h3>
-                <div className="space-y-2">
-                  <p className="text-foreground/80">
-                    <span className="font-medium">By Air:</span> The nearest airport is Goa International Airport (160 km) or Hubli Airport (75 km).
-                  </p>
-                  <p className="text-foreground/80">
-                    <span className="font-medium">By Train:</span> Alnavar Junction (40 km) is the nearest railway station.
-                  </p>
-                  <p className="text-foreground/80">
-                    <span className="font-medium">By Road:</span> Well-connected by road from Bangalore (465 km), Goa (125 km), and Mumbai (500 km).
-                  </p>
-                </div>
-              </div>
+              <Link 
+                to="/contact" 
+                className="btn-primary"
+              >
+                Contact Us for Directions
+              </Link>
             </div>
             
             <div className="animate-slide-up animation-delay-200">
-              <div className="relative shadow-xl rounded-xl overflow-hidden h-[400px]">
-                {/* This would typically be a Google Maps embed */}
-                <img 
-                  src="https://images.unsplash.com/photo-1576374894533-75a92ca76e9d?auto=format&fit=crop&w=800&q=80" 
-                  alt="Map of Dandeli" 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="p-4 glass rounded-xl">
-                    <h3 className="font-display font-medium text-lg">Dandeli Adventures</h3>
-                    <p className="text-sm">Dandeli Wildlife Sanctuary, Karnataka</p>
-                  </div>
-                </div>
+              <div className="rounded-xl overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61475.89343423126!2d74.57940594863278!3d15.244387199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf35941ce7aacd%3A0xcdbe67b4b8d98c2!2sDandeli%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1650120000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  title="Dandeli Adventures Location"
+                  className="w-full"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* CTA */}
+        <section className="py-20 bg-accent text-accent-foreground relative">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="container relative z-10 px-4 text-center">
+            <div className="max-w-3xl mx-auto animate-fade-in">
+              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
+                Ready to Experience Dandeli?
+              </h2>
+              <p className="text-xl mb-8 text-accent-foreground/90">
+                Book your stay now and discover the magic of the Western Ghats with us.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  to="/accommodation" 
+                  className="inline-block px-8 py-4 bg-white text-accent font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]"
+                >
+                  View Accommodations
+                </Link>
+                <Link 
+                  to="/booking" 
+                  className="inline-block px-8 py-4 bg-transparent border-2 border-white text-white font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:translate-y-[-2px]"
+                >
+                  Book Now
+                </Link>
               </div>
             </div>
           </div>
