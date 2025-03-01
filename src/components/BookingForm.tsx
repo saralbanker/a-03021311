@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -48,7 +49,7 @@ interface BookingFormProps {
 
 export function BookingForm({ onSubmit }: BookingFormProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: FormSchema.resolver,
+    resolver: zodResolver(FormSchema),
     defaultValues: {
       name: "",
       email: "",
