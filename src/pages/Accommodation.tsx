@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RoomCard from '@/components/RoomCard';
-import { Wifi, Coffee, Users, Tv, ArrowRight, MapPin } from 'lucide-react';
+import { Wifi, Coffee, Users, Tv, MapPin } from 'lucide-react';
 
 type RoomType = {
   id: string;
