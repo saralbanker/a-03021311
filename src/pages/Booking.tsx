@@ -1,32 +1,29 @@
 
 import React, { useState } from 'react';
 import { BookingForm } from '@/components/BookingForm';
+import { PaymentForm } from '@/components/PaymentForm';
 import { useToast } from '@/components/ui/use-toast';
 import { Separator } from '@/components/ui/separator';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Check, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { sendEmail, formatBookingEmail } from '@/utils/email-service';
 
 const BookingPage = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingStep, setBookingStep] = useState<'form' | 'payment' | 'confirmation'>('form');
+  const [currentBooking, setCurrentBooking] = useState<any>(null);
+  const [transactionId, setTransactionId] = useState<string | null>(null);
 
   const handleBookingSubmit = async (values: any) => {
     setIsSubmitting(true);
+    setCurrentBooking(values);
     
-    // Simulate API call
     try {
-      // In a real app, this would be an API call to your backend
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      toast({
-        title: "Booking Request Received",
-        description: "We'll contact you shortly to confirm your booking.",
-        variant: "default",
-      });
-      
-      console.log('Booking submitted:', values);
+      // Move to payment step
+      setBookingStep('payment');
     } catch (error) {
       toast({
         title: "Something went wrong",
@@ -37,6 +34,59 @@ const BookingPage = () => {
     } finally {
       setIsSubmitting(false);
     }
+  };
+  
+  const handlePaymentSuccess = async (paymentTransactionId: string) => {
+    setTransactionId(paymentTransactionId);
+    
+    try {
+      // Send confirmation email
+      const emailContent = formatBookingEmail({
+        ...currentBooking,
+        paymentTransactionId
+      });
+      
+      await sendEmail({
+        to: "stanleyyesu@gmail.com", // Admin email
+        subject: `New Booking: ${currentBooking.name}`,
+        body: emailContent
+      });
+      
+      // Also send email to the customer
+      await sendEmail({
+        to: currentBooking.email, 
+        subject: "Your Booking Confirmation - Dandeli Adventures",
+        body: emailContent
+      });
+      
+      setBookingStep('confirmation');
+      
+      toast({
+        title: "Booking Confirmed!",
+        description: "Check your email for booking details.",
+        variant: "default",
+      });
+    } catch (error) {
+      console.error('Error sending confirmation email:', error);
+      
+      toast({
+        title: "Booking Successful",
+        description: "However, there was an issue sending the confirmation email.",
+        variant: "default",
+      });
+      
+      setBookingStep('confirmation');
+    }
+  };
+  
+  const handlePaymentCancel = () => {
+    setBookingStep('form');
+  };
+  
+  const resetBooking = () => {
+    setBookingStep('form');
+    setCurrentBooking(null);
+    setTransactionId(null);
   };
 
   return (
@@ -68,10 +118,48 @@ const BookingPage = () => {
         
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Booking Form Column */}
+            {/* Booking Form or Payment Form Column */}
             <div className="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 animate-fade-in">
-              <h2 className="text-2xl font-display font-semibold mb-6">Reservation Details</h2>
-              <BookingForm onSubmit={handleBookingSubmit} />
+              {bookingStep === 'form' && (
+                <>
+                  <h2 className="text-2xl font-display font-semibold mb-6">Reservation Details</h2>
+                  <BookingForm onSubmit={handleBookingSubmit} />
+                </>
+              )}
+              
+              {bookingStep === 'payment' && currentBooking && (
+                <>
+                  <h2 className="text-2xl font-display font-semibold mb-6">Payment Details</h2>
+                  <PaymentForm 
+                    bookingDetails={currentBooking}
+                    onPaymentSuccess={handlePaymentSuccess}
+                    onCancel={handlePaymentCancel}
+                  />
+                </>
+              )}
+              
+              {bookingStep === 'confirmation' && (
+                <div className="text-center py-8">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Check className="h-10 w-10 text-green-600" />
+                  </div>
+                  <h2 className="text-2xl font-display font-semibold mb-4">Booking Confirmed!</h2>
+                  <p className="mb-4 text-muted-foreground">
+                    Thank you for booking with Dandeli Adventures. We've sent a confirmation email to {currentBooking?.email}.
+                  </p>
+                  {transactionId && (
+                    <p className="text-sm bg-muted p-3 rounded-md inline-block mb-6">
+                      Transaction ID: {transactionId}
+                    </p>
+                  )}
+                  <button 
+                    onClick={resetBooking}
+                    className="btn-primary mx-auto mt-4"
+                  >
+                    Make Another Booking
+                  </button>
+                </div>
+              )}
             </div>
             
             {/* Sidebar Information */}

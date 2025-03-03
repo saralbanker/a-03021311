@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -13,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -41,6 +42,7 @@ const FormSchema = z.object({
   date: z.date({
     required_error: "Please select a date.",
   }),
+  paymentMethod: z.enum(["creditCard", "upi", "bankTransfer"]),
 });
 
 interface BookingFormProps {
@@ -58,13 +60,17 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
       children: "0",
       roomType: "",
       date: new Date(),
+      paymentMethod: "creditCard",
     },
   });
 
   const isMobile = useIsMobile();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   function handleFormSubmit(values: z.infer<typeof FormSchema>) {
+    setIsSubmitting(true);
     onSubmit(values);
+    // Form will be reset by the parent component after submission
   }
 
   return (
@@ -225,7 +231,40 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        
+        <FormField
+          control={form.control}
+          name="paymentMethod"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Payment Method</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select payment method" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="creditCard">Credit/Debit Card</SelectItem>
+                  <SelectItem value="upi">UPI Payment</SelectItem>
+                  <SelectItem value="bankTransfer">Bank Transfer</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+        <Button type="submit" disabled={isSubmitting} className="w-full">
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Processing...
+            </>
+          ) : (
+            "Proceed to Payment"
+          )}
+        </Button>
       </form>
     </Form>
   );

@@ -1,13 +1,23 @@
+
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
+import { 
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogHeader
+} from "@/components/ui/dialog";
+import { SearchForm } from './SearchForm';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -68,6 +78,7 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-4">
           <button 
             className="p-2 rounded-full text-foreground/70 hover:text-foreground transition-colors duration-300"
+            onClick={() => setIsSearchOpen(true)}
           >
             <Search size={20} />
           </button>
@@ -111,6 +122,15 @@ const Navbar: React.FC = () => {
               {link.name}
             </Link>
           ))}
+          <button
+            className="text-xl font-medium py-2 border-b border-border text-foreground/80 text-left"
+            onClick={() => {
+              setIsMenuOpen(false);
+              setIsSearchOpen(true);
+            }}
+          >
+            Search
+          </button>
           <Link 
             to="/booking" 
             className="btn-primary text-center"
@@ -120,6 +140,16 @@ const Navbar: React.FC = () => {
           </Link>
         </nav>
       </div>
+      
+      {/* Search Dialog */}
+      <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+        <DialogContent className="sm:max-w-3xl">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-display mb-4">Search for Availability</DialogTitle>
+          </DialogHeader>
+          <SearchForm />
+        </DialogContent>
+      </Dialog>
     </header>
   );
 };
