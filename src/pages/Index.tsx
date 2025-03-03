@@ -1,10 +1,11 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import FeaturedActivities from '@/components/FeaturedActivities';
-import { ArrowRight, Leaf, Shield, Award, Percent, Calendar, Tag } from 'lucide-react';
+import { ArrowRight, Leaf, Shield, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Index: React.FC = () => {
@@ -12,55 +13,8 @@ const Index: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      {/* Special Offer Banner */}
-      <div className="bg-accent text-accent-foreground py-2 relative z-20">
-        <div className="container text-center flex items-center justify-center space-x-2">
-          <Tag className="h-4 w-4" />
-          <p className="text-sm font-medium">
-            SUMMER SPECIAL: Use code <span className="font-bold">SUMMER25</span> for 25% off on all bookings!
-          </p>
-        </div>
-      </div>
-      
       <main className="flex-grow">
         <Hero />
-        
-        {/* Flash Deals Section */}
-        <section className="bg-secondary/80 py-6">
-          <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white rounded-lg p-4 shadow-md flex items-center animate-pulse">
-                <div className="p-3 bg-accent/20 rounded-full mr-4">
-                  <Calendar className="h-6 w-6 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Weekday Special</h3>
-                  <p className="text-sm text-muted-foreground">30% off on Monday-Thursday stays</p>
-                </div>
-              </div>
-              
-              <div className="bg-white rounded-lg p-4 shadow-md flex items-center animate-pulse animation-delay-200">
-                <div className="p-3 bg-accent/20 rounded-full mr-4">
-                  <Percent className="h-6 w-6 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Family Package</h3>
-                  <p className="text-sm text-muted-foreground">Kids stay free + complimentary activities</p>
-                </div>
-              </div>
-              
-              <div className="bg-white rounded-lg p-4 shadow-md flex items-center animate-pulse animation-delay-400">
-                <div className="p-3 bg-accent/20 rounded-full mr-4">
-                  <Tag className="h-6 w-6 text-accent" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Extended Stay</h3>
-                  <p className="text-sm text-muted-foreground">Book 4 nights, get 1 night free</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
         
         {/* About section */}
         <section className="section-padding container">
@@ -92,7 +46,7 @@ const Index: React.FC = () => {
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-start">
-                  <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700">
                     <Leaf size={20} />
                   </div>
                   <div>
@@ -104,7 +58,7 @@ const Index: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700">
                     <Shield size={20} />
                   </div>
                   <div>
@@ -116,7 +70,7 @@ const Index: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700">
                     <Award size={20} />
                   </div>
                   <div>
@@ -130,7 +84,7 @@ const Index: React.FC = () => {
               
               <Link 
                 to="/about" 
-                className="inline-flex items-center text-accent hover:underline"
+                className="inline-flex items-center text-green-700 hover:underline"
               >
                 Learn more about us <ArrowRight size={16} className="ml-1" />
               </Link>
@@ -139,59 +93,6 @@ const Index: React.FC = () => {
         </section>
         
         <FeaturedActivities />
-        
-        {/* Limited Time Offer */}
-        <section className="py-12 bg-accent/10">
-          <div className="container">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="inline-block px-4 py-1 bg-accent/20 text-accent rounded-full text-sm font-medium mb-4">
-                    Limited Time Offer
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                    Early Bird Monsoon Package
-                  </h2>
-                  <p className="mb-6 text-foreground/80">
-                    Book your monsoon adventure before May 31st and enjoy:
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-start">
-                      <span className="mr-2 text-accent">✓</span>
-                      <span>40% off on all accommodations</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 text-accent">✓</span>
-                      <span>Complimentary river rafting experience</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2 text-accent">✓</span>
-                      <span>Free upgrade to premium cottage (subject to availability)</span>
-                    </li>
-                  </ul>
-                  <Link to="/booking">
-                    <Button variant="default" size="lg" className="font-medium">
-                      Book This Offer <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <p className="text-sm text-muted-foreground mt-4">
-                    Use promo code <span className="font-medium">EARLYBIRD40</span> at checkout
-                  </p>
-                </div>
-                <div className="relative h-64 lg:h-auto">
-                  <img 
-                    src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80" 
-                    alt="Monsoon Package" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-4 right-4 bg-accent text-white text-lg font-bold py-3 px-6 rounded-full rotate-12 shadow-lg">
-                    40% OFF
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
         
         {/* Accommodations preview */}
         <section className="py-20 bg-secondary">
@@ -247,7 +148,7 @@ const Index: React.FC = () => {
                     </p>
                     <Link 
                       to="/accommodation" 
-                      className="text-accent hover:underline inline-flex items-center"
+                      className="text-green-700 hover:underline inline-flex items-center"
                     >
                       View Details <ArrowRight size={16} className="ml-1" />
                     </Link>
@@ -334,10 +235,10 @@ const Index: React.FC = () => {
           <div className="container px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
-                Get Exclusive Offers & Updates
+                Get Exclusive Updates
               </h2>
               <p className="text-foreground/70 mb-8">
-                Subscribe to our newsletter and be the first to know about special discounts and seasonal packages.
+                Subscribe to our newsletter and be the first to know about new adventures and seasonal experiences.
               </p>
               <div className="flex flex-col sm:flex-row items-center max-w-md mx-auto gap-3">
                 <input 
@@ -345,7 +246,7 @@ const Index: React.FC = () => {
                   placeholder="Your email address" 
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
-                <Button variant="default" className="w-full sm:w-auto">
+                <Button variant="default" className="w-full sm:w-auto bg-green-700 hover:bg-green-800">
                   Subscribe
                 </Button>
               </div>
@@ -357,22 +258,19 @@ const Index: React.FC = () => {
         </section>
         
         {/* CTA */}
-        <section className="py-20 bg-accent text-accent-foreground relative">
+        <section className="py-20 bg-green-700 text-white relative">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
           <div className="container relative z-10 px-4 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
               <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
                 Your Adventure Awaits!
               </h2>
-              <p className="text-xl mb-4 text-accent-foreground/90">
+              <p className="text-xl mb-8 text-white/90">
                 Book your stay now and create memories that will last a lifetime.
-              </p>
-              <p className="text-lg mb-8 font-medium">
-                Use code <span className="bg-white text-accent px-2 py-1 rounded-md mx-1">ADVENTURE15</span> for 15% off your first booking
               </p>
               <Link 
                 to="/booking" 
-                className="inline-block px-8 py-4 bg-white text-accent font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]"
+                className="inline-block px-8 py-4 bg-white text-green-700 font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]"
               >
                 Book Your Adventure Now
               </Link>

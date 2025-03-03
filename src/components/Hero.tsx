@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 type SlideData = {
   id: number;
-  image: string;
+  videoSrc: string;
   title: string;
   subtitle: string;
 }
@@ -13,21 +13,21 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&q=80',
-    title: 'Discover Untamed Beauty',
-    subtitle: 'Immerse yourself in the serene wilderness of Dandeli'
+    videoSrc: 'https://player.vimeo.com/external/373895732.sd.mp4?s=6e0b20c0040fcb14bac4f7cf09eb0c8e9511fba5&profile_id=164&oauth2_token_id=57447761',
+    title: 'Experience Rapids Adventure',
+    subtitle: 'Navigate through thrilling white water rafting in Dandeli'
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80',
-    title: 'Adventure Awaits',
-    subtitle: 'Experience thrilling activities in nature\'s playground'
+    videoSrc: 'https://player.vimeo.com/external/434085178.sd.mp4?s=95afc62ecd5625cf9e2c0655d1f990183bbb4c52&profile_id=164&oauth2_token_id=57447761',
+    title: 'Explore Kali River',
+    subtitle: 'Immerse yourself in the natural beauty of Dandeli wilderness'
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1920&q=80',
-    title: 'Reconnect with Nature',
-    subtitle: 'Find peace and tranquility in our sanctuary'
+    videoSrc: 'https://player.vimeo.com/external/338205352.sd.mp4?s=6af52a8c365041abee0f3965dd133496ae66d72e&profile_id=164&oauth2_token_id=57447761',
+    title: 'Connect With Nature',
+    subtitle: 'Experience the thrill of river adventures in Dandeli'
   }
 ];
 
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 8000); // Longer interval for videos
     
     return () => clearInterval(interval);
   }, []);
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
   
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Slides */}
+      {/* Video Slides */}
       {slides.map((slide, index) => (
         <div 
           key={slide.id}
@@ -57,14 +57,17 @@ const Hero: React.FC = () => {
             currentSlide === index ? 'opacity-100' : 'opacity-0'
           )}
         >
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
-          >
-            <div className="absolute inset-0 bg-black/30" />
-          </div>
+          <div className="absolute inset-0 bg-black/30 z-10" />
+          <video 
+            className="absolute inset-0 w-full h-full object-cover"
+            src={slide.videoSrc}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
           
-          <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
+          <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-20">
             <h1 
               className={cn(
                 "text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white max-w-5xl leading-tight mb-4",
@@ -99,12 +102,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
       ))}
-      
-      {/* Special Offer Tag */}
-      <div className="absolute top-40 right-0 bg-accent text-white py-3 px-5 z-10 transform rotate-0 shadow-lg">
-        <div className="font-bold text-lg">SUMMER OFFER</div>
-        <div className="text-sm">25% OFF ALL BOOKINGS</div>
-      </div>
       
       {/* Slide indicators */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
