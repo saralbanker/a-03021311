@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { Phone } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const WhatsAppButton: React.FC = () => {
-  const phoneNumber = '+919123456789'; // Replace with actual phone number
+  const phoneNumber = '+918904704234'; // Updated phone number
   const message = encodeURIComponent("Hi! I'm interested in booking an adventure at Dandeli.");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
@@ -23,7 +23,8 @@ const WhatsAppButton: React.FC = () => {
       aria-label="Contact us on WhatsApp"
     >
       <div className="relative">
-        <Phone size={24} className="text-white" />
+        {/* Using a more WhatsApp-like icon */}
+        <MessageSquare size={24} className="text-white" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full"></span>
       </div>
     </a>

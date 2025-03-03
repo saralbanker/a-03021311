@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 const ChatBot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{text: string, isUser: boolean}[]>([
-    { text: "Hi there! 👋 I'm your adventure assistant. How can I help you today?", isUser: false }
+    { text: "Hi there! 👋 I'm your personal Dandeli adventure guide. How can I help you plan your perfect nature getaway?", isUser: false }
   ]);
   const [input, setInput] = useState('');
 
@@ -22,15 +22,28 @@ const ChatBot: React.FC = () => {
     setMessages([...messages, { text: input, isUser: true }]);
     setInput('');
     
-    // Simulate bot response after a delay
+    // Improved bot responses based on user input
     setTimeout(() => {
-      setMessages(prev => [
-        ...prev, 
-        { 
-          text: "Thanks for your message! Our team will get back to you shortly. For immediate assistance, please contact us via WhatsApp.", 
-          isUser: false 
-        }
-      ]);
+      let botResponse = "";
+      const userInput = input.toLowerCase();
+      
+      if (userInput.includes("price") || userInput.includes("cost") || userInput.includes("rate")) {
+        botResponse = "Our adventure packages start from ₹1,999 per person. For the premium experience with luxury accommodation, rates are ₹4,999 per night. Don't forget to check our ongoing monsoon special discount of 25% off on all bookings!";
+      } 
+      else if (userInput.includes("booking") || userInput.includes("reserve")) {
+        botResponse = "Booking is super easy! You can either use our online booking form, contact us on WhatsApp at +918904704234, or call us directly. We recommend booking at least 2 weeks in advance during peak season (Oct-Feb).";
+      }
+      else if (userInput.includes("activity") || userInput.includes("adventure") || userInput.includes("rafting")) {
+        botResponse = "We offer thrilling adventures including white water rafting (grades 2-3), jungle safaris, night camping, kayaking, and guided nature walks. Our most popular package is the 'Weekend Wilderness' which includes rafting, safari and overnight camping!";
+      }
+      else if (userInput.includes("location") || userInput.includes("reach") || userInput.includes("address")) {
+        botResponse = "We're located in the heart of Dandeli Wildlife Sanctuary, Karnataka. The nearest airport is Goa International Airport (160km). We provide pickup services, and our resort is just 5km from Dandeli town center.";
+      }
+      else {
+        botResponse = "Thanks for reaching out! Our adventure specialists would love to help you personally. Please contact us via WhatsApp or call us at +918904704234 for immediate assistance. Would you like to know about our adventure packages, accommodation options, or special offers?";
+      }
+      
+      setMessages(prev => [...prev, { text: botResponse, isUser: false }]);
     }, 1000);
   };
 
@@ -48,7 +61,7 @@ const ChatBot: React.FC = () => {
         onClick={toggleChat}
         className={cn(
           "w-14 h-14 rounded-full shadow-lg flex items-center justify-center",
-          "bg-accent hover:bg-accent/90 transition-all duration-300",
+          "bg-green-600 hover:bg-green-700 transition-all duration-300", // Changed to nature green
           !isOpen && "animate-bounce"
         )}
         aria-label="Chat with us"
@@ -66,7 +79,7 @@ const ChatBot: React.FC = () => {
         style={{ height: isOpen ? '400px' : '0' }}
       >
         {/* Header */}
-        <div className="bg-accent p-4 text-white">
+        <div className="bg-green-600 p-4 text-white"> {/* Changed to nature green */}
           <h3 className="font-bold">Adventure Support</h3>
           <p className="text-xs opacity-80">We typically reply within minutes</p>
         </div>
@@ -79,8 +92,8 @@ const ChatBot: React.FC = () => {
               className={cn(
                 "max-w-[80%] p-3 rounded-lg",
                 message.isUser 
-                  ? "bg-accent text-white self-end rounded-br-none" 
-                  : "bg-muted self-start rounded-bl-none"
+                  ? "bg-green-600 text-white self-end rounded-br-none" // Changed to nature green
+                  : "bg-gray-100 self-start rounded-bl-none"
               )}
             >
               {message.text}
@@ -96,11 +109,11 @@ const ChatBot: React.FC = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
-            className="flex-1 px-3 py-2 border rounded-l-md focus:outline-none focus:ring-1 focus:ring-accent"
+            className="flex-1 px-3 py-2 border rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-600" // Changed focus ring color
           />
           <Button 
             onClick={handleSend}
-            className="rounded-l-none"
+            className="rounded-l-none bg-green-600 hover:bg-green-700" // Changed to nature green
             disabled={input.trim() === ''}
           >
             <Send size={18} />
