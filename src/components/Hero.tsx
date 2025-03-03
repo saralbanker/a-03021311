@@ -100,6 +100,12 @@ const Hero: React.FC = () => {
         </div>
       ))}
       
+      {/* Special Offer Tag */}
+      <div className="absolute top-40 right-0 bg-accent text-white py-3 px-5 z-10 transform rotate-0 shadow-lg">
+        <div className="font-bold text-lg">SUMMER OFFER</div>
+        <div className="text-sm">25% OFF ALL BOOKINGS</div>
+      </div>
+      
       {/* Slide indicators */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
         {slides.map((_, index) => (
