@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Logo from './Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,12 +42,7 @@ const Navbar: React.FC = () => {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link 
-          to="/" 
-          className="text-2xl font-display font-bold text-accent transition-all duration-300 hover:opacity-80"
-        >
-          Dandeli Adventures
-        </Link>
+        <Logo />
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
