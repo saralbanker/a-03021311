@@ -1,16 +1,26 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import FeaturedActivities from '@/components/FeaturedActivities';
+import SpecialOffers from '@/components/SpecialOffers';
+import PromotionBanner from '@/components/PromotionBanner';
 import { ArrowRight, Leaf, Shield, Award } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <PromotionBanner 
+        title="Welcome Offer"
+        description="Use code WELCOME15 for 15% off your first booking"
+        code="WELCOME15"
+        backgroundClass="bg-green-700"
+        textColorClass="text-white"
+        linkPath="/booking?promo=WELCOME15"
+        discountPercentage={15}
+      />
+      
       <Navbar />
       
       <main className="flex-grow">
@@ -91,6 +101,9 @@ const Index: React.FC = () => {
             </div>
           </div>
         </section>
+        
+        {/* Special Offers Section */}
+        <SpecialOffers />
         
         <FeaturedActivities />
         

@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 
 type SlideData = {
   id: number;
-  videoSrc: string;
+  imageSrc: string;
   title: string;
   subtitle: string;
 }
@@ -13,19 +13,19 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    videoSrc: 'https://player.vimeo.com/external/373895732.sd.mp4?s=6e0b20c0040fcb14bac4f7cf09eb0c8e9511fba5&profile_id=164&oauth2_token_id=57447761',
+    imageSrc: 'https://images.unsplash.com/photo-1472213984304-6eb5c9c2f704?q=80&w=2574&auto=format&fit=crop',
     title: 'Experience Rapids Adventure',
     subtitle: 'Navigate through thrilling white water rafting in Dandeli'
   },
   {
     id: 2,
-    videoSrc: 'https://player.vimeo.com/external/434085178.sd.mp4?s=95afc62ecd5625cf9e2c0655d1f990183bbb4c52&profile_id=164&oauth2_token_id=57447761',
+    imageSrc: 'https://images.unsplash.com/photo-1575535967488-3e40929584ec?q=80&w=2574&auto=format&fit=crop',
     title: 'Explore Kali River',
     subtitle: 'Immerse yourself in the natural beauty of Dandeli wilderness'
   },
   {
     id: 3,
-    videoSrc: 'https://player.vimeo.com/external/338205352.sd.mp4?s=6af52a8c365041abee0f3965dd133496ae66d72e&profile_id=164&oauth2_token_id=57447761',
+    imageSrc: 'https://images.unsplash.com/photo-1505158498176-0150297fbd7d?q=80&w=2574&auto=format&fit=crop',
     title: 'Connect With Nature',
     subtitle: 'Experience the thrill of river adventures in Dandeli'
   }
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 8000); // Longer interval for videos
+    }, 6000); // 6 seconds interval for images
     
     return () => clearInterval(interval);
   }, []);
@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
   
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Video Slides */}
+      {/* Image Slides */}
       {slides.map((slide, index) => (
         <div 
           key={slide.id}
@@ -58,13 +58,9 @@ const Hero: React.FC = () => {
           )}
         >
           <div className="absolute inset-0 bg-black/30 z-10" />
-          <video 
-            className="absolute inset-0 w-full h-full object-cover"
-            src={slide.videoSrc}
-            autoPlay
-            muted
-            loop
-            playsInline
+          <div 
+            className="absolute inset-0 w-full h-full bg-cover bg-center"
+            style={{ backgroundImage: `url(${slide.imageSrc})` }}
           />
           
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-20">

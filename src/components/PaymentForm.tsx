@@ -1,12 +1,14 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Check, CreditCard, Loader2 } from 'lucide-react';
+import { Check, CreditCard, Loader2, Tag } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { processPayment, calculateBookingPrice } from "@/utils/payment-service";
+import { processPayment, calculateBookingPrice, applyPromoCode } from "@/utils/payment-service";
+import { useToast } from "@/hooks/use-toast";
+import { useSearchParams } from 'react-router-dom';
 
 interface PaymentFormProps {
   bookingDetails: any;
@@ -15,6 +17,8 @@ interface PaymentFormProps {
 }
 
 export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: PaymentFormProps) {
+  const [searchParams] = useSearchParams();
+  const { toast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [cardDetails, setCardDetails] = useState({
@@ -24,13 +28,41 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
     cvv: ''
   });
   const [upiId, setUpiId] = useState('');
+  const [promoCode, setPromoCode] = useState(searchParams.get('promo') || '');
+  const [promoApplied, setPromoApplied] = useState(false);
+  const [discountInfo, setDiscountInfo] = useState<{
+    discountedAmount: number;
+    discount: number;
+    valid: boolean;
+  }>({ discountedAmount: 0, discount: 0, valid: false });
   
   // Calculate booking amount
-  const amount = calculateBookingPrice(
+  const baseAmount = calculateBookingPrice(
     bookingDetails.roomType, 
     parseInt(bookingDetails.adults),
     parseInt(bookingDetails.children)
   );
+  
+  // Apply promo code if present
+  useEffect(() => {
+    if (promoCode && !promoApplied) {
+      const result = applyPromoCode(baseAmount, promoCode);
+      setDiscountInfo(result);
+      if (result.valid) {
+        setPromoApplied(true);
+        toast({
+          title: "Promo code applied!",
+          description: `You saved ₹${result.discount.toLocaleString()} with code ${promoCode}`,
+          variant: "default",
+        });
+      }
+    }
+  }, [promoCode, baseAmount, promoApplied, toast]);
+  
+  // Final amount to charge
+  const finalAmount = promoApplied && discountInfo.valid 
+    ? discountInfo.discountedAmount 
+    : baseAmount;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -48,10 +80,41 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
       });
     } else if (name === 'upiId') {
       setUpiId(value);
+    } else if (name === 'promoCode') {
+      setPromoCode(value);
     } else {
       setCardDetails({
         ...cardDetails,
         [name]: value
+      });
+    }
+  };
+  
+  const handleApplyPromo = () => {
+    if (!promoCode) {
+      toast({
+        title: "No promo code entered",
+        description: "Please enter a promo code to apply a discount",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    const result = applyPromoCode(baseAmount, promoCode);
+    setDiscountInfo(result);
+    
+    if (result.valid) {
+      setPromoApplied(true);
+      toast({
+        title: "Promo code applied!",
+        description: `You saved ₹${result.discount.toLocaleString()} with code ${promoCode}`,
+        variant: "default",
+      });
+    } else {
+      toast({
+        title: "Invalid promo code",
+        description: "The promo code you entered is not valid",
+        variant: "destructive",
       });
     }
   };
@@ -61,18 +124,29 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
     setIsProcessing(true);
     
     try {
-      // Process payment with the chosen method
-      const paymentResult = await processPayment({
-        amount,
+      // Prepare payment details based on method
+      const paymentDetails: any = {
+        amount: finalAmount,
         currency: 'INR',
         paymentMethod: bookingDetails.paymentMethod,
         description: `Booking for ${bookingDetails.roomType} room`,
         metadata: {
           guestName: bookingDetails.name,
           checkInDate: bookingDetails.date.toISOString(),
-          roomType: bookingDetails.roomType
+          roomType: bookingDetails.roomType,
+          promoApplied: promoApplied ? promoCode : null
         }
-      });
+      };
+      
+      // Add method-specific details
+      if (bookingDetails.paymentMethod === 'creditCard') {
+        paymentDetails.cardDetails = cardDetails;
+      } else if (bookingDetails.paymentMethod === 'upi') {
+        paymentDetails.upiId = upiId;
+      }
+      
+      // Process payment with the chosen method
+      const paymentResult = await processPayment(paymentDetails);
       
       if (paymentResult.success && paymentResult.transactionId) {
         setPaymentSuccess(true);
@@ -84,7 +158,11 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
       }
     } catch (error) {
       console.error('Payment error:', error);
-      alert('Payment failed. Please try again.');
+      toast({
+        title: "Payment failed",
+        description: error instanceof Error ? error.message : "Please try again or use a different payment method",
+        variant: "destructive",
+      });
     } finally {
       setIsProcessing(false);
     }
@@ -122,7 +200,7 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
         <div className="space-y-4">
           <div className="flex justify-between">
             <span>Booking Amount:</span>
-            <span className="font-medium">₹{amount.toLocaleString()}</span>
+            <span className="font-medium">₹{baseAmount.toLocaleString()}</span>
           </div>
           <div className="flex justify-between">
             <span>Room Type:</span>
@@ -132,11 +210,57 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
             <span>Check-in Date:</span>
             <span className="font-medium">{bookingDetails.date.toLocaleDateString()}</span>
           </div>
-          <Separator />
-          <div className="flex justify-between font-medium text-lg">
-            <span>Total Amount:</span>
-            <span>₹{amount.toLocaleString()}</span>
+          
+          {/* Promo code section */}
+          <div className="pt-2 pb-2">
+            <div className="flex gap-2">
+              <div className="flex-grow">
+                <Input
+                  name="promoCode"
+                  placeholder="Promo code"
+                  value={promoCode}
+                  onChange={handleInputChange}
+                  disabled={promoApplied}
+                />
+              </div>
+              <Button 
+                type="button"
+                variant={promoApplied ? "outline" : "default"}
+                onClick={handleApplyPromo}
+                disabled={promoApplied || isProcessing}
+              >
+                {promoApplied ? "Applied" : "Apply"}
+              </Button>
+            </div>
+            {promoApplied && discountInfo.valid && (
+              <div className="flex items-center mt-2 text-sm text-green-600">
+                <Tag size={14} className="mr-1" />
+                <span>
+                  {promoCode} applied: ₹{discountInfo.discount.toLocaleString()} off
+                </span>
+              </div>
+            )}
           </div>
+          
+          <Separator />
+          
+          {promoApplied && discountInfo.valid ? (
+            <div className="space-y-1">
+              <div className="flex justify-between text-muted-foreground line-through">
+                <span>Original Total:</span>
+                <span>₹{baseAmount.toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between font-medium text-lg">
+                <span>Discounted Total:</span>
+                <span className="text-green-600">₹{finalAmount.toLocaleString()}</span>
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-between font-medium text-lg">
+              <span>Total Amount:</span>
+              <span>₹{finalAmount.toLocaleString()}</span>
+            </div>
+          )}
         </div>
         
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
