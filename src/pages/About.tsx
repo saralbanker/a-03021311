@@ -1,75 +1,59 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { ArrowRight, Leaf, Shield, Award, Users, Heart, BookOpen, Map, Calendar, Mountain } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
 const About: React.FC = () => {
-  const teamMembers = [
-    {
-      name: "Aishwarya Sharma",
-      role: "Founder & CEO",
-      bio: "With over 15 years of experience in adventure tourism, Aishwarya founded Dandeli Adventures with a vision to create sustainable tourism experiences.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      name: "Rahul Patil",
-      role: "Operations Director",
-      bio: "Rahul ensures all our adventures run smoothly and safely, with a background in wilderness management and outdoor leadership.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      name: "Priya Desai",
-      role: "Wildlife Expert",
-      bio: "A certified naturalist with a passion for conservation, Priya leads our wildlife experiences and educational programs.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      name: "Vikram Mehra",
-      role: "Head Chef",
-      bio: "Specializing in local Malnad cuisine, Chef Vikram creates authentic farm-to-table experiences using ingredients from our organic garden.",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80"
-    }
-  ];
-
-  const timeline = [
-    {
-      year: "2005",
-      title: "Our Beginning",
-      description: "Dandeli Adventures was founded with just two riverside cottages and a dream to share the magic of Western Ghats."
-    },
-    {
-      year: "2010",
-      title: "Expansion",
-      description: "Added our signature treehouse villas and expanded our adventure activities to include white water rafting and kayaking."
-    },
-    {
-      year: "2015",
-      title: "Conservation Partnership",
-      description: "Partnered with the Karnataka Forest Department for wildlife conservation initiatives in Dandeli-Anshi Tiger Reserve."
-    },
-    {
-      year: "2019",
-      title: "Sustainability Award",
-      description: "Recognized with the National Tourism Award for sustainable ecotourism practices and community development."
-    },
-    {
-      year: "2023",
-      title: "Today",
-      description: "Now offering over 20 unique experiences and accommodations while remaining committed to sustainable tourism."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  const teamMembers = [{
+    name: "Aishwarya Sharma",
+    role: "Founder & CEO",
+    bio: "With over 15 years of experience in adventure tourism, Aishwarya founded Dandeli Adventures with a vision to create sustainable tourism experiences.",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
+  }, {
+    name: "Rahul Patil",
+    role: "Operations Director",
+    bio: "Rahul ensures all our adventures run smoothly and safely, with a background in wilderness management and outdoor leadership.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80"
+  }, {
+    name: "Priya Desai",
+    role: "Wildlife Expert",
+    bio: "A certified naturalist with a passion for conservation, Priya leads our wildlife experiences and educational programs.",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80"
+  }, {
+    name: "Vikram Mehra",
+    role: "Head Chef",
+    bio: "Specializing in local Malnad cuisine, Chef Vikram creates authentic farm-to-table experiences using ingredients from our organic garden.",
+    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80"
+  }];
+  const timeline = [{
+    year: "2005",
+    title: "Our Beginning",
+    description: "Dandeli Adventures was founded with just two riverside cottages and a dream to share the magic of Western Ghats."
+  }, {
+    year: "2010",
+    title: "Expansion",
+    description: "Added our signature treehouse villas and expanded our adventure activities to include white water rafting and kayaking."
+  }, {
+    year: "2015",
+    title: "Conservation Partnership",
+    description: "Partnered with the Karnataka Forest Department for wildlife conservation initiatives in Dandeli-Anshi Tiger Reserve."
+  }, {
+    year: "2019",
+    title: "Sustainability Award",
+    description: "Recognized with the National Tourism Award for sustainable ecotourism practices and community development."
+  }, {
+    year: "2023",
+    title: "Today",
+    description: "Now offering over 20 unique experiences and accommodations while remaining committed to sustainable tourism."
+  }];
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-grow pt-24">
         {/* Hero Section */}
         <section className="relative py-20 mb-8">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20 bg-lime-600"></div>
           <div className="relative z-10 container mx-auto text-center px-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 animate-fade-in hover:text-glow transition-all duration-300">
               Our Story
@@ -85,17 +69,9 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" 
-                  alt="Dandeli Wildlife" 
-                  className="w-full h-[500px] object-cover rounded-xl shadow-lg"
-                />
+                <img src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block">
-                  <img 
-                    src="https://images.unsplash.com/photo-1678483789107-0029c61fdcca?auto=format&fit=crop&w=400&q=80" 
-                    alt="Wildlife" 
-                    className="w-40 h-32 object-cover rounded-md"
-                  />
+                  <img src="https://images.unsplash.com/photo-1678483789107-0029c61fdcca?auto=format&fit=crop&w=400&q=80" alt="Wildlife" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
@@ -146,37 +122,29 @@ const About: React.FC = () => {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  icon: <Leaf size={30} />,
-                  title: "Sustainability",
-                  description: "Minimize our ecological footprint while maximizing positive impact on local ecosystems.",
-                  delay: 0
-                },
-                {
-                  icon: <Shield size={30} />,
-                  title: "Safety",
-                  description: "Rigorous safety standards and certified guides for all adventure activities.",
-                  delay: 100
-                },
-                {
-                  icon: <Users size={30} />,
-                  title: "Community",
-                  description: "Supporting local communities through employment and cultural preservation.",
-                  delay: 200
-                },
-                {
-                  icon: <Award size={30} />,
-                  title: "Excellence",
-                  description: "Commitment to exceptional experiences and continuous improvement.",
-                  delay: 300
-                }
-              ].map((value, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white p-8 rounded-xl text-center shadow-sm animate-slide-up card-hover"
-                  style={{ animationDelay: `${value.delay}ms` }}
-                >
+              {[{
+              icon: <Leaf size={30} />,
+              title: "Sustainability",
+              description: "Minimize our ecological footprint while maximizing positive impact on local ecosystems.",
+              delay: 0
+            }, {
+              icon: <Shield size={30} />,
+              title: "Safety",
+              description: "Rigorous safety standards and certified guides for all adventure activities.",
+              delay: 100
+            }, {
+              icon: <Users size={30} />,
+              title: "Community",
+              description: "Supporting local communities through employment and cultural preservation.",
+              delay: 200
+            }, {
+              icon: <Award size={30} />,
+              title: "Excellence",
+              description: "Commitment to exceptional experiences and continuous improvement.",
+              delay: 300
+            }].map((value, index) => <div key={index} className="bg-white p-8 rounded-xl text-center shadow-sm animate-slide-up card-hover" style={{
+              animationDelay: `${value.delay}ms`
+            }}>
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary text-accent mb-6">
                     {value.icon}
                   </div>
@@ -186,8 +154,7 @@ const About: React.FC = () => {
                   <p className="text-foreground/70">
                     {value.description}
                   </p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -208,15 +175,9 @@ const About: React.FC = () => {
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-accent/30 transform md:translate-x-[-50%] hidden sm:block"></div>
             
             <div className="space-y-12">
-              {timeline.map((item, index) => (
-                <div 
-                  key={index}
-                  className={cn(
-                    "relative flex flex-col sm:flex-row items-start gap-8 animate-fade-in",
-                    index % 2 === 0 ? "md:flex-row-reverse text-left md:text-right" : "text-left"
-                  )}
-                  style={{ animationDelay: `${index * 200}ms` }}
-                >
+              {timeline.map((item, index) => <div key={index} className={cn("relative flex flex-col sm:flex-row items-start gap-8 animate-fade-in", index % 2 === 0 ? "md:flex-row-reverse text-left md:text-right" : "text-left")} style={{
+              animationDelay: `${index * 200}ms`
+            }}>
                   <div className="sm:w-1/2"></div>
                   
                   {/* Year marker */}
@@ -224,10 +185,7 @@ const About: React.FC = () => {
                     <Calendar size={16} />
                   </div>
                   
-                  <div className={cn(
-                    "sm:w-1/2 bg-white p-6 rounded-xl shadow-sm card-hover",
-                    index % 2 === 0 ? "sm:pr-10" : "sm:pl-10"
-                  )}>
+                  <div className={cn("sm:w-1/2 bg-white p-6 rounded-xl shadow-sm card-hover", index % 2 === 0 ? "sm:pr-10" : "sm:pl-10")}>
                     <div className="flex sm:hidden items-center mb-3">
                       <div className="w-8 h-8 rounded-full bg-accent text-accent-foreground flex items-center justify-center mr-3">
                         <Calendar size={14} />
@@ -240,8 +198,7 @@ const About: React.FC = () => {
                       <p className="text-foreground/70">{item.description}</p>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -259,26 +216,18 @@ const About: React.FC = () => {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {teamMembers.map((member, index) => (
-                <div 
-                  key={index}
-                  className="bg-white rounded-xl overflow-hidden shadow-sm animate-slide-up card-hover"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
+              {teamMembers.map((member, index) => <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm animate-slide-up card-hover" style={{
+              animationDelay: `${index * 100}ms`
+            }}>
                   <div className="aspect-[3/4] overflow-hidden">
-                    <img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
+                    <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-display font-semibold">{member.name}</h3>
                     <p className="text-accent font-medium mb-3">{member.role}</p>
                     <p className="text-foreground/70 text-sm">{member.bio}</p>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -320,26 +269,16 @@ const About: React.FC = () => {
                 </div>
               </div>
               
-              <Link 
-                to="/contact" 
-                className="btn-primary"
-              >
+              <Link to="/contact" className="btn-primary">
                 Contact Us for Directions
               </Link>
             </div>
             
             <div className="animate-slide-up animation-delay-200">
               <div className="rounded-xl overflow-hidden shadow-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61475.89343423126!2d74.57940594863278!3d15.244387199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf35941ce7aacd%3A0xcdbe67b4b8d98c2!2sDandeli%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1650120000000!5m2!1sen!2sin"
-                  width="100%"
-                  height="450"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  title="Dandeli Adventures Location"
-                  className="w-full"
-                ></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61475.89343423126!2d74.57940594863278!3d15.244387199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf35941ce7aacd%3A0xcdbe67b4b8d98c2!2sDandeli%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1650120000000!5m2!1sen!2sin" width="100%" height="450" style={{
+                border: 0
+              }} allowFullScreen loading="lazy" title="Dandeli Adventures Location" className="w-full"></iframe>
               </div>
             </div>
           </div>
@@ -357,16 +296,10 @@ const About: React.FC = () => {
                 Book your stay now and discover the magic of the Western Ghats with us.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  to="/accommodation" 
-                  className="inline-block px-8 py-4 bg-white text-accent font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]"
-                >
+                <Link to="/accommodation" className="inline-block px-8 py-4 bg-white text-accent font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]">
                   View Accommodations
                 </Link>
-                <Link 
-                  to="/booking" 
-                  className="inline-block px-8 py-4 bg-transparent border-2 border-white text-white font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:translate-y-[-2px]"
-                >
+                <Link to="/booking" className="inline-block px-8 py-4 bg-transparent border-2 border-white text-white font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/10 hover:shadow-lg hover:translate-y-[-2px]">
                   Book Now
                 </Link>
               </div>
@@ -376,8 +309,6 @@ const About: React.FC = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
