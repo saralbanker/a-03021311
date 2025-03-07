@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { BookingForm } from '@/components/BookingForm';
 import { PaymentForm } from '@/components/PaymentForm';
@@ -9,18 +8,17 @@ import Footer from '@/components/Footer';
 import { Check, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sendEmail, formatBookingEmail } from '@/utils/email-service';
-
 const BookingPage = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStep, setBookingStep] = useState<'form' | 'payment' | 'confirmation'>('form');
   const [currentBooking, setCurrentBooking] = useState<any>(null);
   const [transactionId, setTransactionId] = useState<string | null>(null);
-
   const handleBookingSubmit = async (values: any) => {
     setIsSubmitting(true);
     setCurrentBooking(values);
-    
     try {
       // Move to payment step
       setBookingStep('payment');
@@ -28,82 +26,69 @@ const BookingPage = () => {
       toast({
         title: "Something went wrong",
         description: "Please try again later.",
-        variant: "destructive",
+        variant: "destructive"
       });
       console.error('Booking error:', error);
     } finally {
       setIsSubmitting(false);
     }
   };
-  
   const handlePaymentSuccess = async (paymentTransactionId: string) => {
     setTransactionId(paymentTransactionId);
-    
     try {
       // Send confirmation email
       const emailContent = formatBookingEmail({
         ...currentBooking,
         paymentTransactionId
       });
-      
       await sendEmail({
-        to: "stanleyyesu@gmail.com", // Admin email
+        to: "stanleyyesu@gmail.com",
+        // Admin email
         subject: `New Booking: ${currentBooking.name}`,
         body: emailContent
       });
-      
+
       // Also send email to the customer
       await sendEmail({
-        to: currentBooking.email, 
+        to: currentBooking.email,
         subject: "Your Booking Confirmation - Dandeli Adventures",
         body: emailContent
       });
-      
       setBookingStep('confirmation');
-      
       toast({
         title: "Booking Confirmed!",
         description: "Check your email for booking details.",
-        variant: "default",
+        variant: "default"
       });
     } catch (error) {
       console.error('Error sending confirmation email:', error);
-      
       toast({
         title: "Booking Successful",
         description: "However, there was an issue sending the confirmation email.",
-        variant: "default",
+        variant: "default"
       });
-      
       setBookingStep('confirmation');
     }
   };
-  
   const handlePaymentCancel = () => {
     setBookingStep('form');
   };
-  
   const resetBooking = () => {
     setBookingStep('form');
     setCurrentBooking(null);
     setTransactionId(null);
   };
-
-  return (
-    <div className="flex flex-col min-h-screen">
+  return <div className="flex flex-col min-h-screen">
       <Navbar />
       
       <main className="flex-grow">
         {/* Hero Section */}
         <div className="relative h-[40vh] md:h-[50vh] w-full">
-          <div 
-            className="absolute inset-0 bg-cover bg-center" 
-            style={{ 
-              backgroundImage: "url('https://images.unsplash.com/photo-1567636788276-80a11be35011?q=80&w=1974&auto=format&fit=crop')", 
-              backgroundPosition: "center 30%" 
-            }}
-          >
-            <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-cover bg-center" style={{
+          backgroundImage: "url('https://images.unsplash.com/photo-1567636788276-80a11be35011?q=80&w=1974&auto=format&fit=crop')",
+          backgroundPosition: "center 30%"
+        }}>
+            <div className="absolute inset-0 bg-lime-600" />
           </div>
           
           <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
@@ -120,26 +105,17 @@ const BookingPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Booking Form or Payment Form Column */}
             <div className="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 animate-fade-in">
-              {bookingStep === 'form' && (
-                <>
+              {bookingStep === 'form' && <>
                   <h2 className="text-2xl font-display font-semibold mb-6">Reservation Details</h2>
                   <BookingForm onSubmit={handleBookingSubmit} />
-                </>
-              )}
+                </>}
               
-              {bookingStep === 'payment' && currentBooking && (
-                <>
+              {bookingStep === 'payment' && currentBooking && <>
                   <h2 className="text-2xl font-display font-semibold mb-6">Payment Details</h2>
-                  <PaymentForm 
-                    bookingDetails={currentBooking}
-                    onPaymentSuccess={handlePaymentSuccess}
-                    onCancel={handlePaymentCancel}
-                  />
-                </>
-              )}
+                  <PaymentForm bookingDetails={currentBooking} onPaymentSuccess={handlePaymentSuccess} onCancel={handlePaymentCancel} />
+                </>}
               
-              {bookingStep === 'confirmation' && (
-                <div className="text-center py-8">
+              {bookingStep === 'confirmation' && <div className="text-center py-8">
                   <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Check className="h-10 w-10 text-green-600" />
                   </div>
@@ -147,19 +123,13 @@ const BookingPage = () => {
                   <p className="mb-4 text-muted-foreground">
                     Thank you for booking with Dandeli Adventures. We've sent a confirmation email to {currentBooking?.email}.
                   </p>
-                  {transactionId && (
-                    <p className="text-sm bg-muted p-3 rounded-md inline-block mb-6">
+                  {transactionId && <p className="text-sm bg-muted p-3 rounded-md inline-block mb-6">
                       Transaction ID: {transactionId}
-                    </p>
-                  )}
-                  <button 
-                    onClick={resetBooking}
-                    className="btn-primary mx-auto mt-4"
-                  >
+                    </p>}
+                  <button onClick={resetBooking} className="btn-primary mx-auto mt-4">
                     Make Another Booking
                   </button>
-                </div>
-              )}
+                </div>}
             </div>
             
             {/* Sidebar Information */}
@@ -257,44 +227,34 @@ const BookingPage = () => {
             <h2 className="text-3xl font-display font-semibold mb-8 text-center">Frequently Asked Questions</h2>
             
             <div className="max-w-3xl mx-auto space-y-6">
-              {faqs.map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+              {faqs.map((faq, index) => <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                   <h3 className="text-lg font-medium mb-2">{faq.question}</h3>
                   <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
 
 // FAQ data
-const faqs = [
-  {
-    question: "How do I make a reservation?",
-    answer: "You can make a reservation by filling out the booking form on our website, calling our reservation team, or sending an email to bookings@dandeliadventures.com."
-  },
-  {
-    question: "Is there a minimum stay requirement?",
-    answer: "During weekends and peak seasons, there is typically a 2-night minimum stay requirement. During weekdays and off-peak seasons, single-night stays may be available."
-  },
-  {
-    question: "Do you offer airport transfers?",
-    answer: "Yes, we offer airport transfers from Hubballi Airport and Goa Airport for an additional fee. Please mention your requirement in the special requests section of the booking form."
-  },
-  {
-    question: "Are meals included in the room rate?",
-    answer: "Our standard packages include breakfast. You can upgrade to half-board (breakfast and dinner) or full-board (all meals) options during the booking process."
-  },
-  {
-    question: "Can I book activities in advance?",
-    answer: "Yes, we recommend booking activities in advance, especially during peak season. You can add activities to your reservation through our booking form or contact our team for assistance."
-  }
-];
-
+const faqs = [{
+  question: "How do I make a reservation?",
+  answer: "You can make a reservation by filling out the booking form on our website, calling our reservation team, or sending an email to bookings@dandeliadventures.com."
+}, {
+  question: "Is there a minimum stay requirement?",
+  answer: "During weekends and peak seasons, there is typically a 2-night minimum stay requirement. During weekdays and off-peak seasons, single-night stays may be available."
+}, {
+  question: "Do you offer airport transfers?",
+  answer: "Yes, we offer airport transfers from Hubballi Airport and Goa Airport for an additional fee. Please mention your requirement in the special requests section of the booking form."
+}, {
+  question: "Are meals included in the room rate?",
+  answer: "Our standard packages include breakfast. You can upgrade to half-board (breakfast and dinner) or full-board (all meals) options during the booking process."
+}, {
+  question: "Can I book activities in advance?",
+  answer: "Yes, we recommend booking activities in advance, especially during peak season. You can add activities to your reservation through our booking form or contact our team for assistance."
+}];
 export default BookingPage;
