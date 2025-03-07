@@ -1,13 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
-
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
-  return (
-    <footer className="bg-accent text-accent-foreground">
+  return <footer className="bg-accent text-accent-foreground">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16 px-4">
           <div className="space-y-4 animate-fade-in">
@@ -31,16 +27,11 @@ const Footer: React.FC = () => {
           <div className="space-y-4 animate-fade-in animation-delay-200">
             <h4 className="text-lg font-display font-semibold">Quick Links</h4>
             <ul className="space-y-2">
-              {['About Us', 'Accommodation', 'Activities', 'Gallery', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    to={`/${item.toLowerCase().replace(' ', '-')}`}
-                    className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1"
-                  >
+              {['About Us', 'Accommodation', 'Activities', 'Gallery', 'Contact'].map(item => <li key={item}>
+                  <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
                     {item}
                   </Link>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
           
@@ -55,7 +46,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={20} className="flex-shrink-0" />
-                <span className="text-accent-foreground/80">+91 (123) 456-7890</span>
+                <span className="text-accent-foreground/80">+91 8904704234</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={20} className="flex-shrink-0" />
@@ -70,15 +61,8 @@ const Footer: React.FC = () => {
               Subscribe to our newsletter for the latest updates and offers.
             </p>
             <form className="mt-4 space-y-3">
-              <input 
-                type="email" 
-                placeholder="Your email address"
-                className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-accent-foreground focus:outline-none focus:ring-2 focus:ring-white/30"
-              />
-              <button 
-                type="submit"
-                className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90"
-              >
+              <input type="email" placeholder="Your email address" className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-accent-foreground focus:outline-none focus:ring-2 focus:ring-white/30" />
+              <button type="submit" className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90">
                 Subscribe
               </button>
             </form>
@@ -89,8 +73,6 @@ const Footer: React.FC = () => {
           <p>© {currentYear} Dandeli Adventures. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
