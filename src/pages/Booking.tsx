@@ -92,9 +92,7 @@ const BookingPage = () => {
           </div>
           
           <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">
-              Book Your Getaway
-            </h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">Book Your Gateway</h1>
             <p className="text-lg md:text-xl max-w-2xl animate-slide-up animation-delay-200">
               Reserve your perfect stay in the heart of nature's paradise
             </p>
