@@ -28,7 +28,7 @@ const Index: React.FC = () => {
               <div className="relative">
                 <img src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" alt="Dandeli Adventures Resort" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                  <img src="https://images.unsplash.com/photo-1438565434616-3ef039228b15?auto=format&fit=crop&w=400&q=80" alt="Wildlife" className="w-40 h-32 object-cover rounded-md" />
+                  <img src="https://cdn.pixabay.com/photo/2013/08/16/16/54/kali-river-173169_1280.jpg" alt="Free Kali River Dandeli photo and picture" title="Download free HD stock image of Kali River Dandeli" alt="Wildlife" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
@@ -161,6 +161,36 @@ const Index: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+<<<<<<< HEAD
+            {[
+              {
+                name: "Stanley Nuthalpati",
+                location: "New York, USA",
+                quote: "The river rafting experience was exhilarating! The staff was incredibly knowledgeable and made us feel safe while still having a blast.",
+                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80",
+                delay: 0
+              },
+              {
+                name: "Atharva Kulkarni",
+                location: "Mumbai, India",
+                quote: "The treehouse villa exceeded our expectations. Waking up to birds chirping and the view of the forest canopy was magical. A perfect anniversary getaway.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                delay: 200
+              },
+              {
+                name: "Rajat Hegde",
+                location: "Singapore",
+                quote: "The wildlife safari was the highlight of our trip. We spotted elephants, deer, and even a black panther! Our guide was exceptional in tracking the animals.",
+                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+                delay: 400
+              }
+            ].map((testimonial, index) => (
+              <div 
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-md animate-slide-up"
+                style={{ animationDelay: `${testimonial.delay}ms` }}
+              >
+=======
             {[{
             name: "Sarah Johnson",
             location: "New York, USA",
@@ -182,6 +212,7 @@ const Index: React.FC = () => {
           }].map((testimonial, index) => <div key={index} className="bg-white p-6 rounded-xl shadow-md animate-slide-up" style={{
             animationDelay: `${testimonial.delay}ms`
           }}>
+>>>>>>> 663b03b072e85f5c472a421ad839d5a7e82e7180
                 <div className="flex items-center mb-4">
                   <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4 object-cover" />
                   <div>
