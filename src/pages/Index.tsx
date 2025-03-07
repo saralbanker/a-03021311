@@ -1,32 +1,27 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from "@/components/ui/button"; // Add this import for the Button component
+import { Button } from "@/components/ui/button";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import FeaturedActivities from '@/components/FeaturedActivities';
 import SpecialOffers from '@/components/SpecialOffers';
-import PromotionBanner from '@/components/PromotionBanner';
 import { ArrowRight, Leaf, Shield, Award } from 'lucide-react';
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <PromotionBanner 
-        title="Welcome Offer"
-        description="Use code WELCOME15 for 15% off your first booking"
-        code="WELCOME15"
-        backgroundClass="bg-green-700"
-        textColorClass="text-white"
-        linkPath="/booking?promo=WELCOME15"
-        discountPercentage={15}
-      />
-      
       <Navbar />
       
       <main className="flex-grow">
         <Hero />
+        
+        {/* Special Promotion Banner */}
+        <div className="bg-green-700 text-white py-3 px-4 text-center shadow-md">
+          <div className="container mx-auto">
+            <p className="text-xl font-bold">Book now just at ₹1499! <Link to="/booking" className="underline ml-2 hover:text-yellow-200 transition-colors">Limited time offer</Link></p>
+          </div>
+        </div>
         
         {/* About section */}
         <section className="section-padding container">
@@ -36,9 +31,9 @@ const Index: React.FC = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" 
                   alt="Dandeli Adventures Resort" 
-                  className="w-full h-[500px] object-cover rounded-xl shadow-lg"
+                  className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block">
+                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
                   <img 
                     src="https://images.unsplash.com/photo-1438565434616-3ef039228b15?auto=format&fit=crop&w=400&q=80" 
                     alt="Wildlife" 
@@ -57,36 +52,36 @@ const Index: React.FC = () => {
               </p>
               
               <div className="space-y-4 mb-8">
-                <div className="flex items-start">
-                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700">
-                    <Leaf size={20} />
+                <div className="flex items-start group">
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700 group-hover:bg-green-100 transition-colors duration-300">
+                    <Leaf size={20} className="group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h3 className="font-medium">Eco-Friendly Resort</h3>
+                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Eco-Friendly Resort</h3>
                     <p className="text-sm text-foreground/70">
                       Committed to sustainable tourism practices with minimal environmental impact.
                     </p>
                   </div>
                 </div>
                 
-                <div className="flex items-start">
-                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700">
-                    <Shield size={20} />
+                <div className="flex items-start group">
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700 group-hover:bg-green-100 transition-colors duration-300">
+                    <Shield size={20} className="group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h3 className="font-medium">Safety First Adventures</h3>
+                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Safety First Adventures</h3>
                     <p className="text-sm text-foreground/70">
                       All activities conducted by certified professionals with top-tier safety equipment.
                     </p>
                   </div>
                 </div>
                 
-                <div className="flex items-start">
-                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700">
-                    <Award size={20} />
+                <div className="flex items-start group">
+                  <div className="mr-4 p-2 bg-secondary rounded-full text-green-700 group-hover:bg-green-100 transition-colors duration-300">
+                    <Award size={20} className="group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h3 className="font-medium">Award-Winning Hospitality</h3>
+                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Award-Winning Hospitality</h3>
                     <p className="text-sm text-foreground/70">
                       Recognized for exceptional service and authentic local experiences.
                     </p>
@@ -96,9 +91,9 @@ const Index: React.FC = () => {
               
               <Link 
                 to="/about" 
-                className="inline-flex items-center text-green-700 hover:underline"
+                className="inline-flex items-center text-green-700 hover:underline group"
               >
-                Learn more about us <ArrowRight size={16} className="ml-1" />
+                Learn more about us <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>
