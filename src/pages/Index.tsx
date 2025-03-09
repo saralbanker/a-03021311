@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import FeaturedActivities from '@/components/FeaturedActivities';
 import SpecialOffers from '@/components/SpecialOffers';
 import { ArrowRight, Leaf, Shield, Award } from 'lucide-react';
+
 const Index: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -161,7 +162,6 @@ const Index: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-<<<<<<< HEAD
             {[
               {
                 name: "Stanley Nuthalpati",
@@ -190,29 +190,6 @@ const Index: React.FC = () => {
                 className="bg-white p-6 rounded-xl shadow-md animate-slide-up"
                 style={{ animationDelay: `${testimonial.delay}ms` }}
               >
-=======
-            {[{
-            name: "Sarah Johnson",
-            location: "New York, USA",
-            quote: "The river rafting experience was exhilarating! The staff was incredibly knowledgeable and made us feel safe while still having a blast.",
-            image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80",
-            delay: 0
-          }, {
-            name: "Raj Patel",
-            location: "Mumbai, India",
-            quote: "The treehouse villa exceeded our expectations. Waking up to birds chirping and the view of the forest canopy was magical. A perfect anniversary getaway.",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
-            delay: 200
-          }, {
-            name: "Emma Chen",
-            location: "Singapore",
-            quote: "The wildlife safari was the highlight of our trip. We spotted elephants, deer, and even a black panther! Our guide was exceptional in tracking the animals.",
-            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
-            delay: 400
-          }].map((testimonial, index) => <div key={index} className="bg-white p-6 rounded-xl shadow-md animate-slide-up" style={{
-            animationDelay: `${testimonial.delay}ms`
-          }}>
->>>>>>> 663b03b072e85f5c472a421ad839d5a7e82e7180
                 <div className="flex items-center mb-4">
                   <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4 object-cover" />
                   <div>
@@ -224,7 +201,8 @@ const Index: React.FC = () => {
                 <div className="mt-4 flex">
                   {[...Array(5)].map((_, starIndex) => <Star key={starIndex} filled={true} />)}
                 </div>
-              </div>)}
+              </div>
+            ))}
           </div>
         </section>
         
@@ -284,4 +262,5 @@ const Star: React.FC<{
       <path d="M10 1L12.39 6.55L18.5 7.31L14.25 11.75L15.51 18L10 15.09L4.49 18L5.75 11.75L1.5 7.31L7.61 6.55L10 1Z" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>;
 };
+
 export default Index;
