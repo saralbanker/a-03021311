@@ -218,8 +218,11 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                     mode="single"
                     selected={field.value}
                     onSelect={(date) => {
-                      field.onChange(date);
-                      setIsCalendarOpen(false);
+                      if (date) {
+                        field.onChange(date);
+                        // Automatically close the calendar when a date is selected
+                        setIsCalendarOpen(false);
+                      }
                     }}
                     disabled={(date) =>
                       date < new Date()

@@ -13,21 +13,21 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    imageSrc: 'https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2574&auto=format&fit=crop',
+    imageSrc: '/lovable-uploads/7fb9e3c6-353a-410e-8478-5741bfe3ab03.png',
     title: 'Experience Rapids Adventure',
     subtitle: 'Navigate through thrilling white water rafting in Dandeli'
   },
   {
     id: 2,
-    imageSrc: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2574&auto=format&fit=crop',
+    imageSrc: '/lovable-uploads/85075839-6408-4ebf-9c30-b606ab1ba315.png',
     title: 'Explore Kali River',
     subtitle: 'Immerse yourself in the natural beauty of Dandeli wilderness'
   },
   {
     id: 3,
-    imageSrc: 'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2574&auto=format&fit=crop',
-    title: 'Connect With Nature',
-    subtitle: 'Experience the thrill of river adventures in Dandeli'
+    imageSrc: '/lovable-uploads/a9564770-c40f-447d-b775-55edb57ee4f2.png',
+    title: 'Wildlife Safari Adventures',
+    subtitle: 'Encounter majestic tigers and wildlife in their natural habitat'
   },
   {
     id: 4,
@@ -37,9 +37,9 @@ const slides: SlideData[] = [
   },
   {
     id: 5,
-    imageSrc: 'https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=2574&auto=format&fit=crop',
-    title: 'Pristine Waters',
-    subtitle: 'Dive into the crystal clear waters of Dandeli'
+    imageSrc: '/lovable-uploads/66cc351b-f10b-44d3-834b-c45ba90c6dc0.png',
+    title: 'Rich Biodiversity',
+    subtitle: 'Spot crocodiles, hornbills and other exotic wildlife in Dandeli'
   }
 ];
 

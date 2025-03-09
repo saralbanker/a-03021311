@@ -36,13 +36,13 @@ const Navbar: React.FC = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
+  // Removed "Booking" from this array
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Accommodation', path: '/accommodation' },
     { name: 'Activities', path: '/activities' },
     { name: 'Contact', path: '/contact' },
-    { name: 'Booking', path: '/booking' },
   ];
   
   return (

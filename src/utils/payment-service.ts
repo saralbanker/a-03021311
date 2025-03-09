@@ -21,8 +21,8 @@ interface PaymentDetails {
 
 // Mock API endpoints that would be real in production
 const API_ENDPOINTS = {
-  PROCESS_PAYMENT: 'https://api.example.com/payments/process', // This would be a real payment gateway API
-  VERIFY_PAYMENT: 'https://api.example.com/payments/verify',
+  PROCESS_PAYMENT: 'https://api.razorpay.com/v1/payment_links', // Changed to Razorpay API
+  VERIFY_PAYMENT: 'https://api.razorpay.com/v1/payments/verify',
 };
 
 /**
@@ -67,7 +67,44 @@ export const processPayment = async (details: PaymentDetails): Promise<{success:
     }
     
     // Generate a transaction ID (in production, this would come from the payment gateway)
-    const transactionId = 'TXN' + Date.now().toString(36).toUpperCase();
+    const transactionId = 'DANDELI' + Date.now().toString(36).toUpperCase();
+    
+    // In a real implementation, we would integrate with Razorpay or another payment gateway
+    // Example code for Razorpay integration (commented out as this would need proper credentials)
+    /*
+    const response = await fetch(API_ENDPOINTS.PROCESS_PAYMENT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + btoa(`${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`)
+      },
+      body: JSON.stringify({
+        amount: details.amount * 100, // In paise
+        currency: 'INR',
+        description: details.description,
+        customer: {
+          name: details.metadata?.guestName,
+          email: details.metadata?.email,
+          contact: details.metadata?.phone
+        },
+        notify: {
+          sms: true,
+          email: true
+        },
+        reminder_enable: true,
+        notes: {
+          roomType: details.metadata?.roomType,
+          checkInDate: details.metadata?.checkInDate
+        }
+      })
+    });
+    
+    const result = await response.json();
+    return {
+      success: true,
+      transactionId: result.id
+    };
+    */
     
     return {
       success: true,
@@ -90,21 +127,21 @@ export const processPayment = async (details: PaymentDetails): Promise<{success:
  * @returns Calculated price
  */
 export const calculateBookingPrice = (roomType: string, adults: number, children: number): number => {
-  // Base prices per room type
+  // Base prices per room type (in INR)
   const basePrices = {
-    standard: 100,
-    deluxe: 150,
-    suite: 250
+    standard: 2499,
+    deluxe: 3999,
+    suite: 5999
   };
   
   // Get the base price for the room type
   const basePrice = roomType in basePrices 
     ? basePrices[roomType as keyof typeof basePrices] 
-    : 100;
+    : 2499;
   
   // Add per person costs
-  const adultCost = adults * 20;
-  const childrenCost = children * 10;
+  const adultCost = adults * 500;  // ₹500 per additional adult
+  const childrenCost = children * 300;  // ₹300 per child
   
   // Apply season discounts if applicable (could be expanded in a real system)
   const calculatedPrice = basePrice + adultCost + childrenCost;

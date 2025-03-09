@@ -1,21 +1,22 @@
+
 import React, { useState } from 'react';
 import { BookingForm } from '@/components/BookingForm';
 import { PaymentForm } from '@/components/PaymentForm';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Check, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { sendEmail, formatBookingEmail } from '@/utils/email-service';
+import { sendEmail, formatBookingEmail, sendSMS, formatBookingSMS } from '@/utils/email-service';
+
 const BookingPage = () => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStep, setBookingStep] = useState<'form' | 'payment' | 'confirmation'>('form');
   const [currentBooking, setCurrentBooking] = useState<any>(null);
   const [transactionId, setTransactionId] = useState<string | null>(null);
+  
   const handleBookingSubmit = async (values: any) => {
     setIsSubmitting(true);
     setCurrentBooking(values);
@@ -33,17 +34,17 @@ const BookingPage = () => {
       setIsSubmitting(false);
     }
   };
+  
   const handlePaymentSuccess = async (paymentTransactionId: string) => {
     setTransactionId(paymentTransactionId);
     try {
-      // Send confirmation email
+      // Send confirmation email to admin (Stanley)
       const emailContent = formatBookingEmail({
         ...currentBooking,
         paymentTransactionId
       });
       await sendEmail({
         to: "stanleyyesu@gmail.com",
-        // Admin email
         subject: `New Booking: ${currentBooking.name}`,
         body: emailContent
       });
@@ -54,10 +55,23 @@ const BookingPage = () => {
         subject: "Your Booking Confirmation - Dandeli Adventures",
         body: emailContent
       });
+      
+      // Send SMS to customer
+      if (currentBooking.phone) {
+        const smsContent = formatBookingSMS({
+          ...currentBooking,
+          paymentTransactionId
+        });
+        await sendSMS({
+          to: currentBooking.phone,
+          message: smsContent
+        });
+      }
+      
       setBookingStep('confirmation');
       toast({
         title: "Booking Confirmed!",
-        description: "Check your email for booking details.",
+        description: "Check your email and phone for booking details.",
         variant: "default"
       });
     } catch (error) {
@@ -70,14 +84,17 @@ const BookingPage = () => {
       setBookingStep('confirmation');
     }
   };
+  
   const handlePaymentCancel = () => {
     setBookingStep('form');
   };
+  
   const resetBooking = () => {
     setBookingStep('form');
     setCurrentBooking(null);
     setTransactionId(null);
   };
+  
   return <div className="flex flex-col min-h-screen">
       <Navbar />
       
@@ -85,10 +102,10 @@ const BookingPage = () => {
         {/* Hero Section */}
         <div className="relative h-[40vh] md:h-[50vh] w-full">
           <div className="absolute inset-0 bg-cover bg-center" style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1567636788276-80a11be35011?q=80&w=1974&auto=format&fit=crop')",
+          backgroundImage: "url('/lovable-uploads/7fb9e3c6-353a-410e-8478-5741bfe3ab03.png')",
           backgroundPosition: "center 30%"
         }}>
-            <div className="absolute inset-0 bg-lime-600" />
+            <div className="absolute inset-0 bg-black/50" />
           </div>
           
           <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
@@ -119,7 +136,7 @@ const BookingPage = () => {
                   </div>
                   <h2 className="text-2xl font-display font-semibold mb-4">Booking Confirmed!</h2>
                   <p className="mb-4 text-muted-foreground">
-                    Thank you for booking with Dandeli Adventures. We've sent a confirmation email to {currentBooking?.email}.
+                    Thank you for booking with Dandeli Adventures. We've sent a confirmation email to {currentBooking?.email} and an SMS to your phone.
                   </p>
                   {transactionId && <p className="text-sm bg-muted p-3 rounded-md inline-block mb-6">
                       Transaction ID: {transactionId}
@@ -166,7 +183,7 @@ const BookingPage = () => {
                 <p className="mb-4 text-sm">Our reservation team is available to help you plan your perfect stay.</p>
                 <div className="space-y-2 text-sm">
                   <p className="font-medium">Call us:</p>
-                  <p className="text-accent">+91 9876543210</p>
+                  <p className="text-accent">+91 8904704234</p>
                   <p className="font-medium mt-3">Email:</p>
                   <p className="text-accent">bookings@dandeliadventures.com</p>
                 </div>
@@ -255,4 +272,5 @@ const faqs = [{
   question: "Can I book activities in advance?",
   answer: "Yes, we recommend booking activities in advance, especially during peak season. You can add activities to your reservation through our booking form or contact our team for assistance."
 }];
+
 export default BookingPage;

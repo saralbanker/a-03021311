@@ -34,7 +34,7 @@ const ChatBot: React.FC = () => {
         botResponse = "Booking is super easy! You can either use our online booking form, contact us on WhatsApp at +918904704234, or call us directly. We recommend booking at least 2 weeks in advance during peak season (Oct-Feb).";
       }
       else if (userInput.includes("activity") || userInput.includes("adventure") || userInput.includes("rafting")) {
-        botResponse = "We offer thrilling adventures including white water rafting (grades 2-3), jungle safaris, night camping, kayaking, and guided nature walks. Our most popular package is the 'Weekend Wilderness' which includes rafting, safari and overnight camping!";
+        botResponse = "We offer thrilling adventures including white water rafting (grades 2-3), jungle safaris, kayaking, and guided nature walks. Our most popular package is the 'Weekend Wilderness' which includes rafting, safari and overnight camping!";
       }
       else if (userInput.includes("location") || userInput.includes("reach") || userInput.includes("address")) {
         botResponse = "We're located in the heart of Dandeli Wildlife Sanctuary, Karnataka. The nearest airport is Goa International Airport (160km). We provide pickup services, and our resort is just 5km from Dandeli town center.";
@@ -55,13 +55,13 @@ const ChatBot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-6 z-40">
       {/* Chat Button */}
       <Button
         onClick={toggleChat}
         className={cn(
           "w-14 h-14 rounded-full shadow-lg flex items-center justify-center",
-          "bg-green-600 hover:bg-green-700 transition-all duration-300", // Changed to nature green
+          "bg-green-600 hover:bg-green-700 transition-all duration-300", 
           !isOpen && "animate-bounce"
         )}
         aria-label="Chat with us"
@@ -79,7 +79,7 @@ const ChatBot: React.FC = () => {
         style={{ height: isOpen ? '400px' : '0' }}
       >
         {/* Header */}
-        <div className="bg-green-600 p-4 text-white"> {/* Changed to nature green */}
+        <div className="bg-green-600 p-4 text-white">
           <h3 className="font-bold">Adventure Support</h3>
           <p className="text-xs opacity-80">We typically reply within minutes</p>
         </div>
@@ -92,7 +92,7 @@ const ChatBot: React.FC = () => {
               className={cn(
                 "max-w-[80%] p-3 rounded-lg",
                 message.isUser 
-                  ? "bg-green-600 text-white self-end rounded-br-none" // Changed to nature green
+                  ? "bg-green-600 text-white self-end rounded-br-none"
                   : "bg-gray-100 self-start rounded-bl-none"
               )}
             >
@@ -109,11 +109,11 @@ const ChatBot: React.FC = () => {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
-            className="flex-1 px-3 py-2 border rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-600" // Changed focus ring color
+            className="flex-1 px-3 py-2 border rounded-l-md focus:outline-none focus:ring-1 focus:ring-green-600"
           />
           <Button 
             onClick={handleSend}
-            className="rounded-l-none bg-green-600 hover:bg-green-700" // Changed to nature green
+            className="rounded-l-none bg-green-600 hover:bg-green-700"
             disabled={input.trim() === ''}
           >
             <Send size={18} />

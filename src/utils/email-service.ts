@@ -10,6 +10,11 @@ interface EmailData {
   body: string;
 }
 
+interface SMSData {
+  to: string;
+  message: string;
+}
+
 /**
  * Send an email to the recipient
  * @param data Email data including to, subject, and body
@@ -25,16 +30,19 @@ export const sendEmail = async (data: EmailData): Promise<boolean> => {
     // In a real implementation, you would connect to an email API service like SendGrid, Mailgun, etc.
     // Example (commented out as we don't have actual credentials):
     /*
-    const response = await fetch('https://api.emailservice.com/send', {
+    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer YOUR_API_KEY'
+        'Authorization': 'Bearer YOUR_SENDGRID_API_KEY'
       },
       body: JSON.stringify({
-        to: data.to,
+        personalizations: [{
+          to: [{ email: data.to }]
+        }],
+        from: { email: 'bookings@dandeliadventures.com', name: 'Dandeli Adventures' },
         subject: data.subject,
-        html: data.body
+        content: [{ type: 'text/html', value: data.body }]
       })
     });
     
@@ -51,12 +59,51 @@ export const sendEmail = async (data: EmailData): Promise<boolean> => {
 };
 
 /**
+ * Send SMS to the customer
+ * @param data SMS data including to and message
+ * @returns Promise that resolves when SMS is sent
+ */
+export const sendSMS = async (data: SMSData): Promise<boolean> => {
+  try {
+    // In this demo, we'll log the SMS content to console
+    console.log('Sending SMS to:', data.to);
+    console.log('Message:', data.message);
+    
+    // In a real implementation, you would connect to an SMS API service like Twilio, MSG91, etc.
+    // Example (commented out as we don't have actual credentials):
+    /*
+    const response = await fetch('https://api.twilio.com/2010-04-01/Accounts/YOUR_ACCOUNT_SID/Messages.json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + btoa(`YOUR_ACCOUNT_SID:YOUR_AUTH_TOKEN`)
+      },
+      body: new URLSearchParams({
+        From: 'YOUR_TWILIO_PHONE_NUMBER',
+        To: data.to,
+        Body: data.message
+      })
+    });
+    
+    const result = await response.json();
+    return result.status === 'queued' || result.status === 'sent';
+    */
+    
+    // For demo purposes, always return true
+    return true;
+  } catch (error) {
+    console.error('Error sending SMS:', error);
+    return false;
+  }
+};
+
+/**
  * Format booking details into HTML email content
  * @param bookingData Booking form data
  * @returns Formatted HTML string
  */
 export const formatBookingEmail = (bookingData: any): string => {
-  // Calculate total price
+  // Format room type display
   const roomTypeDisplay = {
     standard: 'Standard Room',
     deluxe: 'Deluxe Room',
@@ -141,14 +188,14 @@ export const formatBookingEmail = (bookingData: any): string => {
           </ul>
           
           <p>If you have any questions or need to modify your booking, please contact us at:</p>
-          <p>📞 +91 9876543210<br>📧 bookings@dandeliadventures.com</p>
+          <p>📞 +91 8904704234<br>📧 bookings@dandeliadventures.com</p>
           
           <p>We look forward to providing you with an unforgettable experience!</p>
           
           <p>Warm regards,<br>The Dandeli Adventures Team</p>
         </div>
         <div class="footer">
-          <p>© 2023 Dandeli Adventures. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} Dandeli Adventures. All rights reserved.</p>
           <p>Kali River Front, Dandeli, Karnataka 581325, India</p>
         </div>
       </div>
@@ -158,10 +205,19 @@ export const formatBookingEmail = (bookingData: any): string => {
 };
 
 /**
+ * Format booking details into SMS content
+ * @param bookingData Booking form data
+ * @returns Formatted SMS string
+ */
+export const formatBookingSMS = (bookingData: any): string => {
+  return `Thank you for booking with Dandeli Adventures! Your booking for ${bookingData.date ? bookingData.date.toLocaleDateString() : 'your selected date'} is confirmed (Ref: ${bookingData.paymentTransactionId || 'Processing'}). For assistance, call +91 8904704234.`;
+};
+
+/**
  * Send booking confirmation to both customer and admin
  * @param bookingData Booking form data
  * @param transactionId Payment transaction ID
- * @returns Promise that resolves when emails are sent
+ * @returns Promise that resolves when emails and SMS are sent
  */
 export const sendBookingConfirmations = async (bookingData: any, transactionId: string): Promise<boolean> => {
   try {
@@ -173,7 +229,7 @@ export const sendBookingConfirmations = async (bookingData: any, transactionId: 
     // Format email content
     const emailContent = formatBookingEmail(bookingWithTransaction);
     
-    // Send to admin (always send to Stanley)
+    // Send to admin (Stanley)
     await sendEmail({
       to: "stanleyyesu@gmail.com",
       subject: `New Booking: ${bookingData.name} - ${transactionId}`,
@@ -187,9 +243,18 @@ export const sendBookingConfirmations = async (bookingData: any, transactionId: 
       body: emailContent
     });
     
+    // Send SMS to customer
+    if (bookingData.phone) {
+      const smsContent = formatBookingSMS(bookingWithTransaction);
+      await sendSMS({
+        to: bookingData.phone,
+        message: smsContent
+      });
+    }
+    
     return true;
   } catch (error) {
-    console.error('Error sending confirmation emails:', error);
+    console.error('Error sending confirmation emails/SMS:', error);
     return false;
   }
 };

@@ -16,8 +16,8 @@ const Index: React.FC = () => {
       <main className="flex-grow">
         <Hero />
         
-        {/* Call Now Button */}
-        <div className="fixed bottom-20 right-4 z-40 md:bottom-8">
+        {/* Call Now Button - repositioned above chatbot with more space */}
+        <div className="fixed bottom-32 right-4 z-40 md:bottom-24">
           <a 
             href="tel:+918904704234" 
             className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-105 animate-pulse hover:animate-none"
@@ -39,9 +39,10 @@ const Index: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                <img src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" alt="Dandeli Adventures Resort" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                {/* Changed from camel image to crocodile image */}
+                <img src="/lovable-uploads/66cc351b-f10b-44d3-834b-c45ba90c6dc0.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                  <img src="https://cdn.pixabay.com/photo/2013/08/16/16/54/kali-river-173169_1280.jpg" alt="Kali River Dandeli" className="w-40 h-32 object-cover rounded-md" />
+                  <img src="/assets/rafting-activity.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
