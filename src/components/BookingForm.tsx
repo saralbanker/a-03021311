@@ -66,6 +66,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
 
   const isMobile = useIsMobile();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
 
   function handleFormSubmit(values: z.infer<typeof FormSchema>) {
     setIsSubmitting(true);
@@ -178,9 +179,9 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="standard">Standard Room</SelectItem>
-                  <SelectItem value="deluxe">Deluxe Room</SelectItem>
-                  <SelectItem value="suite">Suite</SelectItem>
+                  <SelectItem value="standard">Standard Room - ₹2,499/night</SelectItem>
+                  <SelectItem value="deluxe">Deluxe Room - ₹3,999/night</SelectItem>
+                  <SelectItem value="suite">Suite - ₹5,999/night</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -193,7 +194,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <FormLabel>Booking Date</FormLabel>
-              <Popover>
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
@@ -212,15 +213,19 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 pointer-events-auto" align="start">
                   <Calendar
                     mode="single"
                     selected={field.value}
-                    onSelect={field.onChange}
+                    onSelect={(date) => {
+                      field.onChange(date);
+                      setIsCalendarOpen(false);
+                    }}
                     disabled={(date) =>
                       date < new Date()
                     }
                     initialFocus
+                    className="pointer-events-auto"
                   />
                 </PopoverContent>
               </Popover>

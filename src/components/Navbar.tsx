@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Logo from './Logo';
 import { 
@@ -41,6 +41,7 @@ const Navbar: React.FC = () => {
     { name: 'About', path: '/about' },
     { name: 'Accommodation', path: '/accommodation' },
     { name: 'Activities', path: '/activities' },
+    { name: 'Contact', path: '/contact' },
     { name: 'Booking', path: '/booking' },
   ];
   
@@ -76,6 +77,13 @@ const Navbar: React.FC = () => {
         </nav>
         
         <div className="hidden md:flex items-center space-x-4">
+          <a 
+            href="tel:+918904704234" 
+            className="flex items-center gap-1 text-foreground/80 hover:text-foreground transition-colors duration-300"
+          >
+            <Phone size={16} />
+            <span>+91 8904704234</span>
+          </a>
           <button 
             className="p-2 rounded-full text-foreground/70 hover:text-foreground transition-colors duration-300"
             onClick={() => setIsSearchOpen(true)}
@@ -94,6 +102,7 @@ const Navbar: React.FC = () => {
         <button 
           className="md:hidden text-foreground p-2"
           onClick={toggleMenu}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -106,6 +115,14 @@ const Navbar: React.FC = () => {
           isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'
         )}
       >
+        <button 
+          className="absolute top-4 right-4 p-2 text-foreground"
+          onClick={() => setIsMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          <X size={24} />
+        </button>
+        
         <nav className="flex flex-col space-y-6">
           {navLinks.map((link) => (
             <Link
@@ -122,13 +139,22 @@ const Navbar: React.FC = () => {
               {link.name}
             </Link>
           ))}
+          <a
+            href="tel:+918904704234"
+            className="text-xl font-medium py-2 border-b border-border text-foreground/80 flex items-center gap-2"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <Phone size={20} className="text-green-600" />
+            Call Now: +91 8904704234
+          </a>
           <button
-            className="text-xl font-medium py-2 border-b border-border text-foreground/80 text-left"
+            className="text-xl font-medium py-2 border-b border-border text-foreground/80 text-left flex items-center gap-2"
             onClick={() => {
               setIsMenuOpen(false);
               setIsSearchOpen(true);
             }}
           >
+            <Search size={20} />
             Search
           </button>
           <Link 

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -6,7 +7,7 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import FeaturedActivities from '@/components/FeaturedActivities';
 import SpecialOffers from '@/components/SpecialOffers';
-import { ArrowRight, Leaf, Shield, Award } from 'lucide-react';
+import { ArrowRight, Leaf, Shield, Award, Phone } from 'lucide-react';
 
 const Index: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
@@ -14,6 +15,17 @@ const Index: React.FC = () => {
       
       <main className="flex-grow">
         <Hero />
+        
+        {/* Call Now Button */}
+        <div className="fixed bottom-20 right-4 z-40 md:bottom-8">
+          <a 
+            href="tel:+918904704234" 
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-105 animate-pulse hover:animate-none"
+          >
+            <Phone size={20} className="animate-bounce" />
+            <span className="font-medium">Call Now</span>
+          </a>
+        </div>
         
         {/* Special Promotion Banner */}
         <div className="bg-green-700 text-white py-3 px-4 text-center shadow-md">
@@ -29,7 +41,7 @@ const Index: React.FC = () => {
               <div className="relative">
                 <img src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" alt="Dandeli Adventures Resort" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                  <img src="https://cdn.pixabay.com/photo/2013/08/16/16/54/kali-river-173169_1280.jpg" alt="Free Kali River Dandeli photo and picture" title="Download free HD stock image of Kali River Dandeli" alt="Wildlife" className="w-40 h-32 object-cover rounded-md" />
+                  <img src="https://cdn.pixabay.com/photo/2013/08/16/16/54/kali-river-173169_1280.jpg" alt="Kali River Dandeli" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
@@ -80,9 +92,14 @@ const Index: React.FC = () => {
                 </div>
               </div>
               
-              <Link to="/about" className="inline-flex items-center text-green-700 hover:underline group">
-                Learn more about us <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/about" className="inline-flex items-center text-green-700 hover:underline group">
+                  Learn more about us <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                </Link>
+                <Link to="/contact" className="inline-flex items-center text-green-700 hover:underline group">
+                  Contact us for directions <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -109,16 +126,19 @@ const Index: React.FC = () => {
               title: "Riverside Cottages",
               image: "https://images.unsplash.com/photo-1606402179428-a57976d71fa4?auto=format&fit=crop&w=600&q=80",
               description: "Wake up to the soothing sounds of the river",
+              price: "₹2,499",
               delay: 0
             }, {
               title: "Treehouse Villas",
               image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80",
               description: "Elevated living with panoramic forest views",
+              price: "₹3,999",
               delay: 200
             }, {
               title: "Luxury Tents",
               image: "https://images.unsplash.com/photo-1561912774-79769a0a0a7a?auto=format&fit=crop&w=600&q=80",
               description: "Glamping experience with all modern amenities",
+              price: "₹1,999",
               delay: 400
             }].map((accommodation, index) => <div key={index} className="overflow-hidden rounded-xl group shadow-md animate-slide-up card-hover bg-white" style={{
               animationDelay: `${accommodation.delay}ms`
@@ -130,8 +150,11 @@ const Index: React.FC = () => {
                     <h3 className="text-xl font-display font-semibold mb-2">
                       {accommodation.title}
                     </h3>
-                    <p className="text-foreground/70 mb-4">
+                    <p className="text-foreground/70 mb-2">
                       {accommodation.description}
+                    </p>
+                    <p className="text-green-700 font-semibold mb-4">
+                      {accommodation.price} per night
                     </p>
                     <Link to="/accommodation" className="text-green-700 hover:underline inline-flex items-center">
                       View Details <ArrowRight size={16} className="ml-1" />

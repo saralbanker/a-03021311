@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Activities from "./pages/Activities";
 import Booking from "./pages/Booking";
 import Gallery from "./pages/Gallery";
+import Contact from "./pages/Contact";
 import ChatBot from "./components/ChatBot";
 import WhatsAppButton from "./components/WhatsAppButton";
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/activities" element={<Activities />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
