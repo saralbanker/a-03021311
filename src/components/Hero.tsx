@@ -13,27 +13,27 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    imageSrc: '/lovable-uploads/7fb9e3c6-353a-410e-8478-5741bfe3ab03.png',
-    title: 'Experience Rapids Adventure',
-    subtitle: 'Navigate through thrilling white water rafting in Dandeli'
+    imageSrc: '/lovable-uploads/9f1aa528-e58f-4fd1-828f-4236f7ec9428.png',
+    title: 'Thrilling White Water Rafting',
+    subtitle: 'Navigate through exciting rapids on the Kali River in Dandeli'
   },
   {
     id: 2,
-    imageSrc: '/lovable-uploads/85075839-6408-4ebf-9c30-b606ab1ba315.png',
-    title: 'Explore Kali River',
-    subtitle: 'Immerse yourself in the natural beauty of Dandeli wilderness'
+    imageSrc: '/lovable-uploads/126f34e9-3915-45cb-9bde-876014e4e7b3.png',
+    title: 'Western Ghats Panorama',
+    subtitle: 'Experience breathtaking views of the pristine Western Ghats and Kali River'
   },
   {
     id: 3,
-    imageSrc: '/lovable-uploads/a9564770-c40f-447d-b775-55edb57ee4f2.png',
-    title: 'Wildlife Safari Adventures',
-    subtitle: 'Encounter majestic tigers and wildlife in their natural habitat'
+    imageSrc: '/lovable-uploads/071c1021-cc9e-4c4e-9aa7-74c7a1408db5.png',
+    title: 'Zipline Adventure',
+    subtitle: 'Soar through the forest canopy on our thrilling zipline course'
   },
   {
     id: 4,
-    imageSrc: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2574&auto=format&fit=crop',
-    title: 'Breathtaking Views',
-    subtitle: 'Discover panoramic vistas of the Western Ghats'
+    imageSrc: '/lovable-uploads/e2a90929-4f0d-451a-b844-3e0d86948878.png',
+    title: 'Exotic Wildlife',
+    subtitle: 'Spot the Great Indian Hornbill and other rare species in their natural habitat'
   },
   {
     id: 5,
