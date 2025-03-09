@@ -1,11 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
-
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
   return <footer className="bg-accent text-accent-foreground">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16 px-4">
@@ -30,31 +27,11 @@ const Footer: React.FC = () => {
           <div className="space-y-4 animate-fade-in animation-delay-200">
             <h4 className="text-lg font-display font-semibold">Quick Links</h4>
             <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/accommodation" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
-                  Accommodation
-                </Link>
-              </li>
-              <li>
-                <Link to="/activities" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
-                  Activities
-                </Link>
-              </li>
-              <li>
-                <Link to="/gallery" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
-                  Contact
-                </Link>
-              </li>
+              {['About Us', 'Accommodation', 'Activities', 'Gallery', 'Contact'].map(item => <li key={item}>
+                  <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
+                    {item}
+                  </Link>
+                </li>)}
             </ul>
           </div>
           
@@ -69,18 +46,19 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Phone size={20} className="flex-shrink-0" />
-                <a href="tel:+918904704234" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300">+91 8904704234</a>
+                <span className="text-accent-foreground/80">+91 8904704234</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={20} className="flex-shrink-0" />
-                <span className="text-accent-foreground/80 text-base">dandeliadventures.in@gmail.com</span>
+                <span className="text-accent-foreground/80 text-base">dandeliadventures.in@gmail.com
+              </span>
               </li>
             </ul>
           </div>
           
           <div className="space-y-4 animate-fade-in animation-delay-600">
             <h4 className="text-lg font-display font-semibold">Newsletter</h4>
-            <p className="text-accent-foreground/80">
+            <p className="text-accent-foreground/80 mx-0 my-0 px-0 py-0 rounded-lg">
               Subscribe to our newsletter for the latest updates and offers.
             </p>
             <form className="mt-4 space-y-3">
@@ -98,5 +76,4 @@ const Footer: React.FC = () => {
       </div>
     </footer>;
 };
-
 export default Footer;
