@@ -49,7 +49,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
           src={image} 
           alt={title} 
           className="w-full h-full object-cover"
-          style={{ minHeight: '250px' }}
+          style={{ minHeight: '250px', objectPosition: 'center' }}
         />
         <div className={cn(
           "absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium",
@@ -85,7 +85,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
         
         <div className="mt-auto flex items-center justify-between">
           <div className="text-lg font-semibold">
-            ${price} <span className="text-sm font-normal text-foreground/70">per person</span>
+            ₹{price * 83} <span className="text-sm font-normal text-foreground/70">per person</span>
           </div>
           
           <Link 

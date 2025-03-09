@@ -22,7 +22,7 @@ const Activities: React.FC = () => {
       id: "river-rafting",
       title: "River Rafting",
       description: "Experience the thrill of navigating through the rapids of Kali River, with expert guides ensuring safety while you enjoy the adrenaline rush.",
-      image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/1d3255ca-7296-4e20-b1fb-416cfb82fa82.png",
       duration: "2-3 hours",
       difficulty: "Moderate",
       groupSize: "4-8 people",
@@ -34,7 +34,7 @@ const Activities: React.FC = () => {
       id: "wildlife-safari",
       title: "Wildlife Safari",
       description: "Explore the rich biodiversity of Dandeli Wildlife Sanctuary with guided jeep safaris. Spot elephants, black panthers, and various bird species in their natural habitat.",
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/dc56b3d5-8de2-40a9-b259-35829487f125.png",
       duration: "3-4 hours",
       difficulty: "Easy",
       groupSize: "6-10 people",
@@ -46,7 +46,7 @@ const Activities: React.FC = () => {
       id: "jungle-trekking",
       title: "Jungle Trekking",
       description: "Embark on a guided trek through pristine forest trails, discovering hidden waterfalls, spotting exotic birds, and learning about local flora and fauna.",
-      image: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/41b176ee-c1a4-467f-8c90-a34ecc92fb8b.png",
       duration: "4-5 hours",
       difficulty: "Moderate",
       groupSize: "4-12 people",
@@ -58,7 +58,7 @@ const Activities: React.FC = () => {
       id: "kayaking",
       title: "Kayaking",
       description: "Paddle through the calm stretches of the Kali River and enjoy the peaceful surroundings. Perfect for beginners and nature lovers seeking a serene adventure.",
-      image: "https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/507fc338-616e-4fdf-abd2-b19888c736c2.png",
       duration: "1-2 hours",
       difficulty: "Easy",
       groupSize: "1-2 people",
@@ -82,7 +82,7 @@ const Activities: React.FC = () => {
       id: "zipline-adventure",
       title: "Zipline Adventure",
       description: "Soar through the forest canopy on our thrilling zipline course. Get a bird's eye view of the beautiful landscapes while experiencing an adrenaline rush.",
-      image: "https://images.unsplash.com/photo-1622267224871-2440788e04f6?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/f72bb782-6d03-4da5-8892-6c7b06b24244.png",
       duration: "1-2 hours",
       difficulty: "Challenging",
       groupSize: "2-10 people",
@@ -94,7 +94,7 @@ const Activities: React.FC = () => {
       id: "coracle-ride",
       title: "Coracle Ride",
       description: "Experience a traditional boat ride in circular coracles. Spin and float down the gentle currents while enjoying the scenic beauty around you.",
-      image: "https://images.unsplash.com/photo-1559891493-526854aac3ac?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/6662536f-4567-4622-87e5-b40513f3d86f.png",
       duration: "1-2 hours",
       difficulty: "Easy",
       groupSize: "2-3 people",
@@ -106,7 +106,7 @@ const Activities: React.FC = () => {
       id: "bird-watching",
       title: "Bird Watching",
       description: "Dandeli is home to over 300 species of birds. Join our expert ornithologists for a guided bird watching experience in this avian paradise.",
-      image: "https://images.unsplash.com/photo-1546942113-a6c43b63104a?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/a86fb74f-d5e7-48b5-a676-777476545216.png",
       duration: "3-4 hours",
       difficulty: "Easy",
       groupSize: "4-8 people",
@@ -162,7 +162,7 @@ const Activities: React.FC = () => {
         <section className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] overflow-hidden">
           <div className="absolute inset-0">
             <img 
-              src="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&q=80" 
+              src="/lovable-uploads/1d3255ca-7296-4e20-b1fb-416cfb82fa82.png" 
               alt="Adventure activities" 
               className="w-full h-full object-cover"
             />
@@ -285,7 +285,7 @@ const Activities: React.FC = () => {
                 {
                   title: "Safety First",
                   description: "All activities are conducted with strict safety protocols. Listen to your guides and follow their instructions at all times.",
-                  image: "https://images.unsplash.com/photo-1569437061238-3cf40ff159d8?auto=format&fit=crop&w=400&q=80"
+                  image: "/lovable-uploads/61d7b6e2-720c-42fc-a459-7624b56b81d0.png"
                 },
                 {
                   title: "Eco-Friendly Approach",
@@ -331,7 +331,7 @@ const Activities: React.FC = () => {
         
         {/* CTA Section */}
         <section className="py-20 bg-accent text-accent-foreground relative">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1566951277903-e8ec215b253d?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/1d3255ca-7296-4e20-b1fb-416cfb82fa82.png')] bg-cover bg-center opacity-20"></div>
           <div className="container relative z-10 px-4 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
               <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
