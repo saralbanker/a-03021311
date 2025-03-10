@@ -180,7 +180,7 @@ const BookingPage = () => {
                   <p className="text-accent">+91 8904704234
 +91 7795601255</p>
                   <p className="font-medium mt-3">Email:</p>
-                  <p className="text-accent">bookings@dandeliadventures.com</p>
+                  <p className="text-accent">dandeliadventuresinfo@gmail.com</p>
                 </div>
               </div>
               
@@ -189,7 +189,7 @@ const BookingPage = () => {
                 <p className="italic text-sm mb-4">
                   "Our stay at Dandeli Adventures was absolutely magical. The staff went above and beyond to make our vacation unforgettable!"
                 </p>
-                <p className="font-medium text-sm">- Priya</p>
+                <p className="font-medium text-sm">- Priya & Rahul , Banglore</p>
               </div>
             </div>
           </div>
