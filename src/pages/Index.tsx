@@ -125,19 +125,19 @@ const Index: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[{
               title: "Riverside Cottages",
-              image: "/lovable-uploads/ea6ebcc8-61ac-4f00-853a-b08d19197ba7.png",
+              image: "/lovable-uploads/44997248-2a7d-4c4b-8656-13d704d35b37.png",
               description: "Wake up to the soothing sounds of the river",
               price: "₹2,499",
               delay: 0
             }, {
               title: "Treehouse Villas",
-              image: "/lovable-uploads/cb1b37ef-32f5-4aa6-84e7-5c54a6cebd38.png",
+              image: "/lovable-uploads/e254561c-a576-4abe-ba9b-a057e1ddc8d7.png",
               description: "Elevated living with panoramic forest views",
               price: "₹3,999",
               delay: 200
             }, {
               title: "Luxury Tents",
-              image: "/lovable-uploads/2de354f0-c211-44f9-8243-b1cce525c7a7.png",
+              image: "/lovable-uploads/507d9972-fed7-467f-90af-7506080a19b4.png",
               description: "Glamping experience with all modern amenities",
               price: "₹1,999",
               delay: 400
