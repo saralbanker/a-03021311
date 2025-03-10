@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { BookingForm } from '@/components/BookingForm';
 import { PaymentForm } from '@/components/PaymentForm';
@@ -9,14 +8,14 @@ import Footer from '@/components/Footer';
 import { Check, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sendEmail, formatBookingEmail, sendSMS, formatBookingSMS } from '@/utils/email-service';
-
 const BookingPage = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingStep, setBookingStep] = useState<'form' | 'payment' | 'confirmation'>('form');
   const [currentBooking, setCurrentBooking] = useState<any>(null);
   const [transactionId, setTransactionId] = useState<string | null>(null);
-  
   const handleBookingSubmit = async (values: any) => {
     setIsSubmitting(true);
     setCurrentBooking(values);
@@ -34,7 +33,6 @@ const BookingPage = () => {
       setIsSubmitting(false);
     }
   };
-  
   const handlePaymentSuccess = async (paymentTransactionId: string) => {
     setTransactionId(paymentTransactionId);
     try {
@@ -55,7 +53,7 @@ const BookingPage = () => {
         subject: "Your Booking Confirmation - Dandeli Adventures",
         body: emailContent
       });
-      
+
       // Send SMS to customer
       if (currentBooking.phone) {
         const smsContent = formatBookingSMS({
@@ -67,7 +65,6 @@ const BookingPage = () => {
           message: smsContent
         });
       }
-      
       setBookingStep('confirmation');
       toast({
         title: "Booking Confirmed!",
@@ -84,17 +81,14 @@ const BookingPage = () => {
       setBookingStep('confirmation');
     }
   };
-  
   const handlePaymentCancel = () => {
     setBookingStep('form');
   };
-  
   const resetBooking = () => {
     setBookingStep('form');
     setCurrentBooking(null);
     setTransactionId(null);
   };
-  
   return <div className="flex flex-col min-h-screen">
       <Navbar />
       
@@ -159,7 +153,7 @@ const BookingPage = () => {
                 <ul className="space-y-3 text-sm">
                   <li className="flex items-start gap-2">
                     <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
-                    <span>Check-in time: 2:00 PM</span>
+                    <span>Check-in time: 12:00 PM</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
@@ -272,5 +266,4 @@ const faqs = [{
   question: "Can I book activities in advance?",
   answer: "Yes, we recommend booking activities in advance, especially during peak season. You can add activities to your reservation through our booking form or contact our team for assistance."
 }];
-
 export default BookingPage;
