@@ -37,9 +37,9 @@ const slides: SlideData[] = [
   },
   {
     id: 5,
-    imageSrc: '/lovable-uploads/cec354a1-60c1-4a99-9cbc-9d973073f060.png',
-    title: 'Exotic Wildlife',
-    subtitle: 'Spot the Great Indian Hornbill and other rare species in their natural habitat'
+    imageSrc: '/lovable-uploads/8fa57071-534c-437a-9450-267f50ce89d6.png',
+    title: 'Thrilling River Rafting',
+    subtitle: 'Navigate through exciting rapids on the Kali River with our expert guides'
   }
 ];
 
