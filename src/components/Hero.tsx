@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -13,33 +12,27 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    imageSrc: '/lovable-uploads/44997248-2a7d-4c4b-8656-13d704d35b37.png',
-    title: 'Riverside Cottages',
-    subtitle: 'Cozy accommodations with stunning views of the Kali River'
+    imageSrc: '/lovable-uploads/b991c4b3-e65b-4be9-9393-4ae95ac11559.png',
+    title: 'Thrilling White Water Rafting',
+    subtitle: 'Navigate through exciting rapids on the Kali River in Dandeli'
   },
   {
     id: 2,
-    imageSrc: '/lovable-uploads/cc6dd7ad-c5fb-4fef-9dd0-f8dca5d5a10d.png',
+    imageSrc: '/lovable-uploads/e34ef5ad-0b39-4da7-b8fc-475ba8cd4f18.png',
     title: 'Western Ghats Panorama',
     subtitle: 'Experience breathtaking views of the pristine Western Ghats and Kali River'
   },
   {
     id: 3,
-    imageSrc: '/lovable-uploads/968e9c7f-6872-4c43-ad59-1dd92c92d29a.png',
+    imageSrc: '/lovable-uploads/605d83a9-db55-4bbc-a767-5050a7ee560a.png',
     title: 'Jungle Trekking Adventures',
     subtitle: 'Explore the dense forests and hills of Dandeli on guided trek experiences'
   },
   {
     id: 4,
-    imageSrc: '/lovable-uploads/003350e1-bba1-4aed-9001-4acf317067fb.png',
-    title: 'Rich Biodiversity',
-    subtitle: 'Spot elephants, hornbills and other exotic wildlife in Dandeli'
-  },
-  {
-    id: 5,
-    imageSrc: '/lovable-uploads/cec354a1-60c1-4a99-9cbc-9d973073f060.png',
-    title: 'Exotic Wildlife',
-    subtitle: 'Spot the Great Indian Hornbill and other rare species in their natural habitat'
+    imageSrc: '/lovable-uploads/c01e622c-b798-43c2-99be-06011d427a23.png',
+    title: 'Riverside Cottages',
+    subtitle: 'Cozy accommodations with stunning views of the Kali River'
   }
 ];
 
