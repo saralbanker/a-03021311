@@ -13,33 +13,33 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    imageSrc: '/lovable-uploads/9f1aa528-e58f-4fd1-828f-4236f7ec9428.png',
+    imageSrc: '/lovable-uploads/039f35db-5cf1-4a0b-be13-c4f3947bec67.png',
     title: 'Thrilling White Water Rafting',
     subtitle: 'Navigate through exciting rapids on the Kali River in Dandeli'
   },
   {
     id: 2,
-    imageSrc: '/lovable-uploads/126f34e9-3915-45cb-9bde-876014e4e7b3.png',
+    imageSrc: '/lovable-uploads/dc72a560-2aa0-4e2c-8644-874319c9cbfa.png',
     title: 'Western Ghats Panorama',
     subtitle: 'Experience breathtaking views of the pristine Western Ghats and Kali River'
   },
   {
     id: 3,
-    imageSrc: '/lovable-uploads/071c1021-cc9e-4c4e-9aa7-74c7a1408db5.png',
+    imageSrc: '/lovable-uploads/627761c4-60f7-43ef-864e-7bfaab1c1dc6.png',
     title: 'Zipline Adventure',
     subtitle: 'Soar through the forest canopy on our thrilling zipline course'
   },
   {
     id: 4,
-    imageSrc: '/lovable-uploads/e2a90929-4f0d-451a-b844-3e0d86948878.png',
+    imageSrc: '/lovable-uploads/cec354a1-60c1-4a99-9cbc-9d973073f060.png',
     title: 'Exotic Wildlife',
     subtitle: 'Spot the Great Indian Hornbill and other rare species in their natural habitat'
   },
   {
     id: 5,
-    imageSrc: '/lovable-uploads/66cc351b-f10b-44d3-834b-c45ba90c6dc0.png',
+    imageSrc: '/lovable-uploads/003350e1-bba1-4aed-9001-4acf317067fb.png',
     title: 'Rich Biodiversity',
-    subtitle: 'Spot crocodiles, hornbills and other exotic wildlife in Dandeli'
+    subtitle: 'Spot elephants, hornbills and other exotic wildlife in Dandeli'
   }
 ];
 

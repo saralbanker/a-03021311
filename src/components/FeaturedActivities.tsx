@@ -50,28 +50,28 @@ const FeaturedActivities: React.FC = () => {
       id: 1,
       title: "River Rafting",
       description: "Navigate the thrilling rapids of the Kali River with our expert guides.",
-      image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/039f35db-5cf1-4a0b-be13-c4f3947bec67.png",
       link: "/activities#river-rafting"
     },
     {
       id: 2,
       title: "Wildlife Safari",
       description: "Explore the rich biodiversity of Dandeli Wildlife Sanctuary.",
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/003350e1-bba1-4aed-9001-4acf317067fb.png",
       link: "/activities#wildlife-safari"
     },
     {
       id: 3,
       title: "Jungle Trekking",
       description: "Embark on guided treks through pristine forest trails.",
-      image: "https://images.unsplash.com/photo-1466721591366-2d5fba72006d?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/f15840d8-da49-4aae-8fcf-43eac89792bf.png",
       link: "/activities#jungle-trekking"
     },
     {
       id: 4,
       title: "Kayaking",
       description: "Paddle through serene waters and enjoy the peaceful surroundings.",
-      image: "https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=600&q=80",
+      image: "/lovable-uploads/7b905624-c28e-44da-82cb-ae80429f6290.png",
       link: "/activities#kayaking"
     }
   ];

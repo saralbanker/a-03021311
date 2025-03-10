@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -9,12 +10,12 @@ const About: React.FC = () => {
     name: "Aishwarya Sharma",
     role: "Founder & CEO",
     bio: "With over 15 years of experience in adventure tourism, Aishwarya founded Dandeli Adventures with a vision to create sustainable tourism experiences.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
+    image: "/lovable-uploads/2bbf5848-053c-4f28-96bc-dac23d6a8b34.png"
   }, {
     name: "Rahul Patil",
     role: "Operations Director",
     bio: "Rahul ensures all our adventures run smoothly and safely, with a background in wilderness management and outdoor leadership.",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80"
+    image: "/lovable-uploads/849faf99-8ef2-4028-bb7f-9b1fd88877ee.png"
   }, {
     name: "Priya Desai",
     role: "Wildlife Expert",
@@ -69,9 +70,9 @@ const About: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                <img src="https://images.unsplash.com/photo-1469041797191-50ace28483c3?auto=format&fit=crop&w=800&q=80" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg" />
+                <img src="/lovable-uploads/fa6d6df3-ea4b-4f3f-9db1-81fbb2370f9f.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block">
-                  <img src="https://images.unsplash.com/photo-1678483789107-0029c61fdcca?auto=format&fit=crop&w=400&q=80" alt="Wildlife" className="w-40 h-32 object-cover rounded-md" />
+                  <img src="/lovable-uploads/627761c4-60f7-43ef-864e-7bfaab1c1dc6.png" alt="Zipline Adventure" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>

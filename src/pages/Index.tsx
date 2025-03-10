@@ -39,10 +39,10 @@ const Index: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                {/* Changed from camel image to crocodile image */}
-                <img src="/lovable-uploads/66cc351b-f10b-44d3-834b-c45ba90c6dc0.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                {/* Changed to bird image */}
+                <img src="/lovable-uploads/cec354a1-60c1-4a99-9cbc-9d973073f060.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                  <img src="/assets/rafting-activity.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
+                  <img src="/lovable-uploads/039f35db-5cf1-4a0b-be13-c4f3947bec67.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
@@ -125,19 +125,19 @@ const Index: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[{
               title: "Riverside Cottages",
-              image: "https://images.unsplash.com/photo-1606402179428-a57976d71fa4?auto=format&fit=crop&w=600&q=80",
+              image: "/lovable-uploads/ea6ebcc8-61ac-4f00-853a-b08d19197ba7.png",
               description: "Wake up to the soothing sounds of the river",
               price: "₹2,499",
               delay: 0
             }, {
               title: "Treehouse Villas",
-              image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80",
+              image: "/lovable-uploads/cb1b37ef-32f5-4aa6-84e7-5c54a6cebd38.png",
               description: "Elevated living with panoramic forest views",
               price: "₹3,999",
               delay: 200
             }, {
               title: "Luxury Tents",
-              image: "https://images.unsplash.com/photo-1561912774-79769a0a0a7a?auto=format&fit=crop&w=600&q=80",
+              image: "/lovable-uploads/2de354f0-c211-44f9-8243-b1cce525c7a7.png",
               description: "Glamping experience with all modern amenities",
               price: "₹1,999",
               delay: 400
@@ -255,7 +255,7 @@ const Index: React.FC = () => {
         
         {/* CTA */}
         <section className="py-20 bg-green-700 text-white relative">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/039f35db-5cf1-4a0b-be13-c4f3947bec67.png')] bg-cover bg-center opacity-20"></div>
           <div className="container relative z-10 px-4 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
               <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
