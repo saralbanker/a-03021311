@@ -157,7 +157,7 @@ const BookingPage = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
-                    <span>Check-out time: 11:00 AM</span>
+                    <span>Check-out time: 11:00 AM (Max 24hrs)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Check size={18} className="text-green-500 shrink-0 mt-0.5" />
@@ -177,7 +177,8 @@ const BookingPage = () => {
                 <p className="mb-4 text-sm">Our reservation team is available to help you plan your perfect stay.</p>
                 <div className="space-y-2 text-sm">
                   <p className="font-medium">Call us:</p>
-                  <p className="text-accent">+91 8904704234</p>
+                  <p className="text-accent">+91 8904704234
++91 7795601255</p>
                   <p className="font-medium mt-3">Email:</p>
                   <p className="text-accent">bookings@dandeliadventures.com</p>
                 </div>
@@ -188,7 +189,7 @@ const BookingPage = () => {
                 <p className="italic text-sm mb-4">
                   "Our stay at Dandeli Adventures was absolutely magical. The staff went above and beyond to make our vacation unforgettable!"
                 </p>
-                <p className="font-medium text-sm">- Priya & Rahul, Bangalore</p>
+                <p className="font-medium text-sm">- Priya</p>
               </div>
             </div>
           </div>
