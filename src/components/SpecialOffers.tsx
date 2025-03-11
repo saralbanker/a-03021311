@@ -87,7 +87,7 @@ const SpecialOffers: React.FC = () => {
             promoCode="MONSOON20"
             discount="20%"
             validUntil="Sep 30, 2023"
-            imageUrl="https://images.unsplash.com/photo-1508108712903-49b7ef9b1df8?q=80&w=2669&auto=format&fit=crop"
+            imageUrl="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png"
             color="#3949ab"
           />
           
@@ -107,7 +107,7 @@ const SpecialOffers: React.FC = () => {
             promoCode="SUMMER25"
             discount="25%"
             validUntil="Jun 30, 2023"
-            imageUrl="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?q=80&w=2670&auto=format&fit=crop"
+            imageUrl="/lovable-uploads/eab0dff8-9904-4338-ae38-67e97ade71cf.png"
             color="#ef6c00"
           />
         </div>

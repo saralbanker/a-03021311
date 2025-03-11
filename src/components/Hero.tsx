@@ -31,13 +31,13 @@ const slides: SlideData[] = [
   },
   {
     id: 4,
-    imageSrc: '/lovable-uploads/003350e1-bba1-4aed-9001-4acf317067fb.png',
-    title: 'Rich Biodiversity',
-    subtitle: 'Spot elephants, hornbills and other exotic wildlife in Dandeli'
+    imageSrc: '/lovable-uploads/ac22646b-1aa2-41fc-8799-5ece999eabac.png', 
+    title: 'Marsh Crocodiles',
+    subtitle: 'Encounter these magnificent reptiles in their natural habitat'
   },
   {
     id: 5,
-    imageSrc: '/lovable-uploads/d8ea592e-ee6c-456e-8730-11337b1c48d3.png',
+    imageSrc: '/lovable-uploads/b4c6f3a5-3500-43ad-97e1-e69041317e64.png', 
     title: 'Thrilling River Rafting',
     subtitle: 'Navigate through exciting rapids on the Kali River with our expert guides'
   },

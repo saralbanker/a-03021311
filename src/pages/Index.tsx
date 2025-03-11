@@ -39,10 +39,11 @@ const Index: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                {/* Changed to bird image */}
-                <img src="/lovable-uploads/cec354a1-60c1-4a99-9cbc-9d973073f060.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                {/* Updated to BG1.jpg image */}
+                <img src="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                  <img src="/lovable-uploads/039f35db-5cf1-4a0b-be13-c4f3947bec67.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
+                  {/* Updated to Cr.jpg image */}
+                  <img src="/lovable-uploads/8fe5892b-b9ce-440c-8423-786ee90235e7.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
