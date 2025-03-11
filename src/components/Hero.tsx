@@ -46,6 +46,12 @@ const slides: SlideData[] = [
     imageSrc: '/lovable-uploads/d6a0abf8-3fb5-4717-9fff-6a3a99f2becf.png',
     title: 'Mountain Trekking',
     subtitle: 'Breathtaking trails through pristine mountains and valleys'
+  },
+  {
+    id: 7,
+    imageSrc: '/lovable-uploads/45ac4715-903c-4b9d-aaf3-c8fbe391b9a7.png',
+    title: 'Exciting Kali River Rafting',
+    subtitle: 'Experience the thrill of white water rafting with expert guides on the Kali River'
   }
 ];
 
