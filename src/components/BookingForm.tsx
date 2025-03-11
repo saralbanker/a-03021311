@@ -4,7 +4,6 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,6 +20,15 @@ import { z } from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { sendBookingConfirmations } from "@/utils/email-service";
+import { useToast } from "@/hooks/use-toast";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -36,13 +44,15 @@ const FormSchema = z.object({
     message: "Number of adults must be greater than 0.",
   }),
   children: z.string(),
-  roomType: z.string().min(1, {
-    message: "Please select a room type.",
+  checkInDate: z.date({
+    required_error: "Please select a check-in date.",
   }),
-  date: z.date({
-    required_error: "Please select a date.",
+  checkOutDate: z.date({
+    required_error: "Please select a check-out date.",
   }),
-  paymentMethod: z.enum(["creditCard", "upi", "bankTransfer"]),
+}).refine((data) => data.checkOutDate > data.checkInDate, {
+  message: "Check-out date must be after check-in date",
+  path: ["checkOutDate"],
 });
 
 interface BookingFormProps {
@@ -50,6 +60,12 @@ interface BookingFormProps {
 }
 
 export function BookingForm({ onSubmit }: BookingFormProps) {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
+  const [showConfirmation, setShowConfirmation] = React.useState(false);
+  const [bookingDetails, setBookingDetails] = React.useState<z.infer<typeof FormSchema> | null>(null);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -58,222 +74,269 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
       phone: "",
       adults: "1",
       children: "0",
-      roomType: "",
-      date: new Date(),
-      paymentMethod: "creditCard",
+      checkInDate: new Date(),
+      checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)),
     },
   });
 
-  const isMobile = useIsMobile();
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
-
-  function handleFormSubmit(values: z.infer<typeof FormSchema>) {
+  async function handleFormSubmit(values: z.infer<typeof FormSchema>) {
     setIsSubmitting(true);
-    onSubmit(values);
-    // Form will be reset by the parent component after submission
+    try {
+      // Generate a simple booking reference
+      const bookingReference = `BK${Date.now().toString().slice(-6)}`;
+      
+      // Store booking details for confirmation dialog
+      setBookingDetails({ ...values, bookingReference });
+      
+      // Send confirmation emails and SMS
+      await sendBookingConfirmations({
+        ...values,
+        bookingReference,
+      }, bookingReference);
+      
+      // Show confirmation dialog
+      setShowConfirmation(true);
+      
+      // Show success toast
+      toast({
+        title: "Booking Successful!",
+        description: "Check your email and phone for booking details.",
+      });
+      
+    } catch (error) {
+      console.error('Booking error:', error);
+      toast({
+        title: "Booking Error",
+        description: "There was a problem processing your booking. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Your Name</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your name" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="phone"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Phone Number</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your phone number" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-col md:flex-row gap-4">
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="adults"
+            name="name"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Adults</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <FormItem>
+                <FormLabel>Your Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your name" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          
           <FormField
             control={form.control}
-            name="children"
+            name="email"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Children</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {Array.from({ length: 5 }, (_, i) => i).map((num) => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your email" {...field} />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-        </div>
-        <FormField
-          control={form.control}
-          name="roomType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Room Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+          
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a room type" />
-                  </SelectTrigger>
+                  <Input placeholder="Enter your phone number" {...field} />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="standard">Standard Room - ₹2,499/night</SelectItem>
-                  <SelectItem value="deluxe">Deluxe Room - ₹3,999/night</SelectItem>
-                  <SelectItem value="suite">Suite - ₹5,999/night</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <div className="flex flex-col md:flex-row gap-4">
+            <FormField
+              control={form.control}
+              name="adults"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Adults</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
+                        <SelectItem key={num} value={num.toString()}>
+                          {num}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="children"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Children</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Array.from({ length: 5 }, (_, i) => i).map((num) => (
+                        <SelectItem key={num} value={num.toString()}>
+                          {num}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4">
+            <FormField
+              control={form.control}
+              name="checkInDate"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Check-in Date</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date < new Date()
+                        }
+                        initialFocus
+                        className="pointer-events-auto"
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="checkOutDate"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Check-out Date</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date <= form.getValues("checkInDate") || date < new Date()
+                        }
+                        initialFocus
+                        className="pointer-events-auto"
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <Button type="submit" disabled={isSubmitting} className="w-full">
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              "Book Now"
+            )}
+          </Button>
+        </form>
+      </Form>
+
+      <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Booking Confirmed!</DialogTitle>
+            <DialogDescription>
+              Thank you for your booking. Here are your details:
+            </DialogDescription>
+          </DialogHeader>
+          {bookingDetails && (
+            <div className="mt-4 space-y-3">
+              <p><strong>Booking Reference:</strong> {bookingDetails.bookingReference}</p>
+              <p><strong>Name:</strong> {bookingDetails.name}</p>
+              <p><strong>Check-in Date:</strong> {format(bookingDetails.checkInDate, "PPP")}</p>
+              <p><strong>Check-out Date:</strong> {format(bookingDetails.checkOutDate, "PPP")}</p>
+              <p><strong>Guests:</strong> {bookingDetails.adults} Adults, {bookingDetails.children} Children</p>
+              <p className="text-sm text-muted-foreground mt-4">
+                A confirmation has been sent to your email ({bookingDetails.email}) and phone number ({bookingDetails.phone}).
+              </p>
+            </div>
           )}
-        />
-        <FormField
-          control={form.control}
-          name="date"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Booking Date</FormLabel>
-              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
-                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 pointer-events-auto" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={field.value}
-                    onSelect={(date) => {
-                      if (date) {
-                        field.onChange(date);
-                        // Automatically close the calendar when a date is selected
-                        setIsCalendarOpen(false);
-                      }
-                    }}
-                    disabled={(date) =>
-                      date < new Date()
-                    }
-                    initialFocus
-                    className="pointer-events-auto"
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription>
-                Please select the date you want to book.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <FormField
-          control={form.control}
-          name="paymentMethod"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Payment Method</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select payment method" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="creditCard">Credit/Debit Card</SelectItem>
-                  <SelectItem value="upi">UPI Payment</SelectItem>
-                  <SelectItem value="bankTransfer">Bank Transfer</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Processing...
-            </>
-          ) : (
-            "Proceed to Payment"
-          )}
-        </Button>
-      </form>
-    </Form>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
+
