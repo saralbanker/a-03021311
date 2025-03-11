@@ -13,12 +13,11 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, Loader2 } from "lucide-react";
+import { CalendarIcon, Check, Loader2, PartyPopper, Sparkle } from "lucide-react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Dialog,
@@ -29,6 +28,11 @@ import {
 } from "@/components/ui/dialog";
 import { sendBookingConfirmations } from "@/utils/email-service";
 import { useToast } from "@/hooks/use-toast";
+
+// Define the booking interface that includes bookingReference
+interface BookingDetails extends z.infer<typeof FormSchema> {
+  bookingReference?: string;
+}
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -64,7 +68,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
   const [showConfirmation, setShowConfirmation] = React.useState(false);
-  const [bookingDetails, setBookingDetails] = React.useState<z.infer<typeof FormSchema> | null>(null);
+  const [bookingDetails, setBookingDetails] = React.useState<BookingDetails | null>(null);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -315,23 +319,49 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
       </Form>
 
       <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Booking Confirmed!</DialogTitle>
-            <DialogDescription>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="space-y-3">
+            <div className="mx-auto bg-green-100 rounded-full p-3 w-16 h-16 flex items-center justify-center animate-scale-in">
+              <Check className="h-8 w-8 text-green-600 animate-[pulse_2s_ease-in-out_infinite]" />
+            </div>
+            <DialogTitle className="text-center text-2xl flex items-center justify-center gap-2 animate-fade-in">
+              <PartyPopper className="h-5 w-5 text-yellow-500" />
+              Booking Confirmed!
+              <Sparkle className="h-5 w-5 text-blue-500 animate-[pulse_3s_ease-in-out_infinite]" />
+            </DialogTitle>
+            <DialogDescription className="text-center animate-fade-in animation-delay-200">
               Thank you for your booking. Here are your details:
             </DialogDescription>
           </DialogHeader>
           {bookingDetails && (
-            <div className="mt-4 space-y-3">
-              <p><strong>Booking Reference:</strong> {bookingDetails.bookingReference}</p>
-              <p><strong>Name:</strong> {bookingDetails.name}</p>
-              <p><strong>Check-in Date:</strong> {format(bookingDetails.checkInDate, "PPP")}</p>
-              <p><strong>Check-out Date:</strong> {format(bookingDetails.checkOutDate, "PPP")}</p>
-              <p><strong>Guests:</strong> {bookingDetails.adults} Adults, {bookingDetails.children} Children</p>
-              <p className="text-sm text-muted-foreground mt-4">
-                A confirmation has been sent to your email ({bookingDetails.email}) and phone number ({bookingDetails.phone}).
+            <div className="mt-4 space-y-3 animate-fade-in animation-delay-400 bg-muted/50 p-4 rounded-lg">
+              <p className="flex justify-between">
+                <span className="font-medium">Booking Reference:</span> 
+                <span className="text-accent">{bookingDetails.bookingReference}</span>
               </p>
+              <p className="flex justify-between">
+                <span className="font-medium">Name:</span> 
+                <span>{bookingDetails.name}</span>
+              </p>
+              <p className="flex justify-between">
+                <span className="font-medium">Check-in Date:</span> 
+                <span>{format(bookingDetails.checkInDate, "PPP")}</span>
+              </p>
+              <p className="flex justify-between">
+                <span className="font-medium">Check-out Date:</span> 
+                <span>{format(bookingDetails.checkOutDate, "PPP")}</span>
+              </p>
+              <p className="flex justify-between">
+                <span className="font-medium">Guests:</span> 
+                <span>{bookingDetails.adults} Adults, {bookingDetails.children} Children</span>
+              </p>
+              <div className="text-sm text-muted-foreground mt-6 bg-green-50 p-3 rounded-md border border-green-100 shadow-sm animate-fade-in animation-delay-600">
+                <p className="text-center">
+                  A confirmation has been sent to your email 
+                  <span className="font-medium"> ({bookingDetails.email})</span> and 
+                  phone number <span className="font-medium">({bookingDetails.phone})</span>.
+                </p>
+              </div>
             </div>
           )}
         </DialogContent>
@@ -339,4 +369,3 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
     </>
   );
 }
-
