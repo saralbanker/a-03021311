@@ -191,7 +191,7 @@ const Index: React.FC = () => {
                 name: "Stanley Nuthalpati",
                 location: "New York, USA",
                 quote: "The river rafting experience was exhilarating! The staff was incredibly knowledgeable and made us feel safe while still having a blast.",
-                image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80",
+                image: "/lovable-uploads/b2944dcd-84a0-4ab8-af63-861cd91c2d08.png",
                 delay: 0
               },
               {
@@ -205,7 +205,7 @@ const Index: React.FC = () => {
                 name: "Rajat Hegde",
                 location: "Singapore",
                 quote: "The wildlife safari was the highlight of our trip. We spotted elephants, deer, and even a black panther! Our guide was exceptional in tracking the animals.",
-                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80",
+                image: "/lovable-uploads/54f9733a-3115-43f8-8702-ac90313ce5aa.png",
                 delay: 400
               }
             ].map((testimonial, index) => (

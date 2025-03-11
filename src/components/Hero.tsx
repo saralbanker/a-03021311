@@ -37,9 +37,15 @@ const slides: SlideData[] = [
   },
   {
     id: 5,
-    imageSrc: '/lovable-uploads/8fa57071-534c-437a-9450-267f50ce89d6.png',
+    imageSrc: '/lovable-uploads/d8ea592e-ee6c-456e-8730-11337b1c48d3.png',
     title: 'Thrilling River Rafting',
     subtitle: 'Navigate through exciting rapids on the Kali River with our expert guides'
+  },
+  {
+    id: 6,
+    imageSrc: '/lovable-uploads/d6a0abf8-3fb5-4717-9fff-6a3a99f2becf.png',
+    title: 'Mountain Trekking',
+    subtitle: 'Breathtaking trails through pristine mountains and valleys'
   }
 ];
 
