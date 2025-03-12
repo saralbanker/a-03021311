@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RoomCard from '@/components/RoomCard';
 import { Wifi, Coffee, Users, Tv, MapPin } from 'lucide-react';
+
 type RoomType = {
   id: string;
   title: string;
@@ -19,6 +20,7 @@ type RoomType = {
     label: string;
   }[];
 };
+
 const Accommodation: React.FC = () => {
   const [filter, setFilter] = useState<string>('all');
   const accommodations: RoomType[] = [{
@@ -52,7 +54,7 @@ const Accommodation: React.FC = () => {
     capacity: 2,
     size: "550 sq ft",
     bedType: "1 King",
-    image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/6b9bf7ef-20c4-4fa9-9f1a-2cd3310bf013.png",
     views: "River",
     amenities: [{
       icon: <Wifi size={16} />,
@@ -75,7 +77,7 @@ const Accommodation: React.FC = () => {
     capacity: 2,
     size: "400 sq ft",
     bedType: "1 Queen",
-    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/a9ae304d-ac8b-4671-94c1-c3a3013a0711.png",
     views: "Forest Canopy",
     amenities: [{
       icon: <Wifi size={16} />,
@@ -121,7 +123,7 @@ const Accommodation: React.FC = () => {
     capacity: 2,
     size: "400 sq ft",
     bedType: "1 King",
-    image: "https://images.unsplash.com/photo-1561912774-79769a0a0a7a?auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/7185274f-a6c4-4980-b354-5641039bc323.png",
     views: "Grassland",
     amenities: [{
       icon: <Wifi size={16} />,
@@ -160,12 +162,14 @@ const Accommodation: React.FC = () => {
       label: "Up to 6 Guests"
     }]
   }];
+
   const filteredAccommodations = filter === 'all' ? accommodations : accommodations.filter(room => {
     if (filter === 'budget' && room.price < 150) return true;
     if (filter === 'standard' && room.price >= 150 && room.price < 250) return true;
     if (filter === 'luxury' && room.price >= 250) return true;
     return false;
   });
+
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
@@ -335,4 +339,6 @@ const Accommodation: React.FC = () => {
       <Footer />
     </div>;
 };
-export default Accommodation;
+
+
+
