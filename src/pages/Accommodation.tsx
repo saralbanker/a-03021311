@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Navbar } from '@/components/Navbar';
+import Navbar from '@/components/Navbar'; // Changed from named import to default import
 import Footer from '@/components/Footer';
 import RoomCard from '@/components/RoomCard';
 import { Wifi, Coffee, Users, Tv, MapPin } from 'lucide-react';
@@ -259,11 +258,7 @@ const Accommodation: React.FC = () => {
               description={room.description}
               price={room.price}
               image={room.image}
-              specs={[
-                `${room.size} | ${room.bedType}`,
-                `${room.capacity} ${room.capacity > 1 ? 'Guests' : 'Guest'} max`,
-                `${room.views}`
-              ]}
+              capacity={room.capacity}
               amenities={room.amenities}
             />
           ))}

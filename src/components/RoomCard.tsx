@@ -16,6 +16,7 @@ type RoomCardProps = {
   price: number;
   capacity: number;
   amenities: Amenity[];
+  specs?: string[]; // Added the specs property as optional
   delay?: number;
 }
 
@@ -26,6 +27,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
   price, 
   capacity, 
   amenities,
+  specs,
   delay = 0
 }) => {
   return (
@@ -56,6 +58,17 @@ const RoomCard: React.FC<RoomCardProps> = ({
         </div>
         
         <p className="text-foreground/70 mb-5">{description}</p>
+        
+        {/* Display specs if provided */}
+        {specs && specs.length > 0 && (
+          <div className="mb-4">
+            {specs.map((spec, index) => (
+              <div key={index} className="text-sm text-foreground/70 mb-1">
+                {spec}
+              </div>
+            ))}
+          </div>
+        )}
         
         <div className="flex flex-wrap gap-3 mb-6">
           {amenities.map((amenity, index) => (
