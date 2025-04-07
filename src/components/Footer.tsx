@@ -50,13 +50,13 @@ const Footer: React.FC = () => {
                 Discover a world of adventure and tranquility nestled in the heart of nature's paradise.
               </p>
               <div className="flex space-x-4 pt-4">
-                <a href="#" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300">
+                <a href="#" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 hover:scale-125">
                   <Instagram size={20} />
                 </a>
-                <a href="#" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300">
+                <a href="#" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 hover:scale-125">
                   <Facebook size={20} />
                 </a>
-                <a href="#" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300">
+                <a href="#" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 hover:scale-125">
                   <Twitter size={20} />
                 </a>
               </div>
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
               <h4 className="text-lg font-display font-semibold">Quick Links</h4>
               <ul className="space-y-2">
                 {['About Us', 'Accommodation', 'Activities', 'Gallery', 'Contact'].map(item => <li key={item}>
-                    <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1">
+                    <Link to={`/${item.toLowerCase().replace(' ', '-')}`} className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300 inline-block py-1 link-underline">
                       {item}
                     </Link>
                   </li>)}
@@ -82,15 +82,18 @@ const Footer: React.FC = () => {
                     Dandeli Wildlife Sanctuary, Karnataka, India - 581325
                   </span>
                 </li>
-                <li className="flex items-center space-x-3">
-                  <Phone size={20} className="flex-shrink-0" />
-                  <span className="text-accent-foreground/80">+91 8277385225  
-+91 7795601255</span>
+                <li className="flex flex-col space-y-2">
+                  <div className="flex items-center space-x-3">
+                    <Phone size={20} className="flex-shrink-0" />
+                    <span className="text-accent-foreground/80">+91 8277385225</span>
+                  </div>
+                  <div className="flex items-center space-x-3 pl-7">
+                    <span className="text-accent-foreground/80">+91 7795601255</span>
+                  </div>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Mail size={20} className="flex-shrink-0" />
-                  <span className="text-accent-foreground/80 text-base">dandeliadventures.in@gmail.com
-                </span>
+                  <span className="text-accent-foreground/80 text-base">dandeliadventures.in@gmail.com</span>
                 </li>
               </ul>
             </div>
@@ -110,7 +113,7 @@ const Footer: React.FC = () => {
                 />
                 <button 
                   type="submit" 
-                  className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90"
+                  className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90 hover:scale-105"
                 >
                   Subscribe
                 </button>
@@ -142,7 +145,7 @@ const Footer: React.FC = () => {
             </p>
             <button
               onClick={() => setIsSubscribed(false)}
-              className="mt-6 px-6 py-2 rounded-md bg-accent text-accent-foreground font-medium transition-all duration-300 hover:bg-accent/90"
+              className="mt-6 px-6 py-2 rounded-md bg-accent text-accent-foreground font-medium transition-all duration-300 hover:bg-accent/90 hover:scale-105"
             >
               Close
             </button>

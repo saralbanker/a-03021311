@@ -7,6 +7,8 @@ import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import FeaturedActivities from '@/components/FeaturedActivities';
 import SpecialOffers from '@/components/SpecialOffers';
+import HomeGallery from '@/components/HomeGallery';
+import NearbyAttractions from '@/components/NearbyAttractions';
 import { ArrowRight, Leaf, Shield, Award, Phone } from 'lucide-react';
 
 const Index: React.FC = () => {
@@ -20,7 +22,7 @@ const Index: React.FC = () => {
         <div className="fixed bottom-32 right-4 z-40 md:bottom-24">
           <a 
             href="tel:+918904704234" 
-            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-105 animate-pulse hover:animate-none"
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110 animate-pulse hover:animate-none"
           >
             <Phone size={20} className="animate-bounce" />
             <span className="font-medium">Call Now</span>
@@ -39,10 +41,8 @@ const Index: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                {/* Updated to BG1.jpg image */}
                 <img src="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
-                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
-                  {/* Updated to Cr.jpg image */}
+                <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-110 transition-all duration-300">
                   <img src="/lovable-uploads/8fe5892b-b9ce-440c-8423-786ee90235e7.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
@@ -57,9 +57,9 @@ const Index: React.FC = () => {
               </p>
               
               <div className="space-y-4 mb-8">
-                <div className="flex items-start group">
+                <div className="flex items-start group hover-lift p-2 rounded-lg transition-all duration-300 hover:bg-green-50">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-green-700 group-hover:bg-green-100 transition-colors duration-300">
-                    <Leaf size={20} className="group-hover:scale-110 transition-transform duration-300" />
+                    <Leaf size={20} className="group-hover:scale-125 transition-transform duration-300" />
                   </div>
                   <div>
                     <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Eco-Friendly Resort</h3>
@@ -69,9 +69,9 @@ const Index: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start group">
+                <div className="flex items-start group hover-lift p-2 rounded-lg transition-all duration-300 hover:bg-green-50">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-green-700 group-hover:bg-green-100 transition-colors duration-300">
-                    <Shield size={20} className="group-hover:scale-110 transition-transform duration-300" />
+                    <Shield size={20} className="group-hover:scale-125 transition-transform duration-300" />
                   </div>
                   <div>
                     <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Safety First Adventures</h3>
@@ -81,9 +81,9 @@ const Index: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start group">
+                <div className="flex items-start group hover-lift p-2 rounded-lg transition-all duration-300 hover:bg-green-50">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-green-700 group-hover:bg-green-100 transition-colors duration-300">
-                    <Award size={20} className="group-hover:scale-110 transition-transform duration-300" />
+                    <Award size={20} className="group-hover:scale-125 transition-transform duration-300" />
                   </div>
                   <div>
                     <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Award-Winning Hospitality</h3>
@@ -96,10 +96,10 @@ const Index: React.FC = () => {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/about" className="inline-flex items-center text-green-700 hover:underline group">
-                  Learn more about us <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                  Learn more about us <ArrowRight size={16} className="ml-1 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
                 <Link to="/contact" className="inline-flex items-center text-green-700 hover:underline group">
-                  Contact us for directions <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
+                  Contact us for directions <ArrowRight size={16} className="ml-1 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
@@ -109,7 +109,13 @@ const Index: React.FC = () => {
         {/* Special Offers Section */}
         <SpecialOffers />
         
+        {/* Gallery Section */}
+        <HomeGallery />
+        
         <FeaturedActivities />
+        
+        {/* Nearby Attractions Section */}
+        <NearbyAttractions />
         
         {/* Accommodations preview */}
         <section className="py-20 bg-secondary">
@@ -125,50 +131,50 @@ const Index: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[{
-              title: "Riverside Cottages",
-              image: "/lovable-uploads/44997248-2a7d-4c4b-8656-13d704d35b37.png",
-              description: "Wake up to the soothing sounds of the river",
-              price: "₹2,499",
-              delay: 0
-            }, {
-              title: "Treehouse Villas",
-              image: "/lovable-uploads/e254561c-a576-4abe-ba9b-a057e1ddc8d7.png",
-              description: "Elevated living with panoramic forest views",
-              price: "₹3,999",
-              delay: 200
-            }, {
-              title: "Luxury Tents",
-              image: "/lovable-uploads/507d9972-fed7-467f-90af-7506080a19b4.png",
-              description: "Glamping experience with all modern amenities",
-              price: "₹1,999",
-              delay: 400
-            }].map((accommodation, index) => <div key={index} className="overflow-hidden rounded-xl group shadow-md animate-slide-up card-hover bg-white" style={{
-              animationDelay: `${accommodation.delay}ms`
-            }}>
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={accommodation.image} alt={accommodation.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-display font-semibold mb-2">
-                      {accommodation.title}
-                    </h3>
-                    <p className="text-foreground/70 mb-2">
-                      {accommodation.description}
-                    </p>
-                    <p className="text-green-700 font-semibold mb-4">
-                      {accommodation.price} per night
-                    </p>
-                    <Link to="/accommodation" className="text-green-700 hover:underline inline-flex items-center">
-                      View Details <ArrowRight size={16} className="ml-1" />
-                    </Link>
-                  </div>
-                </div>)}
+                title: "Riverside Cottages",
+                image: "/lovable-uploads/44997248-2a7d-4c4b-8656-13d704d35b37.png",
+                description: "Wake up to the soothing sounds of the river",
+                price: "₹2,499",
+                delay: 0
+              }, {
+                title: "Treehouse Villas",
+                image: "/lovable-uploads/e254561c-a576-4abe-ba9b-a057e1ddc8d7.png",
+                description: "Elevated living with panoramic forest views",
+                price: "₹3,999",
+                delay: 200
+              }, {
+                title: "Luxury Tents",
+                image: "/lovable-uploads/507d9972-fed7-467f-90af-7506080a19b4.png",
+                description: "Glamping experience with all modern amenities",
+                price: "₹1,999",
+                delay: 400
+              }].map((accommodation, index) => <div key={index} className="overflow-hidden rounded-xl group shadow-md animate-slide-up hover-lift bg-white" style={{
+                animationDelay: `${accommodation.delay}ms`
+              }}>
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img src={accommodation.image} alt={accommodation.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-display font-semibold mb-2 group-hover:text-green-700 transition-colors">
+                        {accommodation.title}
+                      </h3>
+                      <p className="text-foreground/70 mb-2">
+                        {accommodation.description}
+                      </p>
+                      <p className="text-green-700 font-semibold mb-4">
+                        {accommodation.price} per night
+                      </p>
+                      <Link to="/accommodation" className="text-green-700 hover:underline inline-flex items-center group">
+                        View Details <ArrowRight size={16} className="ml-1 group-hover:translate-x-2 transition-transform duration-300" />
+                      </Link>
+                    </div>
+                  </div>)}
             </div>
             
             <div className="text-center mt-12 animate-fade-in" style={{
-            animationDelay: '600ms'
-          }}>
-              <Link to="/accommodation" className="btn-primary">
+              animationDelay: '600ms'
+            }}>
+              <Link to="/accommodation" className="btn-primary hover-scale">
                 Explore All Accommodations
               </Link>
             </div>
@@ -212,11 +218,11 @@ const Index: React.FC = () => {
             ].map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-white p-6 rounded-xl shadow-md animate-slide-up"
+                className="bg-white p-6 rounded-xl shadow-md animate-slide-up hover-lift"
                 style={{ animationDelay: `${testimonial.delay}ms` }}
               >
                 <div className="flex items-center mb-4">
-                  <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4 object-cover" />
+                  <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4 object-cover hover:scale-110 transition-transform duration-300" />
                   <div>
                     <h4 className="font-medium text-base">{testimonial.name}</h4>
                     <p className="text-sm text-foreground/70">{testimonial.location}</p>
@@ -241,12 +247,25 @@ const Index: React.FC = () => {
               <p className="text-foreground/70 mb-8">
                 Subscribe to our newsletter and be the first to know about new adventures and seasonal experiences.
               </p>
-              <div className="flex flex-col sm:flex-row items-center max-w-md mx-auto gap-3">
-                <input type="email" placeholder="Your email address" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" />
-                <Button variant="default" className="w-full sm:w-auto bg-green-700 hover:bg-green-800">
+              <form className="flex flex-col sm:flex-row items-center max-w-md mx-auto gap-3" onSubmit={(e) => {
+                e.preventDefault();
+                const emailInput = e.currentTarget.querySelector('input[type="email"]') as HTMLInputElement;
+                if (emailInput && emailInput.value) {
+                  // We'll use the same subscription logic as in the footer
+                  const { toast } = require("@/hooks/use-toast");
+                  toast({
+                    title: "Success!",
+                    description: "You've been subscribed to our newsletter",
+                    variant: "default",
+                  });
+                  emailInput.value = '';
+                }
+              }}>
+                <input type="email" placeholder="Your email address" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" required />
+                <Button type="submit" variant="default" className="w-full sm:w-auto bg-green-700 hover:bg-green-800 hover:scale-105 transition-transform">
                   Subscribe
                 </Button>
-              </div>
+              </form>
               <p className="text-xs text-muted-foreground mt-4">
                 We respect your privacy. Unsubscribe at any time.
               </p>
@@ -259,13 +278,13 @@ const Index: React.FC = () => {
           <div className="absolute inset-0 bg-[url('/lovable-uploads/039f35db-5cf1-4a0b-be13-c4f3947bec67.png')] bg-cover bg-center opacity-20"></div>
           <div className="container relative z-10 px-4 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
-              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
+              <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-glow">
                 Your Adventure Awaits!
               </h2>
               <p className="text-xl mb-8 text-white/90">
                 Book your stay now and create memories that will last a lifetime.
               </p>
-              <Link to="/booking" className="inline-block px-8 py-4 bg-white text-green-700 font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]">
+              <Link to="/booking" className="inline-block px-8 py-4 bg-white text-green-700 font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px] hover:scale-105">
                 Book Your Adventure Now
               </Link>
             </div>
@@ -283,7 +302,7 @@ const Star: React.FC<{
 }> = ({
   filled
 }) => {
-  return <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-yellow-500">
+  return <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-yellow-500 hover:scale-125 transition-transform duration-300">
       <path d="M10 1L12.39 6.55L18.5 7.31L14.25 11.75L15.51 18L10 15.09L4.49 18L5.75 11.75L1.5 7.31L7.61 6.55L10 1Z" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>;
 };

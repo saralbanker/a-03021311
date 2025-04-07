@@ -81,19 +81,20 @@ const Hero: React.FC = () => {
             currentSlide === index ? 'opacity-100' : 'opacity-0'
           )}
         >
-          <div className="absolute inset-0 bg-black/40 z-10" />
+          <div className="absolute inset-0 bg-black/50 z-10" />
           <div 
             className="absolute inset-0 w-full h-full bg-cover bg-center transform transition-transform duration-10000 scale-105"
             style={{ 
               backgroundImage: `url(${slide.imageSrc})`,
-              transform: currentSlide === index ? 'scale(1.05)' : 'scale(1)'
+              transform: currentSlide === index ? 'scale(1.05)' : 'scale(1)',
+              filter: 'contrast(1.1) brightness(0.9)'
             }}
           />
           
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-20">
             <h1 
               className={cn(
-                "text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white max-w-5xl leading-tight mb-4",
+                "text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white max-w-5xl leading-tight mb-4 text-glow",
                 "transition-all duration-700 transform",
                 currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               )}
@@ -117,7 +118,7 @@ const Hero: React.FC = () => {
             >
               <Link 
                 to="/booking" 
-                className="btn-primary text-lg hover:shadow-glow transition-all duration-300 transform hover:scale-105"
+                className="btn-primary text-lg hover:shadow-glow transition-all duration-300 transform hover:scale-110"
               >
                 Book Your Adventure
               </Link>
@@ -135,8 +136,8 @@ const Hero: React.FC = () => {
             className={cn(
               'w-3 h-3 rounded-full transition-all duration-300 transform',
               currentSlide === index 
-                ? 'bg-white scale-125 shadow-glow' 
-                : 'bg-white/50 hover:bg-white/80 hover:scale-110'
+                ? 'bg-white scale-150 shadow-glow' 
+                : 'bg-white/50 hover:bg-white/80 hover:scale-125'
             )}
             aria-label={`Go to slide ${index + 1}`}
           />
@@ -145,7 +146,7 @@ const Hero: React.FC = () => {
       
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-        <div className="w-8 h-12 rounded-full border-2 border-white/50 flex items-start justify-center">
+        <div className="w-8 h-12 rounded-full border-2 border-white/70 flex items-start justify-center hover:border-white hover:shadow-glow transition-all duration-300">
           <div className="w-1 h-3 bg-white rounded-full mt-2 animate-[slide-down_1.5s_ease-in-out_infinite]" />
         </div>
       </div>
