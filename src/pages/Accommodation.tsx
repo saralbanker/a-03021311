@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar'; // Changed from named import to default import
 import Footer from '@/components/Footer';
@@ -184,8 +185,8 @@ const Accommodation: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      {/* Hero Section */}
-      <div className="relative h-[40vh] md:h-[50vh] w-full">
+      {/* Hero Section - Added mt-20 to increase gap below navbar */}
+      <div className="relative h-[40vh] md:h-[50vh] w-full mt-20">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/lovable-uploads/61d7b6e2-720c-42fc-a459-7624b56b81d0.png')" }}>
           <div className="absolute inset-0 bg-black/50" />
         </div>

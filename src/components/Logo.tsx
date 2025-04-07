@@ -25,10 +25,10 @@ const Logo: React.FC = () => {
       </div>
       <div className="flex flex-col">
         <span className="text-lg font-display font-bold text-green-700 leading-tight group-hover:text-green-600 transition-colors duration-300">
-          Dandeli
+          Dandeli Adventure
         </span>
         <span className="text-xs font-medium text-blue-600 -mt-1 group-hover:text-blue-500 transition-colors duration-300">
-          Adventures
+          Resorts
         </span>
       </div>
     </Link>
