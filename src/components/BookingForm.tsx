@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, Check, Loader2, PartyPopper, Sparkle } from "lucide-react";
+import { CalendarIcon, Check, Loader2, PartyPopper, Sparkle, Clock } from "lucide-react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,6 +28,8 @@ import {
 } from "@/components/ui/dialog";
 import { sendBookingConfirmations } from "@/utils/email-service";
 import { useToast } from "@/hooks/use-toast";
+import { useOtp } from "@/hooks/use-otp";
+import { OtpInput } from "./OtpInput";
 
 // Define the booking interface that includes bookingReference
 interface BookingDetails extends z.infer<typeof FormSchema> {
@@ -66,9 +68,23 @@ interface BookingFormProps {
 export function BookingForm({ onSubmit }: BookingFormProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
   const [showConfirmation, setShowConfirmation] = React.useState(false);
   const [bookingDetails, setBookingDetails] = React.useState<BookingDetails | null>(null);
+  const [showOtpDialog, setShowOtpDialog] = React.useState(false);
+  const [formValues, setFormValues] = React.useState<z.infer<typeof FormSchema> | null>(null);
+  const [countdownInterval, setCountdownInterval] = React.useState<NodeJS.Timeout | null>(null);
+  const [otpValue, setOtpValue] = React.useState("");
+
+  const { 
+    isOtpSent,
+    isVerifying, 
+    otpError, 
+    timeLeft, 
+    setTimeLeft,
+    sendOtp, 
+    verifyOtp, 
+    resendOtp 
+  } = useOtp();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -83,41 +99,104 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
     },
   });
 
-  async function handleFormSubmit(values: z.infer<typeof FormSchema>) {
+  React.useEffect(() => {
+    if (isOtpSent && timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft(prev => prev - 1);
+      }, 1000);
+      setCountdownInterval(timer);
+      return () => clearInterval(timer);
+    } else if (timeLeft === 0 && countdownInterval) {
+      clearInterval(countdownInterval);
+    }
+  }, [isOtpSent, timeLeft, countdownInterval, setTimeLeft]);
+
+  const handleFormSubmit = async (values: z.infer<typeof FormSchema>) => {
+    setFormValues(values);
     setIsSubmitting(true);
+    
     try {
-      // Generate a simple booking reference
-      const bookingReference = `BK${Date.now().toString().slice(-6)}`;
-      
-      // Store booking details for confirmation dialog
-      setBookingDetails({ ...values, bookingReference });
-      
-      // Send confirmation emails and SMS
-      await sendBookingConfirmations({
-        ...values,
-        bookingReference,
-      }, bookingReference);
-      
-      // Show confirmation dialog
-      setShowConfirmation(true);
-      
-      // Show success toast
-      toast({
-        title: "Booking Successful!",
-        description: "Check your email and phone for booking details.",
-      });
-      
+      // Initiate OTP verification
+      await sendOtp(values.phone);
+      setShowOtpDialog(true);
     } catch (error) {
-      console.error('Booking error:', error);
+      console.error('OTP sending error:', error);
       toast({
-        title: "Booking Error",
-        description: "There was a problem processing your booking. Please try again.",
+        title: "Error",
+        description: "Failed to send verification code. Please try again.",
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
-  }
+  };
+
+  const handleOtpComplete = (otp: string) => {
+    setOtpValue(otp);
+  };
+
+  const handleOtpVerification = async () => {
+    if (!formValues) return;
+    
+    setIsSubmitting(true);
+    try {
+      const isValid = await verifyOtp(otpValue);
+      
+      if (isValid) {
+        // Close OTP dialog
+        setShowOtpDialog(false);
+        
+        // Generate a simple booking reference
+        const bookingReference = `BK${Date.now().toString().slice(-6)}`;
+        
+        // Store booking details for confirmation dialog
+        setBookingDetails({ ...formValues, bookingReference });
+        
+        // Send confirmation emails and SMS
+        await sendBookingConfirmations({
+          ...formValues,
+          bookingReference,
+        }, bookingReference);
+        
+        // Show confirmation dialog
+        setShowConfirmation(true);
+        
+        // Show success toast
+        toast({
+          title: "Booking Successful!",
+          description: "Check your email and phone for booking details.",
+        });
+        
+        // Reset the form
+        form.reset();
+      } else {
+        toast({
+          title: "Verification Failed",
+          description: "The code you entered is incorrect. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Verification error:', error);
+      toast({
+        title: "Verification Error",
+        description: "There was a problem verifying your code. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (formValues) {
+      await resendOtp(formValues.phone);
+      toast({
+        title: "Code Resent",
+        description: "A new verification code has been sent to your phone.",
+      });
+    }
+  };
 
   return (
     <>
@@ -318,6 +397,66 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
         </form>
       </Form>
 
+      {/* OTP Verification Dialog */}
+      <Dialog open={showOtpDialog} onOpenChange={(open) => !isSubmitting && setShowOtpDialog(open)}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader className="space-y-3">
+            <div className="mx-auto bg-primary/10 rounded-full p-3 w-16 h-16 flex items-center justify-center">
+              <Clock className="h-8 w-8 text-primary animate-pulse" />
+            </div>
+            <DialogTitle className="text-center text-2xl">
+              Phone Verification
+            </DialogTitle>
+            <DialogDescription className="text-center">
+              We've sent a verification code to {formValues?.phone}.<br />
+              Enter the code below to verify your phone number.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="p-4 space-y-6">
+            <OtpInput 
+              onComplete={handleOtpComplete} 
+              isDisabled={isVerifying}
+            />
+            
+            {otpError && (
+              <p className="text-destructive text-sm text-center">{otpError}</p>
+            )}
+            
+            <div className="flex justify-center items-center text-sm">
+              {timeLeft > 0 ? (
+                <p className="text-muted-foreground">Resend code in {timeLeft}s</p>
+              ) : (
+                <Button 
+                  variant="link" 
+                  onClick={handleResendOtp} 
+                  disabled={isVerifying}
+                  className="text-primary p-0"
+                >
+                  Resend verification code
+                </Button>
+              )}
+            </div>
+            
+            <Button 
+              onClick={handleOtpVerification} 
+              disabled={isVerifying || otpValue.length !== 6} 
+              className="w-full animate-fade-in"
+            >
+              {isVerifying ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Verifying...
+                </>
+              ) : (
+                "Verify & Complete Booking"
+              )}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Booking Confirmation Dialog */}
       <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader className="space-y-3">
