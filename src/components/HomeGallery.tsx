@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ScrollAnimationWrapper } from '@/hooks/use-scroll-animation';
 
 const galleryImages = [
   {
@@ -59,43 +60,49 @@ const HomeGallery: React.FC = () => {
   return (
     <section className="section-padding bg-secondary/40">
       <div className="container">
-        <div className="text-center mb-12 animate-slide-up">
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Explore Our Gallery
-          </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
-            Take a visual journey through the beautiful landscapes and experiences that await you at Dandeli Adventure Resorts
-          </p>
-        </div>
+        <ScrollAnimationWrapper animation="animate-slide-up opacity-100" className="mb-12">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+              Explore Our Gallery
+            </h2>
+            <p className="text-foreground/70 max-w-2xl mx-auto">
+              Take a visual journey through the beautiful landscapes and experiences that await you at Dandeli Adventure Resorts
+            </p>
+          </div>
+        </ScrollAnimationWrapper>
         
-        <div className="relative mx-auto max-w-5xl px-8">
-          <Carousel className="w-full" setApi={setApi}>
-            <CarouselContent>
-              {galleryImages.map((image) => (
-                <CarouselItem key={image.id} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:scale-105 h-64">
-                    <img 
-                      src={image.src} 
-                      alt={image.alt} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                      <p className="text-white p-4 font-medium">{image.alt}</p>
+        <ScrollAnimationWrapper animation="animate-fade-in opacity-100" delay={200}>
+          <div className="relative mx-auto max-w-5xl px-8">
+            <Carousel className="w-full" setApi={setApi}>
+              <CarouselContent>
+                {galleryImages.map((image) => (
+                  <CarouselItem key={image.id} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:scale-105 h-64">
+                      <img 
+                        src={image.src} 
+                        alt={image.alt} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                        <p className="text-white p-4 font-medium">{image.alt}</p>
+                      </div>
                     </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-0 bg-white/80 backdrop-blur-sm hover:bg-white" />
-            <CarouselNext className="right-0 bg-white/80 backdrop-blur-sm hover:bg-white" />
-          </Carousel>
-        </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0 bg-white/80 backdrop-blur-sm hover:bg-white" />
+              <CarouselNext className="right-0 bg-white/80 backdrop-blur-sm hover:bg-white" />
+            </Carousel>
+          </div>
+        </ScrollAnimationWrapper>
         
-        <div className="text-center mt-10">
-          <Link to="/gallery" className="btn-primary inline-flex items-center gap-2 hover-scale">
-            View Full Gallery <ArrowRight size={16} />
-          </Link>
-        </div>
+        <ScrollAnimationWrapper animation="animate-fade-in opacity-100" delay={400}>
+          <div className="text-center mt-10">
+            <Link to="/gallery" className="btn-primary inline-flex items-center gap-2 hover-scale">
+              View Full Gallery <ArrowRight size={16} />
+            </Link>
+          </div>
+        </ScrollAnimationWrapper>
       </div>
     </section>
   );

@@ -46,6 +46,7 @@
   
   html {
     @apply scroll-smooth;
+    scroll-behavior: smooth;
   }
   
   body {
@@ -60,6 +61,14 @@
   /* Custom cursor styling for links */
   a, button, [role="button"] {
     cursor: pointer;
+  }
+  
+  /* Parallax scroll effect for sections with background images */
+  .bg-parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 
@@ -102,6 +111,59 @@
     @apply relative after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 
     after:bg-green-700 after:origin-bottom-right after:transition-transform after:duration-300 
     hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+  
+  /* Scroll reveal animation base styles */
+  .reveal {
+    @apply opacity-0 transition-all duration-700;
+  }
+  
+  .reveal-visible {
+    @apply opacity-100;
+  }
+  
+  /* Different reveal animations */
+  .reveal-fade {
+    @apply opacity-0 transition-opacity duration-700;
+  }
+  
+  .reveal-slide-up {
+    @apply opacity-0 translate-y-10 transition-all duration-700;
+  }
+  
+  .reveal-slide-down {
+    @apply opacity-0 -translate-y-10 transition-all duration-700;
+  }
+  
+  .reveal-slide-left {
+    @apply opacity-0 translate-x-10 transition-all duration-700;
+  }
+  
+  .reveal-slide-right {
+    @apply opacity-0 -translate-x-10 transition-all duration-700;
+  }
+  
+  .reveal-scale {
+    @apply opacity-0 scale-95 transition-all duration-700;
+  }
+  
+  /* Visible states for reveal animations */
+  .reveal-visible.reveal-fade {
+    @apply opacity-100;
+  }
+  
+  .reveal-visible.reveal-slide-up, 
+  .reveal-visible.reveal-slide-down {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .reveal-visible.reveal-slide-left, 
+  .reveal-visible.reveal-slide-right {
+    @apply opacity-100 translate-x-0;
+  }
+  
+  .reveal-visible.reveal-scale {
+    @apply opacity-100 scale-100;
   }
 }
 

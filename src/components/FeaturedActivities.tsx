@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ScrollAnimationWrapper } from '@/hooks/use-scroll-animation';
 
 type ActivityProps = {
   title: string;
@@ -78,34 +79,44 @@ const FeaturedActivities: React.FC = () => {
   
   return (
     <section className="section-padding container">
-      <div className="text-center mb-16 animate-slide-up">
-        <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Featured Experiences</h2>
-        <p className="text-foreground/70 max-w-2xl mx-auto">
-          Discover the thrill and tranquility of our curated adventures in the heart of Dandeli's wilderness.
-        </p>
-      </div>
+      <ScrollAnimationWrapper animation="animate-slide-up opacity-100" className="mb-16">
+        <div className="text-center">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">Featured Experiences</h2>
+          <p className="text-foreground/70 max-w-2xl mx-auto">
+            Discover the thrill and tranquility of our curated adventures in the heart of Dandeli's wilderness.
+          </p>
+        </div>
+      </ScrollAnimationWrapper>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {activities.map((activity, index) => (
-          <ActivityCard 
+          <ScrollAnimationWrapper 
             key={activity.id}
-            title={activity.title}
-            description={activity.description}
-            image={activity.image}
-            link={activity.link}
-            delay={index * 100}
-          />
+            animation="animate-slide-up opacity-100" 
+            delay={index * 150}
+            threshold={0.2}
+          >
+            <ActivityCard 
+              title={activity.title}
+              description={activity.description}
+              image={activity.image}
+              link={activity.link}
+              delay={index * 100}
+            />
+          </ScrollAnimationWrapper>
         ))}
       </div>
       
-      <div className="text-center mt-12 animate-fade-in" style={{ animationDelay: '400ms' }}>
-        <Link 
-          to="/activities" 
-          className="btn-primary inline-flex items-center"
-        >
-          View All Activities <ArrowRight size={16} className="ml-2" />
-        </Link>
-      </div>
+      <ScrollAnimationWrapper animation="animate-fade-in opacity-100" delay={600}>
+        <div className="text-center mt-12">
+          <Link 
+            to="/activities" 
+            className="btn-primary inline-flex items-center"
+          >
+            View All Activities <ArrowRight size={16} className="ml-2" />
+          </Link>
+        </div>
+      </ScrollAnimationWrapper>
     </section>
   );
 };
