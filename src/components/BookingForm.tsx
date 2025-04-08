@@ -74,6 +74,9 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
   const [formValues, setFormValues] = React.useState<z.infer<typeof FormSchema> | null>(null);
   const [countdownInterval, setCountdownInterval] = React.useState<NodeJS.Timeout | null>(null);
   const [otpValue, setOtpValue] = React.useState("");
+  // Add state for controlling calendar popovers
+  const [checkInOpen, setCheckInOpen] = React.useState(false);
+  const [checkOutOpen, setCheckOutOpen] = React.useState(false);
 
   const { 
     isOtpSent,
@@ -303,7 +306,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Check-in Date</FormLabel>
-                  <Popover>
+                  <Popover open={checkInOpen} onOpenChange={setCheckInOpen}>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -326,7 +329,11 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                       <Calendar
                         mode="single"
                         selected={field.value}
-                        onSelect={field.onChange}
+                        onSelect={(date) => {
+                          field.onChange(date);
+                          // Close the calendar popover after selection
+                          setCheckInOpen(false);
+                        }}
                         disabled={(date) =>
                           date < new Date()
                         }
@@ -346,7 +353,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Check-out Date</FormLabel>
-                  <Popover>
+                  <Popover open={checkOutOpen} onOpenChange={setCheckOutOpen}>
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
@@ -369,7 +376,11 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                       <Calendar
                         mode="single"
                         selected={field.value}
-                        onSelect={field.onChange}
+                        onSelect={(date) => {
+                          field.onChange(date);
+                          // Close the calendar popover after selection
+                          setCheckOutOpen(false);
+                        }}
                         disabled={(date) =>
                           date <= form.getValues("checkInDate") || date < new Date()
                         }

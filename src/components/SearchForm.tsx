@@ -16,6 +16,7 @@ export const SearchForm: React.FC = () => {
   const [adults, setAdults] = useState("2");
   const [children, setChildren] = useState("0");
   const [nights, setNights] = useState("2");
+  const [calendarOpen, setCalendarOpen] = useState(false);
   
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +39,7 @@ export const SearchForm: React.FC = () => {
     >
       <div className="flex-1 space-y-2">
         <label className="text-sm font-medium">Check-in Date</label>
-        <Popover>
+        <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
           <PopoverTrigger asChild>
             <Button
               variant={"outline"}
@@ -55,9 +56,14 @@ export const SearchForm: React.FC = () => {
             <Calendar
               mode="single"
               selected={checkInDate}
-              onSelect={setCheckInDate}
+              onSelect={(date) => {
+                setCheckInDate(date);
+                // Close the calendar popover after selection
+                setCalendarOpen(false);
+              }}
               initialFocus
               disabled={(date) => date < new Date()}
+              className="pointer-events-auto"
             />
           </PopoverContent>
         </Popover>
