@@ -1,46 +1,38 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
-import { 
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim() === '') {
       toast({
         title: "Error",
         description: "Please enter your email address",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-    
+
     // Show success notification
     toast({
       title: "Success!",
       description: "You've been subscribed to our newsletter",
-      variant: "default",
+      variant: "default"
     });
-    
+
     // Reset form and show dialog
     setEmail("");
     setIsSubscribed(true);
   };
-
-  return (
-    <>
+  return <>
       <footer className="bg-accent text-accent-foreground">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16 px-4">
@@ -93,7 +85,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li className="flex items-center space-x-3">
                   <Mail size={20} className="flex-shrink-0" />
-                  <span className="text-accent-foreground/80 text-base">dandeliadventures.in@gmail.com</span>
+                  <span className="text-accent-foreground/80 text-base">dandeliadventure.info@gmail.com</span>
                 </li>
               </ul>
             </div>
@@ -104,17 +96,8 @@ const Footer: React.FC = () => {
                 Subscribe to our newsletter for the latest updates and offers.
               </p>
               <form className="mt-4 space-y-3" onSubmit={handleSubscribe}>
-                <input 
-                  type="email" 
-                  placeholder="Your email address" 
-                  className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-accent-foreground focus:outline-none focus:ring-2 focus:ring-white/30"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button 
-                  type="submit" 
-                  className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90 hover:scale-105"
-                >
+                <input type="email" placeholder="Your email address" className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-accent-foreground focus:outline-none focus:ring-2 focus:ring-white/30" value={email} onChange={e => setEmail(e.target.value)} />
+                <button type="submit" className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90 hover:scale-105">
                   Subscribe
                 </button>
               </form>
@@ -143,17 +126,12 @@ const Footer: React.FC = () => {
             <p className="text-center text-muted-foreground">
               You'll now receive our latest updates and exclusive offers directly to your inbox.
             </p>
-            <button
-              onClick={() => setIsSubscribed(false)}
-              className="mt-6 px-6 py-2 rounded-md bg-accent text-accent-foreground font-medium transition-all duration-300 hover:bg-accent/90 hover:scale-105"
-            >
+            <button onClick={() => setIsSubscribed(false)} className="mt-6 px-6 py-2 rounded-md bg-accent text-accent-foreground font-medium transition-all duration-300 hover:bg-accent/90 hover:scale-105">
               Close
             </button>
           </div>
         </DialogContent>
       </Dialog>
-    </>
-  );
+    </>;
 };
-
 export default Footer;
