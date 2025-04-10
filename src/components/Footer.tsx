@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
@@ -10,6 +12,7 @@ const Footer: React.FC = () => {
   const {
     toast
   } = useToast();
+  
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim() === '') {
@@ -32,6 +35,7 @@ const Footer: React.FC = () => {
     setEmail("");
     setIsSubscribed(true);
   };
+  
   return <>
       <footer className="bg-accent text-accent-foreground">
         <div className="container mx-auto">
@@ -74,13 +78,23 @@ const Footer: React.FC = () => {
                     Dandeli Wildlife Sanctuary, Karnataka, India - 581325
                   </span>
                 </li>
-                <li className="flex flex-col space-y-2">
-                  <div className="flex items-center space-x-3">
-                    <Phone size={20} className="flex-shrink-0" />
-                    <span className="text-accent-foreground/80">+91 8277385225</span>
-                  </div>
-                  <div className="flex items-center space-x-3 pl-7">
-                    <span className="text-accent-foreground/80">+91 7795601255</span>
+                <li className="flex items-center space-x-3">
+                  <Phone size={20} className="flex-shrink-0" />
+                  <div className="flex flex-col">
+                    <a 
+                      href="https://wa.me/918277385225?text=Hi!%20I'm%20interested%20in%20booking%20an%20adventure%20at%20Dandeli."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300"
+                    >
+                      +91 8277385225
+                    </a>
+                    <a 
+                      href="tel:+917795601255" 
+                      className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300"
+                    >
+                      +91 7795601255
+                    </a>
                   </div>
                 </li>
                 <li className="flex items-center space-x-3">
@@ -134,4 +148,5 @@ const Footer: React.FC = () => {
       </Dialog>
     </>;
 };
+
 export default Footer;

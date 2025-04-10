@@ -109,15 +109,7 @@ const Index: React.FC = () => {
         {/* Special Offers Section */}
         <SpecialOffers />
         
-        {/* Gallery Section */}
-        <HomeGallery />
-        
-        <FeaturedActivities />
-        
-        {/* Nearby Attractions Section */}
-        <NearbyAttractions />
-        
-        {/* Accommodations preview */}
+        {/* Accommodations preview - MOVED to after Special Offers */}
         <section className="py-20 bg-secondary">
           <div className="container px-4">
             <div className="text-center mb-16 animate-slide-up">
@@ -180,6 +172,14 @@ const Index: React.FC = () => {
             </div>
           </div>
         </section>
+        
+        {/* Gallery Section */}
+        <HomeGallery />
+        
+        <FeaturedActivities />
+        
+        {/* Nearby Attractions Section */}
+        <NearbyAttractions />
         
         {/* Testimonials */}
         <section className="section-padding container">
