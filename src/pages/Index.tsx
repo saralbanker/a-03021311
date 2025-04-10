@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -22,9 +23,9 @@ const Index: React.FC = () => {
         <div className="fixed bottom-32 right-4 z-40 md:bottom-24">
           <a 
             href="tel:+918277385225" 
-            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110 animate-pulse hover:animate-none"
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110"
           >
-            <Phone size={20} className="animate-bounce" />
+            <Phone size={20} />
             <span className="font-medium">Call Now</span>
           </a>
         </div>
