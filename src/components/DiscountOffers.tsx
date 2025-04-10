@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, X } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -74,10 +74,6 @@ const OfferCard: React.FC<OfferProps> = ({
   linkTo,
   animationDelay = 0
 }) => {
-  const [dismissed, setDismissed] = useState(false);
-
-  if (dismissed) return null;
-
   return (
     <motion.div
       className={cn(
@@ -102,13 +98,6 @@ const OfferCard: React.FC<OfferProps> = ({
         >
           <span className={cn("font-bold text-lg", textColor)}>{discount}</span>
         </div>
-        <button 
-          onClick={() => setDismissed(true)} 
-          className="absolute top-2 left-2 rounded-full bg-white/70 p-1 hover:bg-white transition-colors"
-          aria-label="Dismiss offer"
-        >
-          <X size={16} />
-        </button>
       </div>
       <div className={cn("p-6", backgroundColor, textColor)}>
         <h3 className="text-2xl font-display font-semibold mb-2">{title}</h3>

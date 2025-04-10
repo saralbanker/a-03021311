@@ -23,7 +23,7 @@ const Index: React.FC = () => {
         <div className="fixed bottom-32 right-4 z-40 md:bottom-24">
           <a 
             href="tel:+918277385225" 
-            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110"
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
           >
             <Phone size={20} />
             <span className="font-medium">Call Now</span>
