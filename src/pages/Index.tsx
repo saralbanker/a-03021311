@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,7 @@ const Index: React.FC = () => {
         <div className="fixed bottom-32 right-4 z-40 md:bottom-24">
           <a 
             href="tel:+918277385225" 
-            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+            className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110 animate-bounce"
           >
             <Phone size={20} />
             <span className="font-medium">Call Now</span>
@@ -107,13 +106,13 @@ const Index: React.FC = () => {
           </div>
         </section>
         
-        {/* Discount Offers - NEW SECTION */}
+        {/* Discount Offers */}
         <DiscountOffers />
         
         {/* Special Offers Section */}
         <SpecialOffers />
         
-        {/* Accommodations preview - MOVED to after Special Offers */}
+        {/* Accommodations preview */}
         <section className="py-20 bg-secondary">
           <div className="container px-4">
             <div className="text-center mb-16 animate-slide-up">
@@ -180,6 +179,7 @@ const Index: React.FC = () => {
         {/* Gallery Section */}
         <HomeGallery />
         
+        {/* Featured Activities */}
         <FeaturedActivities />
         
         {/* Nearby Attractions Section */}
@@ -309,6 +309,5 @@ const Star: React.FC<{
   return <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-yellow-500 hover:scale-125 transition-transform duration-300">
       <path d="M10 1L12.39 6.55L18.5 7.31L14.25 11.75L15.51 18L10 15.09L4.49 18L5.75 11.75L1.5 7.31L7.61 6.55L10 1Z" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>;
-};
 
 export default Index;
