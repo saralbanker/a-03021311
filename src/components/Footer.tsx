@@ -1,10 +1,8 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Twitter } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
@@ -12,7 +10,6 @@ const Footer: React.FC = () => {
   const {
     toast
   } = useToast();
-  
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim() === '') {
@@ -35,7 +32,6 @@ const Footer: React.FC = () => {
     setEmail("");
     setIsSubscribed(true);
   };
-  
   return <>
       <footer className="bg-accent text-accent-foreground">
         <div className="container mx-auto">
@@ -81,18 +77,10 @@ const Footer: React.FC = () => {
                 <li className="flex items-center space-x-3">
                   <Phone size={20} className="flex-shrink-0" />
                   <div className="flex flex-col">
-                    <a 
-                      href="https://wa.me/918277385225?text=Hi!%20I'm%20interested%20in%20booking%20an%20adventure%20at%20Dandeli."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300"
-                    >
+                    <a href="https://wa.me/918277385225?text=Hi!%20I'm%20interested%20in%20booking%20an%20adventure%20at%20Dandeli." target="_blank" rel="noopener noreferrer" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300">
                       +91 8277385225
                     </a>
-                    <a 
-                      href="tel:+917795601255" 
-                      className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300"
-                    >
+                    <a href="tel:+917795601255" className="text-accent-foreground/80 hover:text-accent-foreground transition-colors duration-300">
                       +91 7795601255
                     </a>
                   </div>
@@ -111,7 +99,7 @@ const Footer: React.FC = () => {
               </p>
               <form className="mt-4 space-y-3" onSubmit={handleSubscribe}>
                 <input type="email" placeholder="Your email address" className="w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-accent-foreground focus:outline-none focus:ring-2 focus:ring-white/30" value={email} onChange={e => setEmail(e.target.value)} />
-                <button type="submit" className="w-full px-4 py-2 rounded-md bg-white text-accent font-medium transition-all duration-300 hover:bg-white/90 hover:scale-105">
+                <button type="submit" className="w-full px-4 py-2 rounded-md text-accent font-medium transition-all duration-300 hover:scale-105 bg-gray-900 hover:bg-gray-800">
                   Subscribe
                 </button>
               </form>
@@ -148,5 +136,4 @@ const Footer: React.FC = () => {
       </Dialog>
     </>;
 };
-
 export default Footer;
