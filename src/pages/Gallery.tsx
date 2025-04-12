@@ -112,7 +112,7 @@ const Gallery: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow pt-16 pb-24">
+      <main className="flex-grow pt-28 md:pt-32 pb-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-slide-up">
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">Our Gallery</h1>
