@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar'; // Changed from named import to default import
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RoomCard from '@/components/RoomCard';
 import { Wifi, Coffee, Users, Tv, MapPin } from 'lucide-react';
@@ -185,13 +184,14 @@ const Accommodation: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      {/* Hero Section - Added mt-20 to increase gap below navbar */}
       <div className="relative h-[40vh] md:h-[50vh] w-full mt-20">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/lovable-uploads/61d7b6e2-720c-42fc-a459-7624b56b81d0.png')" }}>
           <div className="absolute inset-0 bg-black/50" />
         </div>
         <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">Luxury Eco-Accommodations</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 animate-fade-in">
+            Luxury Eco-Accommodations
+          </h1>
           <p className="text-lg md:text-xl max-w-2xl animate-slide-up animation-delay-200">
             Experience the perfect blend of comfort and nature in our sustainable, luxurious lodging options
           </p>
@@ -205,7 +205,6 @@ const Accommodation: React.FC = () => {
             Our accommodations combine luxury with sustainability, offering you a comfortable stay while maintaining our commitment to preserving the environment.
           </p>
           
-          {/* Filter Buttons */}
           <div className="mt-6 flex flex-wrap gap-2">
             <button 
               onClick={() => setFilter('all')}
@@ -250,7 +249,6 @@ const Accommodation: React.FC = () => {
           </div>
         </div>
         
-        {/* Room Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredAccommodations.map((room) => (
             <RoomCard
@@ -278,7 +276,6 @@ const Accommodation: React.FC = () => {
         )}
       </div>
       
-      {/* Amenities Section */}
       <section className="bg-muted/30 py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-display font-semibold mb-10 text-center">Our Amenities</h2>

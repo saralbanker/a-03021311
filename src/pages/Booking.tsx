@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import { Check, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sendEmail, formatBookingEmail, sendSMS, formatBookingSMS } from '@/utils/email-service';
+
 const BookingPage = () => {
   const {
     toast
@@ -16,11 +17,11 @@ const BookingPage = () => {
   const [bookingStep, setBookingStep] = useState<'form' | 'payment' | 'confirmation'>('form');
   const [currentBooking, setCurrentBooking] = useState<any>(null);
   const [transactionId, setTransactionId] = useState<string | null>(null);
+
   const handleBookingSubmit = async (values: any) => {
     setIsSubmitting(true);
     setCurrentBooking(values);
     try {
-      // Move to payment step
       setBookingStep('payment');
     } catch (error) {
       toast({
@@ -33,10 +34,10 @@ const BookingPage = () => {
       setIsSubmitting(false);
     }
   };
+
   const handlePaymentSuccess = async (paymentTransactionId: string) => {
     setTransactionId(paymentTransactionId);
     try {
-      // Send confirmation email to admin (Stanley)
       const emailContent = formatBookingEmail({
         ...currentBooking,
         paymentTransactionId
@@ -47,14 +48,12 @@ const BookingPage = () => {
         body: emailContent
       });
 
-      // Also send email to the customer
       await sendEmail({
         to: currentBooking.email,
         subject: "Your Booking Confirmation - Dandeli Adventures",
         body: emailContent
       });
 
-      // Send SMS to customer
       if (currentBooking.phone) {
         const smsContent = formatBookingSMS({
           ...currentBooking,
@@ -81,19 +80,21 @@ const BookingPage = () => {
       setBookingStep('confirmation');
     }
   };
+
   const handlePaymentCancel = () => {
     setBookingStep('form');
   };
+
   const resetBooking = () => {
     setBookingStep('form');
     setCurrentBooking(null);
     setTransactionId(null);
   };
+
   return <div className="flex flex-col min-h-screen">
       <Navbar />
       
       <main className="flex-grow">
-        {/* Hero Section */}
         <div className="relative h-[40vh] md:h-[50vh] w-full">
           <div className="absolute inset-0 bg-cover bg-center" style={{
           backgroundImage: "url('/lovable-uploads/7fb9e3c6-353a-410e-8478-5741bfe3ab03.png')",
@@ -103,7 +104,7 @@ const BookingPage = () => {
           </div>
           
           <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">Book Your Gateway</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 animate-fade-in">Book Your Gateway</h1>
             <p className="text-lg md:text-xl max-w-2xl animate-slide-up animation-delay-200">
               Reserve your perfect stay in the heart of nature's paradise
             </p>
@@ -112,7 +113,6 @@ const BookingPage = () => {
         
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Booking Form or Payment Form Column */}
             <div className="lg:col-span-2 bg-white rounded-lg shadow-lg p-6 animate-fade-in">
               {bookingStep === 'form' && <>
                   <h2 className="text-2xl font-display font-semibold mb-6">Reservation Details</h2>
@@ -141,9 +141,7 @@ const BookingPage = () => {
                 </div>}
             </div>
             
-            {/* Sidebar Information */}
             <div className="space-y-6">
-              {/* Booking Information */}
               <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in animation-delay-200">
                 <h3 className="text-xl font-display font-semibold mb-4 flex items-center gap-2">
                   <Info size={20} className="text-accent" />
@@ -170,7 +168,6 @@ const BookingPage = () => {
                 </ul>
               </div>
               
-              {/* Contact Information */}
               <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in animation-delay-400">
                 <h3 className="text-xl font-display font-semibold mb-4">Need Assistance?</h3>
                 <Separator className="mb-4" />
@@ -184,7 +181,6 @@ const BookingPage = () => {
                 </div>
               </div>
               
-              {/* Testimonial */}
               <div className="bg-accent/10 rounded-lg p-6 animate-fade-in animation-delay-600">
                 <p className="italic text-sm mb-4">
                   "Our stay at Dandeli Adventures was absolutely magical. The staff went above and beyond to make our vacation unforgettable!"
@@ -195,7 +191,6 @@ const BookingPage = () => {
           </div>
         </div>
         
-        {/* Policies Section */}
         <section className="bg-muted/50 py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-display font-semibold mb-8 text-center">Booking Policies</h2>
@@ -231,7 +226,6 @@ const BookingPage = () => {
           </div>
         </section>
         
-        {/* FAQ Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-display font-semibold mb-8 text-center">Frequently Asked Questions</h2>
@@ -250,7 +244,6 @@ const BookingPage = () => {
     </div>;
 };
 
-// FAQ data
 const faqs = [{
   question: "How do I make a reservation?",
   answer: "You can make a reservation by filling out the booking form on our website, calling our reservation team, or sending an email to bookings@dandeliadventures.com."
@@ -267,4 +260,5 @@ const faqs = [{
   question: "Can I book activities in advance?",
   answer: "Yes, we recommend booking activities in advance, especially during peak season. You can add activities to your reservation through our booking form or contact our team for assistance."
 }];
+
 export default BookingPage;

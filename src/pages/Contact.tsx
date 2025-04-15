@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -18,7 +17,6 @@ const ContactPage = () => {
       duration: 5000,
     });
     
-    // Reset form after submission
     (e.target as HTMLFormElement).reset();
   };
 
@@ -27,7 +25,6 @@ const ContactPage = () => {
       <Navbar />
       
       <main className="flex-grow pt-24">
-        {/* Hero Section */}
         <div className="relative h-[40vh] md:h-[50vh] w-full">
           <div 
             className="absolute inset-0 bg-cover bg-center"
@@ -40,14 +37,13 @@ const ContactPage = () => {
           </div>
           
           <div className="container relative h-full flex flex-col justify-center items-center text-center text-white z-10 px-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 animate-fade-in">Contact Us</h1>
             <p className="text-lg md:text-xl max-w-2xl animate-slide-up animation-delay-200">
               Reach out to us for bookings, inquiries, or to plan your perfect adventure
             </p>
           </div>
         </div>
         
-        {/* Contact Information */}
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -106,7 +102,6 @@ const ContactPage = () => {
                   </div>
                 </div>
                 
-                {/* Map */}
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h3 className="text-xl font-display font-semibold mb-4">Find Us</h3>
                   <div className="aspect-video bg-muted rounded-md overflow-hidden">
@@ -123,7 +118,6 @@ const ContactPage = () => {
                 </div>
               </div>
               
-              {/* Contact Form */}
               <div className="lg:col-span-2">
                 <div className="bg-white p-6 rounded-lg shadow-md">
                   <h2 className="text-2xl font-display font-semibold mb-6">Send Us a Message</h2>
@@ -209,7 +203,6 @@ const ContactPage = () => {
           </div>
         </section>
         
-        {/* FAQ Section */}
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-display font-semibold mb-8 text-center">Frequently Asked Questions</h2>
