@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -108,9 +109,9 @@ const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-black/50 z-10" />
           <animated.div 
             style={{
-              ...(currentSlide === index ? parallaxProps : {}),
               backgroundImage: `url(${slide.imageSrc})`,
-              filter: 'contrast(1.1) brightness(0.9)'
+              filter: 'contrast(1.1) brightness(0.9)',
+              ...(currentSlide === index ? parallaxProps : {})
             }}
             className="absolute inset-0 w-full h-full bg-cover bg-center transform transition-transform duration-10000"
           />
