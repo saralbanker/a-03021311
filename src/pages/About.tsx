@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowRight, Leaf, Shield, Award, Users, Heart, BookOpen, Map, Calendar, Mountain, GitBranch, MapPin } from 'lucide-react';
+import { ArrowRight, Leaf, Shield, Award, Users, Heart, BookOpen, Map, Calendar, Mountain, GitBranch, MapPin, MapPinIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const About: React.FC = () => {
@@ -54,7 +54,6 @@ const About: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow pt-28 md:pt-32">
-        {/* Hero Section */}
         <section className="relative py-20 mb-8">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20 bg-lime-600"></div>
           <div className="relative z-10 container mx-auto text-center px-4">
@@ -67,7 +66,6 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        {/* Mission & Vision */}
         <section className="section-padding container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
@@ -112,7 +110,6 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        {/* Core Values */}
         <section className="py-20 bg-secondary">
           <div className="container px-4">
             <div className="text-center mb-16 animate-slide-up">
@@ -163,7 +160,6 @@ const About: React.FC = () => {
           </div>
         </section>
 
-        {/* Our History Timeline */}
         <section className="section-padding container">
           <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
@@ -175,7 +171,6 @@ const About: React.FC = () => {
           </div>
           
           <div className="relative">
-            {/* Vertical line */}
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-green-200 transform md:translate-x-[-50%] hidden sm:block"></div>
             
             <div className="space-y-12">
@@ -184,12 +179,10 @@ const About: React.FC = () => {
               }}>
                   <div className="sm:w-1/2"></div>
                   
-                  {/* Branch line */}
                   <div className={cn("hidden sm:block absolute top-8 w-8 h-0.5 bg-green-200", 
                     index % 2 === 0 ? "left-[calc(50%-2rem)] md:left-1/2" : "right-[calc(50%-2rem)] md:right-1/2"
                   )}></div>
 
-                  {/* Year marker */}
                   <div className="absolute left-[-20px] md:left-1/2 transform md:translate-x-[-50%] w-12 h-12 rounded-full bg-green-600 text-white flex items-center justify-center font-bold z-10 shadow-lg hover:scale-110 transition-transform duration-300">
                     <GitBranch size={20} />
                   </div>
@@ -212,7 +205,6 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        {/* Team Members */}
         <section className="py-20 bg-secondary">
           <div className="container px-4">
             <div className="text-center mb-16 animate-slide-up">
@@ -241,7 +233,6 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        {/* Location Map */}
         <section className="section-padding container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="animate-slide-up">
@@ -255,10 +246,12 @@ const About: React.FC = () => {
               <div className="space-y-4 mb-8">
                 <div className="flex items-start">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
-                    <MapPin size={20} className="animate-bounce" />
+                    <MapPinIcon size={24} className="animate-bounce" />
                   </div>
                   <div>
-                    <h3 className="font-medium">Our Location</h3>
+                    <h3 className="font-medium flex items-center">
+                      Our Location
+                    </h3>
                     <p className="text-sm text-foreground/70">
                       Dandeli Wildlife Sanctuary, Karnataka, India - 581325
                     </p>
@@ -267,10 +260,12 @@ const About: React.FC = () => {
                 
                 <div className="flex items-start">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
-                    <Map size={20} className="animate-pulse" />
+                    <Map size={24} className="animate-pulse" />
                   </div>
                   <div>
-                    <h3 className="font-medium">Getting Here</h3>
+                    <h3 className="font-medium flex items-center">
+                      Getting Here
+                    </h3>
                     <p className="text-sm text-foreground/70">
                       5 hours drive from Goa, 3 hours from Hubli, and 8 hours from Bangalore.
                     </p>
@@ -293,7 +288,6 @@ const About: React.FC = () => {
           </div>
         </section>
         
-        {/* CTA */}
         <section className="py-20 bg-accent text-accent-foreground relative">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
           <div className="container relative z-10 px-4 text-center">
