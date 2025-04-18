@@ -12,6 +12,10 @@ const ChatBot: React.FC = () => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
+  const toggleChat = () => {
+    setIsOpen(prev => !prev);
+  };
+
   const handleSend = () => {
     if (input.trim() === '') return;
     
