@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { 
@@ -10,6 +10,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { ScrollAnimationWrapper } from '@/hooks/use-scroll-animation';
+import { useSpring, animated } from '@react-spring/web';
+import TiltCard from './TiltCard';
 
 const galleryImages = [
   {
@@ -46,6 +48,36 @@ const galleryImages = [
 
 const HomeGallery: React.FC = () => {
   const [api, setApi] = useState<any>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [scrollRatio, setScrollRatio] = useState(0);
+  
+  // Parallax effect
+  const parallaxHeading = useSpring({
+    transform: `translateY(${scrollRatio * -30}px)`,
+    opacity: 1 - (scrollRatio * 0.5),
+    config: { tension: 170, friction: 26 }
+  });
+  
+  // Element position tracking for parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculate how far the element is through the viewport (0 = just entered, 1 = just left)
+        // This creates a value between 0 and 1 that we can use for animations
+        const percentageThrough = 1 - (rect.top / windowHeight);
+        
+        if (percentageThrough >= 0 && percentageThrough <= 1) {
+          setScrollRatio(percentageThrough);
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   useEffect(() => {
     if (!api) return;
@@ -58,9 +90,9 @@ const HomeGallery: React.FC = () => {
   }, [api]);
 
   return (
-    <section className="section-padding bg-secondary/40">
-      <div className="container">
-        <ScrollAnimationWrapper animation="animate-slide-up opacity-100" className="mb-12">
+    <section ref={sectionRef} className="section-padding bg-secondary/40 overflow-hidden">
+      <div className="container relative">
+        <animated.div style={parallaxHeading} className="mb-12">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
               Explore Our Gallery
@@ -69,24 +101,35 @@ const HomeGallery: React.FC = () => {
               Take a visual journey through the beautiful landscapes and experiences that await you at Dandeli Adventure Resorts
             </p>
           </div>
-        </ScrollAnimationWrapper>
+        </animated.div>
         
         <ScrollAnimationWrapper animation="animate-fade-in opacity-100" delay={200}>
           <div className="relative mx-auto max-w-5xl px-8">
             <Carousel className="w-full" setApi={setApi}>
               <CarouselContent>
-                {galleryImages.map((image) => (
+                {galleryImages.map((image, index) => (
                   <CarouselItem key={image.id} className="md:basis-1/2 lg:basis-1/3">
-                    <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:scale-105 h-64">
-                      <img 
-                        src={image.src} 
-                        alt={image.alt} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <p className="text-white p-4 font-medium">{image.alt}</p>
+                    <TiltCard 
+                      perspective={1200} 
+                      tiltFactor={20} 
+                      scale={1.05} 
+                      className="h-64"
+                    >
+                      <div className="group relative overflow-hidden rounded-xl shadow-md transition-all duration-300 h-full">
+                        <img 
+                          src={image.src} 
+                          alt={image.alt} 
+                          className="w-full h-full object-cover transition-transform duration-500" 
+                          style={{ transform: `translateZ(30px)` }}
+                        />
+                        <div 
+                          className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
+                          style={{ transform: `translateZ(40px)` }}
+                        >
+                          <p className="text-white p-4 font-medium">{image.alt}</p>
+                        </div>
                       </div>
-                    </div>
+                    </TiltCard>
                   </CarouselItem>
                 ))}
               </CarouselContent>
