@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useSpring, animated } from '@react-spring/web';
@@ -61,13 +60,11 @@ const Hero: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
   
-  // Parallax effect for the current slide
   const parallaxProps = useSpring({
     transform: `translateY(${scrollY * 0.3}px)`,
     config: { mass: 1, tension: 120, friction: 14 }
   });
   
-  // Text floating effect
   const textFloatProps = useSpring({
     transform: `translateY(${-scrollY * 0.2}px)`,
     config: { mass: 1, tension: 120, friction: 14 }
@@ -76,7 +73,7 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000); // 5 seconds interval for images
+    }, 5000);
     
     const handleScroll = () => {
       if (heroRef.current) {
@@ -100,7 +97,6 @@ const Hero: React.FC = () => {
   
   return (
     <div ref={heroRef} className="relative h-screen w-full overflow-hidden">
-      {/* Image Slides with Parallax */}
       {slides.map((slide, index) => (
         <div 
           key={slide.id}
@@ -111,12 +107,12 @@ const Hero: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black/50 z-10" />
           <animated.div 
-            style={currentSlide === index ? parallaxProps : {}}
-            className="absolute inset-0 w-full h-full bg-cover bg-center transform transition-transform duration-10000"
-            style={{ 
+            style={{
+              ...(currentSlide === index ? parallaxProps : {}),
               backgroundImage: `url(${slide.imageSrc})`,
               filter: 'contrast(1.1) brightness(0.9)'
             }}
+            className="absolute inset-0 w-full h-full bg-cover bg-center transform transition-transform duration-10000"
           />
           
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-20">
@@ -125,7 +121,7 @@ const Hero: React.FC = () => {
                 className={cn(
                   "text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white max-w-5xl leading-tight mb-4",
                   "transition-all duration-700 transform",
-                  "text-shadow-lg", // Glow effect
+                  "text-shadow-lg",
                   currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 )}
                 style={{textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'}}
@@ -136,7 +132,7 @@ const Hero: React.FC = () => {
                 className={cn(
                   "text-lg md:text-xl text-white max-w-2xl mb-8",
                   "transition-all duration-700 delay-300 transform",
-                  "text-shadow-md", // Glow effect
+                  "text-shadow-md",
                   currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 )}
                 style={{textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'}}
@@ -161,7 +157,6 @@ const Hero: React.FC = () => {
         </div>
       ))}
       
-      {/* Slide indicators */}
       <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
         {slides.map((_, index) => (
           <button
@@ -178,7 +173,6 @@ const Hero: React.FC = () => {
         ))}
       </div>
       
-      {/* Scroll indicator with 3D effect */}
       <animated.div 
         style={useSpring({
           from: { opacity: 0, transform: 'translateY(20px)' },
