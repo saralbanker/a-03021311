@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowRight, Leaf, Shield, Award, Users, Heart, BookOpen, Map, Calendar, Mountain, GitBranch } from 'lucide-react';
+import { ArrowRight, Leaf, Shield, Award, Users, Heart, BookOpen, Map, Calendar, Mountain, GitBranch, MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const About: React.FC = () => {
@@ -145,16 +145,17 @@ const About: React.FC = () => {
                 title: "Excellence",
                 description: "Commitment to exceptional experiences and continuous improvement.",
                 delay: 300
-              }].map((value, index) => <div key={index} className="bg-white p-8 rounded-xl text-center shadow-sm animate-slide-up card-hover" style={{
-                animationDelay: `${value.delay}ms`
-              }}>
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-700 mb-6 transition-transform duration-300 hover:scale-110">
+              }].map((value, index) => <div key={index} 
+                  className="bg-white p-8 rounded-xl text-center shadow-sm animate-slide-up hover:scale-105 hover:shadow-xl transition-all duration-300" 
+                  style={{animationDelay: `${value.delay}ms`}}
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-700 mb-6 transition-transform duration-300 hover:scale-110 hover:bg-green-200">
                     {value.icon}
                   </div>
-                  <h3 className="text-xl font-display font-semibold mb-3">
+                  <h3 className="text-xl font-display font-semibold mb-3 text-gray-900">
                     {value.title}
                   </h3>
-                  <p className="text-foreground/70">
+                  <p className="text-gray-600">
                     {value.description}
                   </p>
                 </div>)}
@@ -254,7 +255,7 @@ const About: React.FC = () => {
               <div className="space-y-4 mb-8">
                 <div className="flex items-start">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
-                    <Map size={20} />
+                    <MapPin size={20} className="animate-bounce" />
                   </div>
                   <div>
                     <h3 className="font-medium">Our Location</h3>
@@ -266,7 +267,7 @@ const About: React.FC = () => {
                 
                 <div className="flex items-start">
                   <div className="mr-4 p-2 bg-secondary rounded-full text-accent">
-                    <Mountain size={20} />
+                    <Map size={20} className="animate-pulse" />
                   </div>
                   <div>
                     <h3 className="font-medium">Getting Here</h3>

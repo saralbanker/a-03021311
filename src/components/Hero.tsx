@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -94,8 +93,9 @@ const Hero: React.FC = () => {
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-20">
             <h1 
               className={cn(
-                "text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white max-w-5xl leading-tight mb-4 text-glow",
+                "text-4xl md:text-5xl lg:text-7xl font-display font-bold text-white max-w-5xl leading-tight mb-4",
                 "transition-all duration-700 transform",
+                "drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]",
                 currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               )}
             >
@@ -105,6 +105,7 @@ const Hero: React.FC = () => {
               className={cn(
                 "text-lg md:text-xl text-white/90 max-w-2xl mb-8",
                 "transition-all duration-700 delay-300 transform",
+                "drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]",
                 currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               )}
             >
