@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -124,7 +125,10 @@ const Hero: React.FC = () => {
                   "text-shadow-lg",
                   currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 )}
-                style={{textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'}}
+                style={{
+                  color: '#FFFFFF', // Pure white color
+                  textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'
+                }}
               >
                 {slide.title}
               </h1>
@@ -135,7 +139,10 @@ const Hero: React.FC = () => {
                   "text-shadow-md",
                   currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 )}
-                style={{textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'}}
+                style={{
+                  color: '#FFFFFF', // Pure white color
+                  textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'
+                }}
               >
                 {slide.subtitle}
               </p>
