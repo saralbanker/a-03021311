@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -111,9 +110,9 @@ const Hero: React.FC = () => {
             style={{
               backgroundImage: `url(${slide.imageSrc})`,
               filter: 'contrast(1.1) brightness(0.9)',
-              ...(currentSlide === index ? parallaxProps : {})
+              transform: currentSlide === index ? parallaxProps.transform : 'none'
             }}
-            className="absolute inset-0 w-full h-full bg-cover bg-center transform transition-transform duration-10000"
+            className="absolute inset-0 w-full h-full bg-cover bg-center"
           />
           
           <div className="relative h-full flex flex-col items-center justify-center text-center px-4 z-20">

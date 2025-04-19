@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -31,7 +30,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useOtp } from "@/hooks/use-otp";
 import { OtpInput } from "./OtpInput";
 
-// Define the booking interface that includes bookingReference
 interface BookingDetails extends z.infer<typeof FormSchema> {
   bookingReference?: string;
 }
@@ -74,7 +72,6 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
   const [formValues, setFormValues] = React.useState<z.infer<typeof FormSchema> | null>(null);
   const [countdownInterval, setCountdownInterval] = React.useState<NodeJS.Timeout | null>(null);
   const [otpValue, setOtpValue] = React.useState("");
-  // Add state for controlling calendar popovers
   const [checkInOpen, setCheckInOpen] = React.useState(false);
   const [checkOutOpen, setCheckOutOpen] = React.useState(false);
 
@@ -119,7 +116,6 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
     setIsSubmitting(true);
     
     try {
-      // Initiate OTP verification
       await sendOtp(values.phone);
       setShowOtpDialog(true);
     } catch (error) {
@@ -146,31 +142,16 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
       const isValid = await verifyOtp(otpValue);
       
       if (isValid) {
-        // Close OTP dialog
-        setShowOtpDialog(false);
-        
-        // Generate a simple booking reference
-        const bookingReference = `BK${Date.now().toString().slice(-6)}`;
-        
-        // Store booking details for confirmation dialog
-        setBookingDetails({ ...formValues, bookingReference });
-        
-        // Send confirmation emails and SMS
+        setBookingDetails({ ...formValues, bookingReference: `BK${Date.now().toString().slice(-6)}` });
         await sendBookingConfirmations({
           ...formValues,
-          bookingReference,
-        }, bookingReference);
-        
-        // Show confirmation dialog
+          bookingReference: `BK${Date.now().toString().slice(-6)}`,
+        }, `BK${Date.now().toString().slice(-6)}`);
         setShowConfirmation(true);
-        
-        // Show success toast
         toast({
           title: "Booking Successful!",
           description: "Check your email and phone for booking details.",
         });
-        
-        // Reset the form
         form.reset();
       } else {
         toast({
@@ -331,7 +312,6 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                         selected={field.value}
                         onSelect={(date) => {
                           field.onChange(date);
-                          // Close the calendar popover after selection
                           setCheckInOpen(false);
                         }}
                         disabled={(date) =>
@@ -378,7 +358,6 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
                         selected={field.value}
                         onSelect={(date) => {
                           field.onChange(date);
-                          // Close the calendar popover after selection
                           setCheckOutOpen(false);
                         }}
                         disabled={(date) =>
@@ -408,7 +387,6 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
         </form>
       </Form>
 
-      {/* OTP Verification Dialog */}
       <Dialog open={showOtpDialog} onOpenChange={(open) => !isSubmitting && setShowOtpDialog(open)}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader className="space-y-3">
@@ -467,7 +445,6 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
         </DialogContent>
       </Dialog>
 
-      {/* Booking Confirmation Dialog */}
       <Dialog open={showConfirmation} onOpenChange={setShowConfirmation}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader className="space-y-3">
