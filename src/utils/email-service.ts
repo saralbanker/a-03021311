@@ -1,4 +1,3 @@
-
 /**
  * Email Service Utility
  * This module contains functions to send emails from the application
@@ -22,13 +21,13 @@ interface SMSData {
  */
 export const sendEmail = async (data: EmailData): Promise<boolean> => {
   try {
-    // In this demo, we'll log the email content to console
+    // For demo purposes, we'll log the email content
     console.log('Sending email to:', data.to);
     console.log('Subject:', data.subject);
     console.log('Body:', data.body);
     
-    // In a real implementation, you would connect to an email API service like SendGrid, Mailgun, etc.
-    // Example (commented out as we don't have actual credentials):
+    // In a real implementation, you would send to dandeliadventure.info@gmail.com
+    // Example with updated email:
     /*
     const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
@@ -38,19 +37,18 @@ export const sendEmail = async (data: EmailData): Promise<boolean> => {
       },
       body: JSON.stringify({
         personalizations: [{
-          to: [{ email: data.to }]
+          to: [
+            { email: 'dandeliadventure.info@gmail.com' },
+            { email: data.to }
+          ]
         }],
         from: { email: 'bookings@dandeliadventures.com', name: 'Dandeli Adventures' },
         subject: data.subject,
         content: [{ type: 'text/html', value: data.body }]
       })
     });
-    
-    return response.ok;
     */
     
-    // For demo purposes, always return true
-    // In production, you would check the response from the email service
     return true;
   } catch (error) {
     console.error('Error sending email:', error);

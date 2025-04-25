@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -11,10 +10,12 @@ import HomeGallery from '@/components/HomeGallery';
 import NearbyAttractions from '@/components/NearbyAttractions';
 import DiscountOffers from '@/components/DiscountOffers';
 import { ArrowRight, Leaf, Shield, Award, Phone } from 'lucide-react';
+import { AdPopup } from '@/components/AdPopup';
 
 const Index: React.FC = () => {
   return <div className="min-h-screen flex flex-col">
       <Navbar />
+      <AdPopup />
       
       <main className="flex-grow">
         <Hero />
