@@ -1,5 +1,5 @@
-
-import React, { useState } from "react";
+import { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -15,7 +15,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon, Check, Loader2 } from "lucide-react";
-import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
@@ -352,4 +351,3 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
     </Form>
   );
 }
-
