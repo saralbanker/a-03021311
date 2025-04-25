@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
-import { Calendar, Users, Tag, Clock } from 'lucide-react';
 
 interface OfferProps {
   title: string;
@@ -82,16 +80,6 @@ const SpecialOffers: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Offer 
-            title="Monsoon Magic"
-            description="Experience the thrill of rafting during monsoon with our special package."
-            promoCode="MONSOON20"
-            discount="20%"
-            validUntil="Sep 30, 2023"
-            imageUrl="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png"
-            color="#3949ab"
-          />
-          
-          <Offer 
             title="Early Bird Special"
             description="Book at least 30 days in advance and get an exclusive discount."
             promoCode="EARLYBIRD10"
@@ -109,6 +97,16 @@ const SpecialOffers: React.FC = () => {
             validUntil="Jun 30, 2023"
             imageUrl="/lovable-uploads/eab0dff8-9904-4338-ae38-67e97ade71cf.png"
             color="#ef6c00"
+          />
+          
+          <Offer 
+            title="Monsoon Magic"
+            description="Experience the thrill of rafting during monsoon with our special package."
+            promoCode="MONSOON20"
+            discount="20%"
+            validUntil="Sep 30, 2023"
+            imageUrl="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png"
+            color="#3949ab"
           />
         </div>
       </div>

@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 export function AdPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,11 +87,9 @@ export function AdPopup() {
               >
                 Book Now on WhatsApp
               </Button>
-              <Link to="/booking#day-package">
-                <Button variant="outline" className="w-full">
-                  Know More
-                </Button>
-              </Link>
+              <Button variant="outline" className="w-full" onClick={() => setIsOpen(false)}>
+                Maybe Later
+              </Button>
             </motion.div>
           </div>
         </motion.div>
