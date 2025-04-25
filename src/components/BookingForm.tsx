@@ -1,3 +1,5 @@
+
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -53,9 +55,9 @@ interface BookingFormProps {
 
 export function BookingForm({ onSubmit }: BookingFormProps) {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [checkInOpen, setCheckInOpen] = React.useState(false);
-  const [checkOutOpen, setCheckOutOpen] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checkInOpen, setCheckInOpen] = useState(false);
+  const [checkOutOpen, setCheckOutOpen] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -350,3 +352,4 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
     </Form>
   );
 }
+
