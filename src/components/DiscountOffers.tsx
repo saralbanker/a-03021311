@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -17,9 +16,24 @@ interface OfferProps {
   textColor: string;
   linkTo: string;
   animationDelay?: number;
+  featured?: boolean;
 }
 
 const offers: OfferProps[] = [
+  {
+    id: 'day-package',
+    title: 'Day Package Special',
+    description: 'Full day of adventure activities including rafting, kayaking, and nature walks',
+    discount: 'SPECIAL',
+    priceFrom: '₹1,499',
+    priceTo: '₹799',
+    image: '/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png',
+    backgroundColor: 'bg-green-600',
+    textColor: 'text-white',
+    linkTo: '/booking?package=day',
+    animationDelay: 0,
+    featured: true
+  },
   {
     id: 'riverside-retreat',
     title: 'Riverside Retreat',
@@ -72,19 +86,21 @@ const OfferCard: React.FC<OfferProps> = ({
   backgroundColor,
   textColor,
   linkTo,
-  animationDelay = 0
+  animationDelay = 0,
+  featured
 }) => {
   return (
     <motion.div
       className={cn(
         "rounded-xl overflow-hidden shadow-lg hover:shadow-xl group relative",
+        featured && "md:col-span-2 md:row-span-2"
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: animationDelay / 1000 }}
       viewport={{ once: true }}
     >
-      <div className="relative h-64">
+      <div className={cn("relative", featured ? "h-96" : "h-64")}>
         <img 
           src={image} 
           alt={title} 
@@ -98,6 +114,11 @@ const OfferCard: React.FC<OfferProps> = ({
         >
           <span className={cn("font-bold text-lg", textColor)}>{discount}</span>
         </div>
+        {featured && (
+          <div className="absolute top-0 left-0 m-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+            Featured Package
+          </div>
+        )}
       </div>
       <div className={cn("p-6", backgroundColor, textColor)}>
         <h3 className="text-2xl font-display font-semibold mb-2">{title}</h3>
@@ -124,8 +145,7 @@ const OfferCard: React.FC<OfferProps> = ({
 
 const DiscountOffers: React.FC = () => {
   return (
-    <section className="py-16 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden">
-      {/* Background animation */}
+    <section className="py-16 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden" id="day-package">
       <div className="absolute inset-0 z-0 opacity-20">
         <div className="absolute top-0 left-0 w-40 h-40 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
         <div className="absolute top-20 right-20 w-40 h-40 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>

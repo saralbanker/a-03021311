@@ -8,12 +8,13 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export function AdPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Show popup after a short delay when component mounts
     const timer = setTimeout(() => {
       setIsOpen(true);
     }, 2000);
@@ -28,36 +29,73 @@ export function AdPopup() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-center">
-            Special Offer! 🎉
-          </DialogTitle>
-        </DialogHeader>
-        <div className="p-6 space-y-4">
-          <div className="text-center space-y-2">
-            <h3 className="text-2xl font-bold text-green-600">
-              Day Package at Just ₹799!
-            </h3>
-            <p className="text-muted-foreground">
-              Experience the best of Dandeli at an unbeatable price
-            </p>
-          </div>
-          <div className="flex flex-col gap-3">
-            <Button 
-              onClick={handleWhatsAppClick}
-              className="bg-green-600 hover:bg-green-700"
-            >
-              Book Now on WhatsApp
-            </Button>
-            <Button 
-              variant="outline" 
+      <DialogContent className="sm:max-w-md p-0 overflow-hidden">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="relative">
+            <img 
+              src="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png" 
+              alt="Day Package"
+              className="w-full h-48 object-cover"
+            />
+            <button 
               onClick={() => setIsOpen(false)}
+              className="absolute top-2 right-2 rounded-full bg-black/50 p-1 text-white hover:bg-black/70 transition-colors"
             >
-              Maybe Later
-            </Button>
+              <X className="h-4 w-4" />
+            </button>
           </div>
-        </div>
+
+          <div className="p-6 space-y-4">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-semibold text-center">
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  Special Offer! 🎉
+                </motion.div>
+              </DialogTitle>
+            </DialogHeader>
+
+            <motion.div 
+              className="text-center space-y-2"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              <h3 className="text-2xl font-bold text-green-600">
+                Day Package at Just ₹799!
+              </h3>
+              <p className="text-muted-foreground">
+                Experience the best of Dandeli at an unbeatable price
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="flex flex-col gap-3"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Button 
+                onClick={handleWhatsAppClick}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                Book Now on WhatsApp
+              </Button>
+              <Link to="/booking#day-package">
+                <Button variant="outline" className="w-full">
+                  Know More
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </motion.div>
       </DialogContent>
     </Dialog>
   );

@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
 import { sendBookingConfirmations } from "@/utils/email-service";
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -55,6 +56,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [checkInOpen, setCheckInOpen] = React.useState(false);
   const [checkOutOpen, setCheckOutOpen] = React.useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -78,10 +80,7 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
         bookingReference,
       }, bookingReference);
 
-      toast({
-        title: "Booking Successful!",
-        description: "Check your email for booking details.",
-      });
+      setShowConfirmation(true);
       form.reset();
       onSubmit(values);
     } catch (error) {
@@ -95,6 +94,56 @@ export function BookingForm({ onSubmit }: BookingFormProps) {
       setIsSubmitting(false);
     }
   };
+
+  if (showConfirmation) {
+    return (
+      <AnimatePresence>
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          className="text-center p-8 bg-white rounded-lg shadow-lg"
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+            className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <Check className="h-10 w-10 text-green-600" />
+          </motion.div>
+          
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-2xl font-bold mb-4"
+          >
+            Booking Confirmed!
+          </motion.h2>
+          
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-gray-600 mb-6"
+          >
+            Thank you for booking with us. We'll send you a confirmation email shortly.
+          </motion.p>
+          
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Button onClick={() => setShowConfirmation(false)}>
+              Make Another Booking
+            </Button>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
 
   return (
     <Form {...form}>
