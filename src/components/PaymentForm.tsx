@@ -38,9 +38,9 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
   
   // Calculate booking amount
   const baseAmount = calculateBookingPrice(
-    bookingDetails.roomType, 
-    parseInt(bookingDetails.adults),
-    parseInt(bookingDetails.children)
+    bookingDetails?.roomType || 'standard', 
+    parseInt(bookingDetails?.adults || '1'),
+    parseInt(bookingDetails?.children || '0')
   );
   
   // Apply promo code if present
@@ -128,20 +128,20 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
       const paymentDetails: any = {
         amount: finalAmount,
         currency: 'INR',
-        paymentMethod: bookingDetails.paymentMethod,
-        description: `Booking for ${bookingDetails.roomType} room`,
+        paymentMethod: bookingDetails?.paymentMethod || 'creditCard',
+        description: `Booking for ${bookingDetails?.roomType || 'standard'} room`,
         metadata: {
-          guestName: bookingDetails.name,
-          checkInDate: bookingDetails.date.toISOString(),
-          roomType: bookingDetails.roomType,
+          guestName: bookingDetails?.name || 'Guest',
+          checkInDate: bookingDetails?.date ? bookingDetails.date.toISOString() : new Date().toISOString(),
+          roomType: bookingDetails?.roomType || 'standard',
           promoApplied: promoApplied ? promoCode : null
         }
       };
       
       // Add method-specific details
-      if (bookingDetails.paymentMethod === 'creditCard') {
+      if (bookingDetails?.paymentMethod === 'creditCard') {
         paymentDetails.cardDetails = cardDetails;
-      } else if (bookingDetails.paymentMethod === 'upi') {
+      } else if (bookingDetails?.paymentMethod === 'upi') {
         paymentDetails.upiId = upiId;
       }
       
