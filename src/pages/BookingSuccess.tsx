@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,11 +9,16 @@ import Footer from '@/components/Footer';
 
 const BookingSuccess = () => {
   const navigate = useNavigate();
+  
+  // Scroll to top when component mounts to ensure popup is visible
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow flex items-center justify-center bg-gray-50 p-4 pt-24">
+      <main className="flex-grow flex items-center justify-center bg-gray-50 p-4 pt-24 pb-24">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
