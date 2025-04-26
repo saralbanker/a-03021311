@@ -13,12 +13,12 @@ const BookingSuccess = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow flex items-center justify-center bg-gray-50 p-4">
+      <main className="flex-grow flex items-center justify-center bg-gray-50 p-4 pt-24">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-auto text-center"
+          className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full mx-auto text-center relative z-10"
         >
           <motion.div
             initial={{ scale: 0 }}
