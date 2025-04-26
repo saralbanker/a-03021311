@@ -10,6 +10,7 @@ import Accommodation from "./pages/Accommodation";
 import About from "./pages/About";
 import Activities from "./pages/Activities";
 import Booking from "./pages/Booking";
+import BookingSuccess from "./pages/BookingSuccess";  // Add this import
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import ChatBot from "./components/ChatBot";
