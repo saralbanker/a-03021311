@@ -9,9 +9,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function AdPopup() {
   const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,7 +30,7 @@ export function AdPopup() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden">
+      <DialogContent className={`sm:max-w-md p-0 overflow-hidden ${isMobile ? 'w-[90%] max-h-[80vh]' : ''}`}>
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -38,7 +40,7 @@ export function AdPopup() {
             <img 
               src="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png" 
               alt="Day Package"
-              className="w-full h-48 object-cover"
+              className={`w-full object-cover ${isMobile ? 'h-36' : 'h-48'}`}
             />
             <button 
               onClick={() => setIsOpen(false)}

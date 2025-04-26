@@ -227,19 +227,21 @@ export const sendBookingConfirmations = async (bookingData: any, transactionId: 
     // Format email content
     const emailContent = formatBookingEmail(bookingWithTransaction);
     
-    // Send to admin (Stanley)
+    // Send to admin (Dandeli Adventures)
     await sendEmail({
-      to: "stanleyyesu@gmail.com",
+      to: "dandeliadventure.info@gmail.com",
       subject: `New Booking: ${bookingData.name} - ${transactionId}`,
       body: emailContent
     });
     
     // Send to customer
-    await sendEmail({
-      to: bookingData.email,
-      subject: "Your Booking Confirmation - Dandeli Adventures",
-      body: emailContent
-    });
+    if (bookingData.email) {
+      await sendEmail({
+        to: bookingData.email,
+        subject: "Your Booking Confirmation - Dandeli Adventures",
+        body: emailContent
+      });
+    }
     
     // Send SMS to customer
     if (bookingData.phone) {
