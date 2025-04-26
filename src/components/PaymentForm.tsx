@@ -132,7 +132,7 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
         description: `Booking for ${bookingDetails?.roomType || 'standard'} room`,
         metadata: {
           guestName: bookingDetails?.name || 'Guest',
-          checkInDate: bookingDetails?.date ? bookingDetails.date.toISOString() : new Date().toISOString(),
+          checkInDate: bookingDetails?.checkInDate ? bookingDetails.checkInDate.toISOString() : new Date().toISOString(),
           roomType: bookingDetails?.roomType || 'standard',
           promoApplied: promoApplied ? promoCode : null
         }
@@ -187,6 +187,17 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
     );
   }
 
+  // Safely format date with null check
+  const getFormattedDate = (date: Date | undefined | null) => {
+    if (!date) return 'Not specified';
+    try {
+      return date.toLocaleDateString();
+    } catch (error) {
+      console.error('Date formatting error:', error);
+      return 'Invalid date';
+    }
+  };
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -204,11 +215,11 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
           </div>
           <div className="flex justify-between">
             <span>Room Type:</span>
-            <span className="font-medium capitalize">{bookingDetails.roomType} Room</span>
+            <span className="font-medium capitalize">{bookingDetails?.roomType || 'Standard'} Room</span>
           </div>
           <div className="flex justify-between">
             <span>Check-in Date:</span>
-            <span className="font-medium">{bookingDetails.date.toLocaleDateString()}</span>
+            <span className="font-medium">{getFormattedDate(bookingDetails?.checkInDate)}</span>
           </div>
           
           {/* Promo code section */}
@@ -264,7 +275,7 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
         </div>
         
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          {bookingDetails.paymentMethod === 'creditCard' && (
+          {bookingDetails?.paymentMethod === 'creditCard' && (
             <>
               <div className="space-y-2">
                 <Label htmlFor="cardNumber">Card Number</Label>
@@ -324,7 +335,7 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
             </>
           )}
           
-          {bookingDetails.paymentMethod === 'upi' && (
+          {bookingDetails?.paymentMethod === 'upi' && (
             <div className="space-y-2">
               <Label htmlFor="upiId">UPI ID</Label>
               <Input
@@ -341,7 +352,7 @@ export function PaymentForm({ bookingDetails, onPaymentSuccess, onCancel }: Paym
             </div>
           )}
           
-          {bookingDetails.paymentMethod === 'bankTransfer' && (
+          {bookingDetails?.paymentMethod === 'bankTransfer' && (
             <div className="border rounded-md p-4 bg-muted/30">
               <h3 className="font-medium mb-2">Bank Transfer Details</h3>
               <p className="text-sm mb-4">
