@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -116,12 +115,15 @@ const Activities: React.FC = () => {
     }
   ];
   
+  // Updated categories as requested
   const categories = [
-    { id: "all", label: "All Activities" },
-    { id: "water", label: "Water Adventures" },
-    { id: "land", label: "Land Expeditions" },
-    { id: "air", label: "Aerial Adventures" },
-    { id: "nature", label: "Nature Experiences" }
+    { id: "all", label: "ALL" },
+    { id: "steam", label: "Industrial Steam Boiler" },
+    { id: "water", label: "Hot Water Generators" },
+    { id: "bath", label: "Bath Heater" },
+    { id: "oil", label: "Indirect Oil Heater" },
+    { id: "thermic", label: "Industrial Thermic Fluid Heater" },
+    { id: "textile", label: "Steam Boiler for Textile Industry" }
   ];
   
   const difficulties = [
@@ -163,7 +165,7 @@ const Activities: React.FC = () => {
           <div className="absolute inset-0">
             <img 
               src="/lovable-uploads/1d3255ca-7296-4e20-b1fb-416cfb82fa82.png" 
-              alt="Adventure activities" 
+              alt="Industrial boilers" 
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/50" />
@@ -171,29 +173,23 @@ const Activities: React.FC = () => {
           
           <div className="relative container h-full flex flex-col justify-center items-center text-center text-white p-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 animate-slide-down">
-              Adventure Awaits
+              Most Ordered Products
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mb-8 animate-fade-in animation-delay-200">
-              Discover thrilling experiences in the heart of Western Ghats' wilderness
+              Discover our best selling industrial boilers and heating solutions
             </p>
-            <Link 
-              to="/booking" 
-              className="bg-white text-accent px-8 py-3 rounded-md font-medium text-lg transition-all duration-300 hover:bg-white/90 hover:shadow-lg animate-slide-up animation-delay-400"
-            >
-              Book an Adventure
-            </Link>
           </div>
         </section>
         
-        {/* Activities Section */}
+        {/* Products Section */}
         <section className="py-16 px-4 container">
           <div className="flex flex-col md:flex-row justify-between items-start mb-10">
             <div className="mb-6 md:mb-0">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                Explore Our Activities
+                Our Product Range
               </h2>
               <p className="text-foreground/70 max-w-xl">
-                From thrilling water sports to peaceful nature walks, find the perfect adventure for every type of explorer.
+                From industrial steam boilers to bath heaters, find the perfect heating solution for your business needs.
               </p>
             </div>
             
@@ -266,18 +262,18 @@ const Activities: React.FC = () => {
               ))
             ) : (
               <div className="text-center py-16">
-                <h3 className="text-xl font-medium mb-2">No activities found</h3>
+                <h3 className="text-xl font-medium mb-2">No products found</h3>
                 <p className="text-foreground/70">Try adjusting your filters</p>
               </div>
             )}
           </div>
         </section>
         
-        {/* Adventure Guidelines Section */}
+        {/* Product Guidelines Section */}
         <section className="bg-secondary py-16 px-4">
           <div className="container">
             <h2 className="text-3xl font-display font-bold mb-8 text-center">
-              Adventure Guidelines
+              Product Guidelines
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -335,16 +331,16 @@ const Activities: React.FC = () => {
           <div className="container relative z-10 px-4 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
               <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-                Ready for Your Next Adventure?
+                Ready to Choose Your Boiler?
               </h2>
               <p className="text-xl mb-8 text-accent-foreground/90">
-                Book your activity now and create memories that will last a lifetime.
+                Contact us today to discuss your industrial heating needs.
               </p>
               <Link 
-                to="/booking" 
+                to="/contact" 
                 className="inline-block px-8 py-4 bg-white text-accent font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px]"
               >
-                Book Your Adventure
+                Contact Us
               </Link>
             </div>
           </div>

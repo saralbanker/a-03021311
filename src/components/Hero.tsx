@@ -14,45 +14,33 @@ type SlideData = {
 const slides: SlideData[] = [
   {
     id: 1,
-    imageSrc: '/lovable-uploads/44997248-2a7d-4c4b-8656-13d704d35b37.png',
-    title: 'Riverside Cottages',
-    subtitle: 'Cozy accommodations with stunning views of the Kali River'
+    imageSrc: 'https://shorturl.at/Q2a17',
+    title: 'Industrial Steam Boilers',
+    subtitle: 'High-efficiency industrial steam boilers for all your manufacturing needs'
   },
   {
     id: 2,
-    imageSrc: '/lovable-uploads/cc6dd7ad-c5fb-4fef-9dd0-f8dca5d5a10d.png',
-    title: 'Western Ghats Panorama',
-    subtitle: 'Experience breathtaking views of the pristine Western Ghats and Kali River'
+    imageSrc: 'https://api.deepai.org/job-view-file/a7ac6d1a-08a1-489a-99f6-185d077a109c/outputs/output.jpg',
+    title: 'Hot Water Generators',
+    subtitle: 'Reliable hot water generators for residential and commercial applications'
   },
   {
     id: 3,
     imageSrc: '/lovable-uploads/968e9c7f-6872-4c43-ad59-1dd92c92d29a.png',
-    title: 'Jungle Trekking Adventures',
-    subtitle: 'Explore the dense forests and hills of Dandeli on guided trek experiences'
+    title: 'Boiler Systems',
+    subtitle: 'Complete boiler systems with state-of-the-art technology and safety features'
   },
   {
     id: 4,
     imageSrc: '/lovable-uploads/ac22646b-1aa2-41fc-8799-5ece999eabac.png', 
-    title: 'Marsh Crocodiles',
-    subtitle: 'Encounter these magnificent reptiles in their natural habitat'
+    title: 'Thermic Fluid Heaters',
+    subtitle: 'Efficient thermic fluid heating solutions for industrial processes'
   },
   {
     id: 5,
     imageSrc: '/lovable-uploads/b4c6f3a5-3500-43ad-97e1-e69041317e64.png', 
-    title: 'Thrilling River Rafting',
-    subtitle: 'Navigate through exciting rapids on the Kali River with our expert guides'
-  },
-  {
-    id: 6,
-    imageSrc: '/lovable-uploads/d6a0abf8-3fb5-4717-9fff-6a3a99f2becf.png',
-    title: 'Mountain Trekking',
-    subtitle: 'Breathtaking trails through pristine mountains and valleys'
-  },
-  {
-    id: 7,
-    imageSrc: '/lovable-uploads/45ac4715-903c-4b9d-aaf3-c8fbe391b9a7.png',
-    title: 'Exciting Kali River Rafting',
-    subtitle: 'Experience the thrill of white water rafting with expert guides on the Kali River'
+    title: 'Bath Heaters',
+    subtitle: 'Premium bath heaters with advanced temperature control'
   }
 ];
 
@@ -126,7 +114,7 @@ const Hero: React.FC = () => {
                   currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 )}
                 style={{
-                  color: '#FFFFFF', // Pure white color
+                  color: '#FFFFFF',
                   textShadow: '0 0 15px rgba(255, 255, 255, 0.7)'
                 }}
               >
@@ -140,7 +128,7 @@ const Hero: React.FC = () => {
                   currentSlide === index ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 )}
                 style={{
-                  color: '#FFFFFF', // Pure white color
+                  color: '#FFFFFF',
                   textShadow: '0 0 10px rgba(255, 255, 255, 0.5)'
                 }}
               >
@@ -156,7 +144,7 @@ const Hero: React.FC = () => {
                   to="/booking" 
                   className="btn-primary text-lg hover:shadow-glow transition-all duration-300 transform hover:scale-110"
                 >
-                  Book Your Adventure
+                  Book Your Boiler
                 </Link>
               </div>
             </animated.div>

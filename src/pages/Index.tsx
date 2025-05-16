@@ -10,12 +10,11 @@ import HomeGallery from '@/components/HomeGallery';
 import NearbyAttractions from '@/components/NearbyAttractions';
 import DiscountOffers from '@/components/DiscountOffers';
 import { ArrowRight, Leaf, Shield, Award, Phone } from 'lucide-react';
-import { AdPopup } from '@/components/AdPopup';
 
 const Index: React.FC = () => {
-  return <div className="min-h-screen flex flex-col">
+  return (
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <AdPopup />
       
       <main className="flex-grow">
         <Hero />
@@ -31,31 +30,24 @@ const Index: React.FC = () => {
           </a>
         </div>
         
-        {/* Special Promotion Banner */}
-        <div className="bg-green-700 text-white py-3 px-4 text-center shadow-md">
-          <div className="container mx-auto">
-            <p className="text-xl font-bold">Book now just at ₹1499! <Link to="/booking" className="underline ml-2 hover:text-yellow-200 transition-colors">Limited time offer</Link></p>
-          </div>
-        </div>
-        
         {/* About section */}
         <section className="section-padding container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-up">
               <div className="relative">
-                <img src="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png" alt="Dandeli Wildlife" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
+                <img src="/lovable-uploads/f97f4d91-56e4-4e2f-bb73-93760030da48.png" alt="Industrial Boiler" className="w-full h-[500px] object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300" />
                 <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl hidden md:block hover:shadow-2xl transform hover:scale-110 transition-all duration-300">
-                  <img src="/lovable-uploads/8fe5892b-b9ce-440c-8423-786ee90235e7.png" alt="Rafting in Dandeli" className="w-40 h-32 object-cover rounded-md" />
+                  <img src="/lovable-uploads/8fe5892b-b9ce-440c-8423-786ee90235e7.png" alt="Boiler Component" className="w-40 h-32 object-cover rounded-md" />
                 </div>
               </div>
             </div>
             
             <div className="animate-slide-up animation-delay-200">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                Experience Nature's Paradise in Dandeli
+                Premium Industrial Boilers and Heating Solutions
               </h2>
               <p className="text-foreground/70 mb-6">
-                Nestled in the heart of Western Ghats, Dandeli Adventures offers an immersive experience in one of India's most biodiverse regions. Our eco-friendly resort combines luxury with wilderness, providing the perfect backdrop for your nature retreat.
+                HME Boilers offers state-of-the-art industrial heating solutions for businesses of all sizes. Our products combine efficiency, reliability, and advanced technology to meet the demanding needs of modern industries.
               </p>
               
               <div className="space-y-4 mb-8">
@@ -64,9 +56,9 @@ const Index: React.FC = () => {
                     <Leaf size={20} className="group-hover:scale-125 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Eco-Friendly Resort</h3>
+                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Energy Efficient</h3>
                     <p className="text-sm text-foreground/70">
-                      Committed to sustainable tourism practices with minimal environmental impact.
+                      Our boilers are designed for optimal fuel efficiency and reduced environmental impact.
                     </p>
                   </div>
                 </div>
@@ -76,9 +68,9 @@ const Index: React.FC = () => {
                     <Shield size={20} className="group-hover:scale-125 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Safety First Adventures</h3>
+                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Safety First Design</h3>
                     <p className="text-sm text-foreground/70">
-                      All activities conducted by certified professionals with top-tier safety equipment.
+                      All products feature multiple safety systems and are certified to international standards.
                     </p>
                   </div>
                 </div>
@@ -88,9 +80,9 @@ const Index: React.FC = () => {
                     <Award size={20} className="group-hover:scale-125 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Award-Winning Hospitality</h3>
+                    <h3 className="font-medium group-hover:text-green-700 transition-colors duration-300">Award-Winning Service</h3>
                     <p className="text-sm text-foreground/70">
-                      Recognized for exceptional service and authentic local experiences.
+                      Recognized for exceptional technical support and maintenance service.
                     </p>
                   </div>
                 </div>
@@ -101,7 +93,7 @@ const Index: React.FC = () => {
                   Learn more about us <ArrowRight size={16} className="ml-1 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
                 <Link to="/contact" className="inline-flex items-center text-green-700 hover:underline group">
-                  Contact us for directions <ArrowRight size={16} className="ml-1 group-hover:translate-x-2 transition-transform duration-300" />
+                  Contact us for inquiries <ArrowRight size={16} className="ml-1 group-hover:translate-x-2 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
@@ -114,15 +106,15 @@ const Index: React.FC = () => {
         {/* Special Offers Section */}
         <SpecialOffers />
         
-        {/* Accommodations preview */}
+        {/* Products preview */}
         <section className="py-20 bg-secondary">
           <div className="container px-4">
             <div className="text-center mb-16 animate-slide-up">
               <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                Stunning Accommodations
+                Our Premium Products
               </h2>
               <p className="text-foreground/70 max-w-2xl mx-auto">
-                Relax in comfort after your adventure in our thoughtfully designed spaces that blend with nature.
+                Explore our range of high-quality boilers and heating solutions designed for efficiency and reliability.
               </p>
             </div>
             
@@ -172,7 +164,7 @@ const Index: React.FC = () => {
               animationDelay: '600ms'
             }}>
               <Link to="/accommodation" className="btn-primary hover-scale">
-                Explore All Accommodations
+                Explore All Products
               </Link>
             </div>
           </div>
@@ -285,13 +277,13 @@ const Index: React.FC = () => {
           <div className="container relative z-10 px-4 text-center">
             <div className="max-w-3xl mx-auto animate-fade-in">
               <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 text-glow">
-                Your Adventure Awaits!
+                Your Boiler Solution Awaits!
               </h2>
               <p className="text-xl mb-8 text-white/90">
-                Book your stay now and create memories that will last a lifetime.
+                Book your quality boiler now and enjoy reliable heating for years to come.
               </p>
               <Link to="/booking" className="inline-block px-8 py-4 bg-white text-green-700 font-medium text-lg rounded-md transition-all duration-300 hover:bg-white/90 hover:shadow-lg hover:translate-y-[-2px] hover:scale-105">
-                Book Your Adventure Now
+                Book Your Boiler Now
               </Link>
             </div>
           </div>
@@ -299,7 +291,8 @@ const Index: React.FC = () => {
       </main>
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
 
 // Helper component for star rating
@@ -308,9 +301,25 @@ const Star: React.FC<{
 }> = ({
   filled
 }) => {
-  return <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-yellow-500 hover:scale-125 transition-transform duration-300">
-      <path d="M10 1L12.39 6.55L18.5 7.31L14.25 11.75L15.51 18L10 15.09L4.49 18L5.75 11.75L1.5 7.31L7.61 6.55L10 1Z" fill={filled ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>;
+  return (
+    <svg 
+      width="20" 
+      height="20" 
+      viewBox="0 0 20 20" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg" 
+      className="text-yellow-500 hover:scale-125 transition-transform duration-300"
+    >
+      <path 
+        d="M10 1L12.39 6.55L18.5 7.31L14.25 11.75L15.51 18L10 15.09L4.49 18L5.75 11.75L1.5 7.31L7.61 6.55L10 1Z" 
+        fill={filled ? "currentColor" : "none"} 
+        stroke="currentColor" 
+        strokeWidth="1.5" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+      />
+    </svg>
+  );
 };
 
 export default Index;
